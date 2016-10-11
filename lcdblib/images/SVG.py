@@ -44,6 +44,13 @@ class nb_svg(object):
                 
         self.image.data = ElementTree.tostring(self.tree, encoding='utf-8', method='xml')
         
+    def getLayers(self):
+        """ Returns a list of layer Names. """
+        names = []
+        for l in self.layers:
+            if l.attrib.get('{%s}groupmode' % self.INKSCAPE_NS, '') == 'layer':
+                names.append(l.attrib['{%s}label' % self.INKSCAPE_NS])
+        return names
         
     def display(self, layer=None):
         """ Use IPython display to show a SVG file.
