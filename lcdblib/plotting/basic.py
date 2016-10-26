@@ -68,7 +68,7 @@ def maPlot(x, y, data=None, title=None, log=False, **kwargs):
 
     """
     if isinstance(x, str) and isinstance(y, str) and data is not None:
-        dat = data[[x,y]]
+        dat = data[[x,y]].copy()
         xlabel = x
         ylabel = y
     elif isinstance(x, pd.Series) and isinstance(y, pd.Series):
