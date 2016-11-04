@@ -35,7 +35,7 @@ BLOCK_DF.set_index('Base', inplace=True)
 
 class TestFastqc(unittest.TestCase):
     def setUp(self):
-        self.filename = 'tests/data/fastqc_data.txt'
+        self.filename = 'data/fastqc_data.txt'
         self.id = 'test'
 
     def tearDown(self):
@@ -46,7 +46,7 @@ class TestFastqc(unittest.TestCase):
         assert_frame_equal(fq.df, BLOCK_DF[fq.df.columns])
         
     def test_fileParse(self):
-        fq = fastqc.FastQC('test', 'tests/data/fastqc_data.txt')
+        fq = fastqc.FastQC('test', 'data/fastqc_data.txt')
         assert_frame_equal(fq['Per base sequence quality'].df, 
                            BLOCK_DF[fq['Per base sequence quality'].df.columns])
 
