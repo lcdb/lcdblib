@@ -11,3 +11,5 @@ PyYAML>=3.11
 pytest>=2.9.2
 editorconfig>=0.12.1
 jsonschema>=2.5.1
+snakemake
+pytest
