@@ -1,9 +1,10 @@
 os:
-- linux
-- osx
+  - linux
+  - osx
 sudo: required
-language: python - "3.5"
+language: python
+  - "3.5"
 install: bash travis-setup.sh
 before_script:
-- export PATH=/anaconda/bin:$PATH
+  - export PATH=/anaconda/bin:$PATH
 script: py.test tests/ -v
