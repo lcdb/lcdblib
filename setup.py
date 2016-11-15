@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -27,11 +27,7 @@ setup(
     author="Ryan Dale",
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
-    packages=[
-        'lcdblib',
-    ],
-    package_dir={'lcdblib':
-                 'lcdblib'},
+    packages=find_packages(),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
