@@ -3,5 +3,4 @@ os:
   - osx
 language: python
   - "3.5"
-install: pip install --user -r requirements_dev.txt
 script: py.test tests/ -v
