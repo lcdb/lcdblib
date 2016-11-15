@@ -3,4 +3,7 @@ language: python
 install: bash travis-setup.sh
 before_script:
     - export PATH=~/anaconda/bin:$PATH
-script: py.test tests/ -v
+script:
+    - which python
+    - python -c 'import lcdblib; print(lcdblib.__file__)'
+    - py.test tests/ -v
