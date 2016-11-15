@@ -1,4 +1,4 @@
 language: python
   - "3.5"
-install: pip install .
+install: bash travis-setup.sh
 script: py.test tests/ -v
