@@ -18,7 +18,7 @@ test_requirements = [
     # TODO: put package test requirements here
 ]
 
-requirements = open('requirements.txt').readlines()
+requirements = [i.strip() for i in open('requirements.txt').readlines()]
 setup(
     name='lcdblib',
     version='0.0.1',
@@ -28,7 +28,6 @@ setup(
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
     packages=find_packages(),
-    include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
@@ -46,6 +45,4 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    test_suite='tests',
-    tests_require=test_requirements
 )
