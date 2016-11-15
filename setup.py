@@ -13,14 +13,16 @@ requirements = [
     # TODO: put package requirements here
 ]
 
+
 test_requirements = [
     # TODO: put package test requirements here
 ]
 
+requirements = open('requirements.txt').readlines()
 setup(
     name='lcdblib',
     version='0.0.1',
-    description="A set of helper function for bioinformatic analysis with snakemake.",
+    description="A set of helper functions for bioinformatics analysis with snakemake.",
     long_description=readme + '\n\n' + history,
     author="Ryan Dale",
     author_email='dalerr@niddk.nih.gov',
