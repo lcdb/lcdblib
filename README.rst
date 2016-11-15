@@ -17,6 +17,8 @@ lcdblib
      :target: https://pyup.io/repos/github/lcdb/lcdblib/
      :alt: Updates
 
+.. image:: https://travis-ci.org/lcdb/lcdblib.svg?branch=master
+    :target: https://travis-ci.org/lcdb/lcdblib
 
 A set of helper function for bioinformatic analysis with snakemake.
 
