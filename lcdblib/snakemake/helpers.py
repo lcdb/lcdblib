@@ -1,94 +1,27 @@
-import os
-import pandas
-import yaml
-from jsonschema import validate, ValidationError
+import collections
 from snakemake.shell import shell
+from snakemake.io import expand
 
-def validate_config(config, schema):
-    schema = yaml.load(open(schema))
-    cfg = yaml.load(open(config))
-    try:
-        validate(cfg, schema)
-    except ValidationError as e:
-        msg = '\nPlease fix %s: %s\n' % (config, e.message)
-        raise ValidationError(msg)
-
-def build_wrapper_for(source_dir, wrappers_dir):
+def fill_patterns(patterns, fill):
     """
-    Returns a `wrapper_for` function to be used in a workflow.
+    Fills in a dictionary of patterns with the dictionary `fill`.
 
-    Parameters
-    ----------
-    :source_dir: str
-        Directory of the calling snakemake workflow. Typically this is obtained
-        with the srcdir() built-in.
-    :wrappers_dir: str
-        Directory of wrappers relative to source dir
+    >>> patterns = dict(a='{sample}_R{N}.fastq')
+    >>> fill = dict(sample=['one', 'two'], N=[1, 2])
+    >>> sorted(fill_patterns(patterns, fill)['a'])
+    ['one_R1.fastq', 'one_R2.fastq', 'two_R1.fastq', 'two_R2.fastq']
     """
-    def wrapper_for(tool):
-        return os.path.join(source_dir, wrappers_dir, tool)
-    return wrapper_for
 
-def build_params_for(config):
-    """
-    Returns a `params_for` function to be used in a workflow.
-
-    Parameters
-    ----------
-    :config: dict
-        The global config dictionary from a workflow
-    """
-    def params_for(rule, key):
-        return  config.get('rules', {}).get(rule, {}).get('params', {}).get(key, '')
-    return params_for
-
-
-def build_threads_for(config):
-    """
-    Returns a `threads_for` function to be used in a workflow.
-
-    Parameters
-    ----------
-    :config: dict
-        The global config dictionary from a workflow
-    """
-    def threads_for(rule):
-        return  config.get('rules', {}).get(rule, {}).get('threads', None)
-    return threads_for
-
-
-def workflow_helper_functions(config, source_dir, wrappers_dir):
-    """
-    One-stop-shop for building helper functions.
-
-    Parameters
-    ----------
-    :config: dict
-        The global config dictionary from a workflow
-    :source_dir: str
-        Directory of the calling snakemake workflow. Typically this is obtained
-        with the srcdir() built-in.
-    :wrappers_dir: str
-        Directory of wrappers relative to source dir
-
-    Returns
-    -------
-    wrappers_for, params_for, and threads_for functions.
-    """
-    return (
-        build_wrapper_for(source_dir, wrappers_dir),
-        build_params_for(config),
-        build_threads_for(config),
-    )
-
-
-def load_sampletable(filename):
-    """
-    Load sampletable.
-
-    TODO: validation will go here.
-    """
-    return pandas.read_table(filename, index_col=0)
+    def update(d, u):
+        for k, v in u.items():
+            if isinstance(v, collections.Mapping):
+                r = update(d.get(k, {}), v)
+                d[k] = r
+            else:
+                d[k] = expand(u[k], **fill)
+        return d
+    d = {}
+    return update(d, patterns)
 
 
 def rscript(string, scriptname, log=None):
