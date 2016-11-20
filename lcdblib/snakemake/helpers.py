@@ -1,3 +1,4 @@
+import collections
 from snakemake.shell import shell
 from snakemake.io import expand
 
@@ -10,10 +11,17 @@ def fill_patterns(patterns, fill):
     >>> sorted(fill_patterns(patterns, fill)['a'])
     ['one_R1.fastq', 'one_R2.fastq', 'two_R1.fastq', 'two_R2.fastq']
     """
+
+    def update(d, u):
+        for k, v in u.items():
+            if isinstance(v, collections.Mapping):
+                r = update(d.get(k, {}), v)
+                d[k] = r
+            else:
+                d[k] = expand(u[k], **fill)
+        return d
     d = {}
-    for k, v in patterns.items():
-        d[k] = expand(v, **fill)
-    return d
+    return update(d, patterns)
 
 def rscript(string, scriptname, log=None):
     """
