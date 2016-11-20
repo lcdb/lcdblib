@@ -3,7 +3,6 @@ import os
 import sys
 import re
 import yaml
-from jsonschema import validate, ValidationError
 
 import pandas as pd
 
@@ -43,43 +42,4 @@ class TestHelperFunctions(unittest.TestCase):
 
     def tearDown(self):
         os.remove(self.tempFile)
-
-    def test_validate_config(self):
-        # TODO: Need to get schema checking and default config setup
-        pass
-
-    @unittest.expectedFailure
-    def test_wrapper_for(self):
-        wrapper_for = helpers.build_wrapper_for(HERE, '../../wrappers')
-        result = wrapper_for('cutadapt')
-        assert os.path.exists(os.path.join(result, 'wrapper.py'))
-
-    def test_build_params_for(self):
-        params_for = helpers.build_params_for(self.config)
-        self.assertEqual(params_for('cutadapt', 'extra'), '-a file:adapters.fa --quality-cutoff 20 --minimum-length 25 --overlap 10')
-
-    def test_build_threads_for(self):
-        threads_for = helpers.build_threads_for(self.config)
-        self.assertEqual(threads_for('cutadapt'), 10)
-
-    @unittest.expectedFailure
-    def test_workflow_helper_functions(self):
-        wrapper_for, params_for, threads_for = helpers.workflow_helper_functions(self.config, HERE, '../../wrappers')
-
-        # Wrapper For
-        result = wrapper_for('cutadapt')
-        assert os.path.exists(os.path.join(result, 'wrapper.py'))
-
-        # Params For
-        params_for = helpers.build_params_for(self.config)
-        self.assertEqual(params_for('cutadapt', 'extra'), '-a file:adapters.fa --quality-cutoff 20 --minimum-length 25 --overlap 10')
-
-        # Threads For
-        threads_for = helpers.build_threads_for(self.config)
-        self.assertEqual(threads_for('cutadapt'), 10)
-
-    def test_load_sampletable(self):
-        from pandas.util.testing import assert_frame_equal
-        df = helpers.load_sampletable(self.tempFile)
-        assert_frame_equal(df, self.df)
 

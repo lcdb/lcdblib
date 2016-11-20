@@ -23,6 +23,7 @@ def fill_patterns(patterns, fill):
     d = {}
     return update(d, patterns)
 
+
 def rscript(string, scriptname, log=None):
     """
     Saves the string as `scriptname` and then runs it
