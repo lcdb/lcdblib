@@ -91,6 +91,6 @@ dev:
 	clear
 	watchmedo shell-command \
 		--patterns='*.py' \
-		--command='clear; python -m unittest discover tests -p "test_*.py"' \
+		--command='clear; py.test' \
 		-w -R -D \
 		.

@@ -28,6 +28,7 @@ setup(
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
     packages=['lcdblib'],
+    include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     entry_points={
