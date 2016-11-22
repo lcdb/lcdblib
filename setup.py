@@ -27,22 +27,13 @@ setup(
     author="Ryan Dale",
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
-    packages=find_packages(),
+    packages=['lcdblib'],
     install_requires=requirements,
     license="MIT license",
-    zip_safe=False,
-    keywords='lcdblib',
-    classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-    ],
+    entry_points={
+        'console_scripts':
+        [
+            'chrom_convert = lcdblib.utils.chrom_convert:main',
+        ],
+    },
 )
