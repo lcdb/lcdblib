@@ -37,4 +37,6 @@ setup(
             'chrom_convert = lcdblib.utils.chrom_convert:main',
         ],
     },
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
 )
