@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Configures a logger to be used across all of pastalavista
+Configures a global logger
 """
 from sys import stderr, stdout
 import logging

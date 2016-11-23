@@ -7,3 +7,6 @@ matplotlib >=1.5.1
 ipython >=5.1.0
 jsonschema >=2.5.1
 pyyaml >=3.11
+pybedtools >=0.7.8
+pysam
+pysam >=0.9.1.4
