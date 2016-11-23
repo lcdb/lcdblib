@@ -132,11 +132,8 @@ def pysam_convert(input, output, kind, mapper):
             OUT.write(read)
 
 def convertFeature(f, mapper):
-    try:
-        f.chrom = mapper[f.chrom]
-        return f
-    except:
-        raise KeyError
+    f.chrom = mapper[f.chrom]
+    return f
 
 def pybedtools_convert(input, output, mapper):
     """ Use pybedtools to convert chromosomes in BED, GTF, or GFF. """
