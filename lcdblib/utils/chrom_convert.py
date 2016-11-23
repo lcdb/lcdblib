@@ -18,7 +18,7 @@ def arguments():
     DESCRIPTION = """\
     Converts between chromosome names.
 
-    In D. melanogaster there are three common varieties of chromosomes names that
+    In D. melanogaster there are four common varieties of chromosomes names that
     are used.
 
     * FlyBase style: 2L, 2R, 3L, etc.
