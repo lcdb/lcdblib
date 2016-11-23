@@ -8,7 +8,6 @@ import pkg_resources
 import pandas as pd
 import pysam
 import pybedtools
-import pyBigWig
 
 from lcdblib.logger import logger
 
@@ -48,7 +47,7 @@ def arguments():
 
     parser.add_argument("--fileType", dest="type", action='store',
                         required=True,
-                        choices=['SAM', 'BAM', 'BED', 'BigWig', 'GFF', 'GTF', 'BigBed'],
+                        choices=['SAM', 'BAM', 'BED', 'GFF', 'GTF'],
                         help="What is the input format.")
 
     parser.add_argument("-i", "--input", dest="input", action='store',
@@ -117,7 +116,7 @@ def pysam_convert(input, output, kind, mapper):
     if kind == 'BAM':
         flag_in = 'rb'
         flag_out = 'wb'
-    elif kine == 'SAM':
+    elif kind == 'SAM':
         flag_in = 'r'
         flag_out = 'w'
 
@@ -128,7 +127,7 @@ def pysam_convert(input, output, kind, mapper):
     for chrom in header['SQ']:
         chrom['SN'] = mapper[chrom['SN']]
 
-    with open(output, flag_out, header=header) as OUT:
+    with pysam.AlignmentFile(output, flag_out, header=header) as OUT:
         for read in curr:
             OUT.write(read)
 
@@ -143,10 +142,6 @@ def pybedtools_convert(input, output, mapper):
     """ Use pybedtools to convert chromosomes in BED, GTF, or GFF. """
     pybedtools.BedTool(input).each(convertFeature, mapper).saveas(output)
 
-def pybigwig_convert(input, output, mapper):
-    bw = pyBigWig.open(input)
-    pass
-
 def main():
     # Import commandline arguments.
     args = arguments()
@@ -158,6 +153,3 @@ def main():
         pysam_convert(args.input, args.output, args.type, mapper)
     elif (args.type == 'BED') | (args.type == 'GFF') | (args.type == 'GTF') :
         pybedtools_convert(args.input, args.output, mapper)
-    elif args.type == 'BigWig':
-        pass
-

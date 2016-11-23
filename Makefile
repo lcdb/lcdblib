@@ -89,8 +89,4 @@ install: clean ## install the package to the active Python's site-packages
 
 dev:
 	clear
-	watchmedo shell-command \
-		--patterns='*.py' \
-		--command='clear; py.test' \
-		-w -R -D \
-		.
+	watchmedo shell-command  --patterns='*.py'  --command='clear; py.test -s'  -W -R -D  .
