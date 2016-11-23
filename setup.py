@@ -27,7 +27,7 @@ setup(
     author="Ryan Dale",
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
-    packages=['lcdblib'],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
