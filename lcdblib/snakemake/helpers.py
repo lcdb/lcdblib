@@ -1,24 +1,33 @@
 import collections
+import pandas as pd
 from snakemake.shell import shell
 from snakemake.io import expand
 
 def fill_patterns(patterns, fill):
     """
-    Fills in a dictionary of patterns with the dictionary `fill`.
+    Fills in a dictionary of patterns with the dictionary or DataFrame `fill`.
 
     >>> patterns = dict(a='{sample}_R{N}.fastq')
     >>> fill = dict(sample=['one', 'two'], N=[1, 2])
     >>> sorted(fill_patterns(patterns, fill)['a'])
     ['one_R1.fastq', 'one_R2.fastq', 'two_R1.fastq', 'two_R2.fastq']
-    """
 
+    >>> patterns = dict(a='{sample}_R{N}.fastq')
+    >>> fill = pd.DataFrame({'sample': ['one', 'two'], 'N': [1, 2]})
+    >>> sorted(fill_patterns(patterns, fill)['a'])
+    ['one_R1.fastq', 'two_R2.fastq']
+
+    """
     def update(d, u):
         for k, v in u.items():
             if isinstance(v, collections.Mapping):
                 r = update(d.get(k, {}), v)
                 d[k] = r
             else:
-                d[k] = list(set(expand(u[k], **fill)))
+                if isinstance(fill, pd.DataFrame):
+                    d[k] = list(set(expand(u[k], zip, **fill.to_dict('list'))))
+                else:
+                    d[k] = list(set(expand(u[k], **fill)))
         return d
     d = {}
     return update(d, patterns)
