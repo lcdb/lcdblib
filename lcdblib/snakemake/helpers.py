@@ -18,7 +18,7 @@ def fill_patterns(patterns, fill):
                 r = update(d.get(k, {}), v)
                 d[k] = r
             else:
-                d[k] = expand(u[k], **fill)
+                d[k] = list(set(expand(u[k], **fill)))
         return d
     d = {}
     return update(d, patterns)
