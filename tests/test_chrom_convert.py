@@ -1,8 +1,10 @@
 import os
 import subprocess
 import pytest
+from textwrap import dedent
 
 from lcdblib.utils import chrom_convert
+
 
 class TestImport:
     """ Test conversion table import and construction of a mapping dictionary. """
@@ -83,6 +85,7 @@ class TestImport:
 def mapper():
         return chrom_convert.import_conversion('UCSC', 'FlyBase')
 
+
 @pytest.fixture(scope='session')
 def inputs(tmpdir_factory):
     import shutil
@@ -100,35 +103,64 @@ def inputs(tmpdir_factory):
 
     return d
 
+
+@pytest.fixture(scope='session')
+def fasta(inputs):
+    fa = dedent("""\
+        >chr2L type=golden_path_region; loc=chr2L:1..14983; ID=chr2L REFSEQ:NW_001845015; length=14983; release=r6.09; species=Dmel;
+        TAATTAAAACAGATCCTGAGAAAATTTCCACAATTATGAAGTATCCGATTCCACAAAACATTAGAGAGCTTCGAAGTTTT
+        CTAGGCCTCACCGGCTACTACCGTAAATTTGTCCGAAATTATGCAAAAATTGCCAAACCTCTAACCAAATACTTAGGAGG
+        AAATAATGGAAAAATTTCTAGGAGAATGTCTACAAAAATTAAAATACAGTTAGATGACCCAGCTGTTAAAGCTTTTAACG
+        AACTTAAAGATAATTTAATAGCACAAGTGGAATTAGTTCAACCTGATTATAACAAAAAAATTCACTTTAACGACAGACGC
+        """)
+
+    fname = os.path.join(inputs, 'dm6.fa')
+    with open(fname, 'w') as fh:
+        fh.write(fa)
+
+    return fname
+
+
 def test_pysam_convert_BAM(inputs, mapper):
     bam = os.path.join(inputs, 'x.bam')
     oname = os.path.join(inputs, 'x_convert.bam')
     chrom_convert.pysam_convert(bam, oname, 'BAM', mapper)
     chrom = subprocess.run(('samtools view {} | head -n1'.format(os.path.join(inputs, 'x_convert.bam'))),
-            stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[2]
+                           stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[2]
     assert chrom == '2L'
+
 
 def test_pysam_convert_SAM(inputs, mapper):
     sam = os.path.join(inputs, 'x.sam')
     oname = os.path.join(inputs, 'x_convert.sam')
     chrom_convert.pysam_convert(sam, oname, 'SAM', mapper)
     chrom = subprocess.run(('tail -n1 {}'.format(os.path.join(inputs, 'x_convert.sam'))),
-            stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[2]
+                           stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[2]
     assert chrom == '2L'
+
 
 def test_pybedtools_convert_BED(inputs, mapper):
     bed = os.path.join(inputs, 'x.bed')
     oname = os.path.join(inputs, 'x_convert.bed')
     chrom_convert.pybedtools_convert(bed, oname, mapper)
     chrom = subprocess.run(('head -n1 {}'.format(os.path.join(inputs, 'x_convert.bed'))),
-            stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[0]
+                           stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[0]
     assert chrom == '2L'
+
 
 def test_pybedtools_convert_GFF(inputs, mapper):
     gff = os.path.join(inputs, 'x.gff')
     oname = os.path.join(inputs, 'x_convert.gff')
     chrom_convert.pybedtools_convert(gff, oname, mapper)
     chrom = subprocess.run(('head -n1 {}'.format(os.path.join(inputs, 'x_convert.gff'))),
-            stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[0]
+                           stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[0]
     assert chrom == '2L'
+
+
+def test_fasta_convert(fasta, inputs, mapper):
+    oname = os.path.join(inputs, 'dm6_convert.fa')
+    chrom_convert.fasta_convert(fasta, oname, mapper)
+    with open(oname, 'r') as fh:
+        header = '>2L type=golden_path_region; loc=2L:1..14983; ID=2L REFSEQ:NW_001845015; length=14983; release=r6.09; species=Dmel;'
+        assert header == fh.readline().strip()
 
