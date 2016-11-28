@@ -4,10 +4,13 @@ import os
 import argparse
 from argparse import RawDescriptionHelpFormatter as Raw
 import pkg_resources
+from tempfile import NamedTemporaryFile
+import gzip
 
 import pandas as pd
 import pysam
 import pybedtools
+from Bio import SeqIO
 
 from lcdblib.logger import logger
 
@@ -47,7 +50,7 @@ def arguments():
 
     parser.add_argument("--fileType", dest="type", action='store',
                         required=True,
-                        choices=['SAM', 'BAM', 'BED', 'GFF', 'GTF'],
+                        choices=['SAM', 'BAM', 'BED', 'GFF', 'GTF', 'FASTA'],
                         help="What is the input format.")
 
     parser.add_argument("-i", "--input", dest="input", action='store',
@@ -60,6 +63,7 @@ def arguments():
                         required=False, help="Enable debug output.")
 
     return parser.parse_args()
+
 
 def import_conversion(f, t):
     """
@@ -103,6 +107,14 @@ def import_conversion(f, t):
 
     return {k: v for k, v in df[[mapping[f], mapping[t]]].values}
 
+
+def decompress(input):
+    tmp = NamedTemporaryFile()
+    with gzip.open(input, 'rb') as fh:
+        tmp.file.writelines(fh.readlines())
+
+    return tmp.name
+
 def pysam_convert(input, output, kind, mapper):
     """
     Use pysam to convert chromosomes in BAM and SAM files.
@@ -131,13 +143,26 @@ def pysam_convert(input, output, kind, mapper):
         for read in curr:
             OUT.write(read)
 
+
 def convertFeature(f, mapper):
     f.chrom = mapper[f.chrom]
     return f
 
+
 def pybedtools_convert(input, output, mapper):
     """ Use pybedtools to convert chromosomes in BED, GTF, or GFF. """
     pybedtools.BedTool(input).each(convertFeature, mapper).saveas(output)
+
+
+def fasta_convert(input, output, mapper):
+    """ Uses Biopython.SeqIO to convert FASTA headers. """
+    with open(output, 'w') as OUT:
+        for seq in SeqIO.parse(input, 'fasta'):
+            seq.description = seq.description.replace(seq.id, mapper[seq.id])
+            seq.name = mapper[seq.name]
+            seq.id = mapper[seq.id]
+            SeqIO.write(seq, OUT, 'fasta')
+
 
 def main():
     # Import commandline arguments.
@@ -146,7 +171,16 @@ def main():
     # Get mapping dict
     mapper = import_conversion(args.orig, args.new)
 
+    # Extract gziped files
+    if args.input.endswith('.gz'):
+        input = decompress(args.input)
+    else:
+        input = args.input
+
     if (args.type == 'BAM') | (args.type == 'SAM'):
-        pysam_convert(args.input, args.output, args.type, mapper)
-    elif (args.type == 'BED') | (args.type == 'GFF') | (args.type == 'GTF') :
-        pybedtools_convert(args.input, args.output, mapper)
+        pysam_convert(input, args.output, args.type, mapper)
+    elif (args.type == 'BED') | (args.type == 'GFF') | (args.type == 'GTF'):
+        pybedtools_convert(input, args.output, mapper)
+    elif (args.type == 'FASTA'):
+        fasta_convert(input, args.output, mapper)
+
