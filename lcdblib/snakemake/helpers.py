@@ -1,9 +1,10 @@
 import collections
+from itertools import product
 import pandas as pd
 from snakemake.shell import shell
 from snakemake.io import expand
 
-def fill_patterns(patterns, fill):
+def fill_patterns(patterns, fill, combination=product):
     """
     Fills in a dictionary of patterns with the dictionary or DataFrame `fill`.
 
@@ -13,12 +14,17 @@ def fill_patterns(patterns, fill):
     ['one_R1.fastq', 'one_R2.fastq', 'two_R1.fastq', 'two_R2.fastq']
 
     >>> patterns = dict(a='{sample}_R{N}.fastq')
+    >>> fill = dict(sample=['one', 'two'], N=[1, 2])
+    >>> sorted(fill_patterns(patterns, fill, zip)['a'])
+    ['one_R1.fastq', 'two_R2.fastq']
+
+    >>> patterns = dict(a='{sample}_R{N}.fastq')
     >>> fill = pd.DataFrame({'sample': ['one', 'two'], 'N': [1, 2]})
     >>> sorted(fill_patterns(patterns, fill)['a'])
     ['one_R1.fastq', 'two_R2.fastq']
 
     """
-    def update(d, u):
+    def update(d, u, c):
         for k, v in u.items():
             if isinstance(v, collections.Mapping):
                 r = update(d.get(k, {}), v)
@@ -27,10 +33,10 @@ def fill_patterns(patterns, fill):
                 if isinstance(fill, pd.DataFrame):
                     d[k] = list(set(expand(u[k], zip, **fill.to_dict('list'))))
                 else:
-                    d[k] = list(set(expand(u[k], **fill)))
+                    d[k] = list(set(expand(u[k], c, **fill)))
         return d
     d = {}
-    return update(d, patterns)
+    return update(d, patterns, combination)
 
 
 def rscript(string, scriptname, log=None):
