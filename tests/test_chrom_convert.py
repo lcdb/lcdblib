@@ -2,6 +2,7 @@ import os
 import subprocess
 import pytest
 from textwrap import dedent
+import gzip
 
 from lcdblib.utils import chrom_convert
 
@@ -101,11 +102,20 @@ def inputs(tmpdir_factory):
     cmd = ['samtools', 'view', '-h', os.path.join(d, 'x.bam'), '-O', 'SAM', '-o', os.path.join(d, 'x.sam')]
     subprocess.run(cmd)
 
-    return d
+    # FASTA with basic header
+    fa = dedent("""\
+        >chr2L
+        TAATTAAAACAGATCCTGAGAAAATTTCCACAATTATGAAGTATCCGATTCCACAAAACATTAGAGAGCTTCGAAGTTTT
+        CTAGGCCTCACCGGCTACTACCGTAAATTTGTCCGAAATTATGCAAAAATTGCCAAACCTCTAACCAAATACTTAGGAGG
+        AAATAATGGAAAAATTTCTAGGAGAATGTCTACAAAAATTAAAATACAGTTAGATGACCCAGCTGTTAAAGCTTTTAACG
+        AACTTAAAGATAATTTAATAGCACAAGTGGAATTAGTTCAACCTGATTATAACAAAAAAATTCACTTTAACGACAGACGC
+        """)
 
+    fname = os.path.join(d, 'dm6_basic.fa')
+    with open(fname, 'w') as fh:
+        fh.write(fa)
 
-@pytest.fixture(scope='session')
-def fasta(inputs):
+    # FASTA with full header
     fa = dedent("""\
         >chr2L type=golden_path_region; loc=chr2L:1..14983; ID=chr2L REFSEQ:NW_001845015; length=14983; release=r6.09; species=Dmel;
         TAATTAAAACAGATCCTGAGAAAATTTCCACAATTATGAAGTATCCGATTCCACAAAACATTAGAGAGCTTCGAAGTTTT
@@ -114,11 +124,15 @@ def fasta(inputs):
         AACTTAAAGATAATTTAATAGCACAAGTGGAATTAGTTCAACCTGATTATAACAAAAAAATTCACTTTAACGACAGACGC
         """)
 
-    fname = os.path.join(inputs, 'dm6.fa')
+    fname = os.path.join(d, 'dm6_full.fa')
     with open(fname, 'w') as fh:
         fh.write(fa)
 
-    return fname
+    # Make GZIP FILE
+    with gzip.open(os.path.join(d, 'test.txt.gz'), 'wb') as fh:
+        fh.write(b'test')
+
+    return d
 
 
 def test_pysam_convert_BAM(inputs, mapper):
@@ -157,10 +171,29 @@ def test_pybedtools_convert_GFF(inputs, mapper):
     assert chrom == '2L'
 
 
-def test_fasta_convert(fasta, inputs, mapper):
-    oname = os.path.join(inputs, 'dm6_convert.fa')
-    chrom_convert.fasta_convert(fasta, oname, mapper)
+def test_fasta_convert_basic_header(inputs, mapper):
+    fname = os.path.join(inputs, 'dm6_basic.fa')
+    oname = os.path.join(inputs, 'dm6_basic_convert.fa')
+    chrom_convert.fasta_convert(fname, oname, mapper)
+    with open(oname, 'r') as fh:
+        header = '>2L'
+        assert header == fh.readline().strip()
+
+
+def test_fasta_convert_full_header(inputs, mapper):
+    fname = os.path.join(inputs, 'dm6_full.fa')
+    oname = os.path.join(inputs, 'dm6_full_convert.fa')
+    chrom_convert.fasta_convert(fname, oname, mapper)
     with open(oname, 'r') as fh:
         header = '>2L type=golden_path_region; loc=2L:1..14983; ID=2L REFSEQ:NW_001845015; length=14983; release=r6.09; species=Dmel;'
         assert header == fh.readline().strip()
 
+
+def test_gzip(inputs):
+    tmp = chrom_convert.decompress(os.path.join(inputs, 'test.txt.gz'))
+    with open(tmp.name, 'r') as fh:
+        assert 'test' == fh.read()
+
+    # Check file deletion upon file closing
+    tmp.close()
+    assert False == os.path.exists(tmp.name)

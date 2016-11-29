@@ -113,7 +113,11 @@ def decompress(input):
     with gzip.open(input, 'rb') as fh:
         tmp.file.writelines(fh.readlines())
 
-    return tmp.name
+    # close the file object
+    tmp.file.close()
+
+    return tmp
+
 
 def pysam_convert(input, output, kind, mapper):
     """
@@ -173,8 +177,10 @@ def main():
 
     # Extract gziped files
     if args.input.endswith('.gz'):
-        input = decompress(args.input)
+        tmp = decompress(args.input)
+        input = tmp.name
     else:
+        tmp = False
         input = args.input
 
     if (args.type == 'BAM') | (args.type == 'SAM'):
@@ -184,3 +190,6 @@ def main():
     elif (args.type == 'FASTA'):
         fasta_convert(input, args.output, mapper)
 
+    # Close tmpfile if it exists
+    if tmp:
+        tmp.close()
