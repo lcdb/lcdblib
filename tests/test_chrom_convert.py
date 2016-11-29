@@ -115,6 +115,10 @@ def inputs(tmpdir_factory):
     with open(fname, 'w') as fh:
         fh.write(fa)
 
+    # Make GZIP FILE
+    with gzip.open(os.path.join(d, 'dm6_basic.fa.gz'), 'wb') as fh:
+        fh.write(fa.encode())
+
     # FASTA with full header
     fa = dedent("""\
         >chr2L type=golden_path_region; loc=chr2L:1..14983; ID=chr2L REFSEQ:NW_001845015; length=14983; release=r6.09; species=Dmel;
@@ -127,10 +131,6 @@ def inputs(tmpdir_factory):
     fname = os.path.join(d, 'dm6_full.fa')
     with open(fname, 'w') as fh:
         fh.write(fa)
-
-    # Make GZIP FILE
-    with gzip.open(os.path.join(d, 'test.txt.gz'), 'wb') as fh:
-        fh.write(b'test')
 
     return d
 
@@ -189,11 +189,11 @@ def test_fasta_convert_full_header(inputs, mapper):
         assert header == fh.readline().strip()
 
 
-def test_gzip(inputs):
-    tmp = chrom_convert.decompress(os.path.join(inputs, 'test.txt.gz'))
-    with open(tmp.name, 'r') as fh:
-        assert 'test' == fh.read()
+def test_fasta_convert_basic_header(inputs, mapper):
+    fname = os.path.join(inputs, 'dm6_basic.fa.gz')
+    oname = os.path.join(inputs, 'dm6_basic_convert.fa')
+    chrom_convert.fasta_convert(fname, oname, mapper)
 
-    # Check file deletion upon file closing
-    tmp.close()
-    assert False == os.path.exists(tmp.name)
+    with open(oname, 'r') as fh:
+        header = '>2L'
+        assert header == fh.readline().strip()

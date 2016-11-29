@@ -4,7 +4,6 @@ import os
 import argparse
 from argparse import RawDescriptionHelpFormatter as Raw
 import pkg_resources
-from tempfile import NamedTemporaryFile
 import gzip
 
 import pandas as pd
@@ -108,17 +107,6 @@ def import_conversion(f, t):
     return {k: v for k, v in df[[mapping[f], mapping[t]]].values}
 
 
-def decompress(input):
-    tmp = NamedTemporaryFile()
-    with gzip.open(input, 'rb') as fh:
-        tmp.file.writelines(fh.readlines())
-
-    # close the file object
-    tmp.file.close()
-
-    return tmp
-
-
 def pysam_convert(input, output, kind, mapper):
     """
     Use pysam to convert chromosomes in BAM and SAM files.
@@ -160,12 +148,20 @@ def pybedtools_convert(input, output, mapper):
 
 def fasta_convert(input, output, mapper):
     """ Uses Biopython.SeqIO to convert FASTA headers. """
+
+    if input.endswith('.gz'):
+        fh = gzip.open(input, 'rt')
+    else:
+        fh = open(input, 'r')
+
     with open(output, 'w') as OUT:
-        for seq in SeqIO.parse(input, 'fasta'):
+        for seq in SeqIO.parse(fh, 'fasta'):
             seq.description = seq.description.replace(seq.id, mapper[seq.id])
             seq.name = mapper[seq.name]
             seq.id = mapper[seq.id]
             SeqIO.write(seq, OUT, 'fasta')
+
+    fh.close()
 
 
 def main():
@@ -175,21 +171,9 @@ def main():
     # Get mapping dict
     mapper = import_conversion(args.orig, args.new)
 
-    # Extract gziped files
-    if args.input.endswith('.gz'):
-        tmp = decompress(args.input)
-        input = tmp.name
-    else:
-        tmp = False
-        input = args.input
-
     if (args.type == 'BAM') | (args.type == 'SAM'):
-        pysam_convert(input, args.output, args.type, mapper)
+        pysam_convert(args.input, args.output, args.type, mapper)
     elif (args.type == 'BED') | (args.type == 'GFF') | (args.type == 'GTF'):
-        pybedtools_convert(input, args.output, mapper)
+        pybedtools_convert(args.input, args.output, mapper)
     elif (args.type == 'FASTA'):
-        fasta_convert(input, args.output, mapper)
-
-    # Close tmpfile if it exists
-    if tmp:
-        tmp.close()
+        fasta_convert(args.input, args.output, mapper)
