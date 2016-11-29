@@ -150,7 +150,7 @@ def pybedtools_convert(input, output, mapper):
     """ Use pybedtools to convert chromosomes in BED, GTF, or GFF. """
     if input == '-':
         # Use STDIN
-        bt = pybedtools.BedTool(sys.stdin.read(), from_string=True)
+        bt = pybedtools.BedTool(sys.stdin)
     else:
         bt = pybedtools.BedTool(input)
 
