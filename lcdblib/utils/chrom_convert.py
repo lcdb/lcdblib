@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """ Converts between chromosome names. """
 import os
+import sys
 import argparse
 from argparse import RawDescriptionHelpFormatter as Raw
 import pkg_resources
@@ -53,10 +54,14 @@ def arguments():
                         help="What is the input format.")
 
     parser.add_argument("-i", "--input", dest="input", action='store',
-                        required=True, help="Input file to convert.")
+                        required=True,
+                        help="""Input file to convert. If `-i -`, STDIN is
+                        used. Note if using SAM/BAM with STDIN, you must
+                        include headrs.""")
 
     parser.add_argument("-o", "--output", dest="output", action='store',
-                        required=True, help="Output file.")
+                        required=False, default='-',
+                        help="Output file, if none given or `-o -` then STDOUT.")
 
     parser.add_argument("--debug", dest="debug", action='store_true',
                         required=False, help="Enable debug output.")
@@ -122,7 +127,7 @@ def pysam_convert(input, output, kind, mapper):
         flag_out = 'wb'
     elif kind == 'SAM':
         flag_in = 'r'
-        flag_out = 'w'
+        flag_out = 'wh'
 
     curr = pysam.AlignmentFile(input, flag_in)
 
@@ -143,25 +148,47 @@ def convertFeature(f, mapper):
 
 def pybedtools_convert(input, output, mapper):
     """ Use pybedtools to convert chromosomes in BED, GTF, or GFF. """
-    pybedtools.BedTool(input).each(convertFeature, mapper).saveas(output)
+    if input == '-':
+        # Use STDIN
+        bt = pybedtools.BedTool(sys.stdin.read(), from_string=True)
+    else:
+        bt = pybedtools.BedTool(input)
+
+    if output == '-':
+        # Use STDOUT
+        print(bt.each(convertFeature, mapper))
+    else:
+        bt.each(convertFeature, mapper).saveas(output)
 
 
 def fasta_convert(input, output, mapper):
     """ Uses Biopython.SeqIO to convert FASTA headers. """
 
-    if input.endswith('.gz'):
+    if input == '-':
+        # Use STDIN
+        fh = sys.stdin
+    elif input.endswith('.gz'):
         fh = gzip.open(input, 'rt')
     else:
         fh = open(input, 'r')
 
-    with open(output, 'w') as OUT:
-        for seq in SeqIO.parse(fh, 'fasta'):
-            seq.description = seq.description.replace(seq.id, mapper[seq.id])
-            seq.name = mapper[seq.name]
-            seq.id = mapper[seq.id]
-            SeqIO.write(seq, OUT, 'fasta')
+    if output == '-':
+        # Use STDOUT
+        oh = sys.stdout
+    elif output.endswith('.gz'):
+        oh = gzip.open(input, 'wb')
+    else:
+        oh = open(output, 'w')
 
+    for seq in SeqIO.parse(fh, 'fasta'):
+        seq.description = seq.description.replace(seq.id, mapper[seq.id])
+        seq.name = mapper[seq.name]
+        seq.id = mapper[seq.id]
+        SeqIO.write(seq, oh, 'fasta')
+
+    # close file handlers
     fh.close()
+    oh.close()
 
 
 def main():
