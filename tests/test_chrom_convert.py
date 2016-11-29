@@ -152,6 +152,14 @@ def test_pysam_convert_SAM(inputs, mapper):
                            stdout=subprocess.PIPE, shell=True).stdout.decode().split('\t')[2]
     assert chrom == '2L'
 
+def test_pysam_convert_SAM_PIPE(inputs, mapper):
+    sam = os.path.join(inputs, 'x.sam')
+    cmd = 'cat {sam} | chrom_convert -i - --from UCSC --to FlyBase \
+            --fileType SAM | grep -v -e "^@" | head -n1 | cut -f3'.format(sam=sam)
+
+    out = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    assert out.stdout.decode('UTF-8').strip() == '2L'
 
 def test_pybedtools_convert_BED(inputs, mapper):
     bed = os.path.join(inputs, 'x.bed')
@@ -171,6 +179,16 @@ def test_pybedtools_convert_GFF(inputs, mapper):
     assert chrom == '2L'
 
 
+def test_pybedtools_convert_GFF_PIPE(inputs, mapper):
+    gff = os.path.join(inputs, 'x.gff')
+    cmd = 'cat {gff} | chrom_convert -i - --from UCSC --to FlyBase \
+            --fileType GFF | head -n1 | cut -f1'.format(gff=gff)
+
+    out = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    assert out.stdout.decode('UTF-8').strip() == '2L'
+
+
 def test_fasta_convert_basic_header(inputs, mapper):
     fname = os.path.join(inputs, 'dm6_basic.fa')
     oname = os.path.join(inputs, 'dm6_basic_convert.fa')
@@ -178,6 +196,16 @@ def test_fasta_convert_basic_header(inputs, mapper):
     with open(oname, 'r') as fh:
         header = '>2L'
         assert header == fh.readline().strip()
+
+
+def test_fasta_convert_basic_header_PIPE(inputs, mapper):
+    fasta = os.path.join(inputs, 'dm6_basic.fa')
+    cmd = 'cat {fasta} | chrom_convert -i - --from UCSC --to FlyBase \
+            --fileType FASTA | head -n1'.format(fasta=fasta)
+
+    out = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    assert out.stdout.decode('UTF-8').strip() == '>2L'
 
 
 def test_fasta_convert_full_header(inputs, mapper):
