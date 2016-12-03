@@ -44,6 +44,7 @@ class ResultsTable(object):
         """
         Wrapper around a pandas.DataFrame that adds additional functionality.
         """)
+
     def __init__(self, data, db=None, import_kwargs=None):
         if isinstance(data, str):
             import_kwargs = import_kwargs or {}
@@ -132,7 +133,7 @@ class ResultsTable(object):
                 else:
                     raise gffutils.FeatureNotFoundError('%s not found' % i)
 
-    def reindex_to(self, x, attribute="Name"):
+    def reindex_to(self, x, attribute=None):
         """
         Returns a copy that only has rows corresponding to feature names in x.
 
@@ -140,13 +141,31 @@ class ResultsTable(object):
         Parameters
         ----------
         x : str or pybedtools.BedTool
-            BED, GFF, GTF, or VCF where the "Name" field (that is, the value
-            returned by feature['Name']) or any arbitrary attribute
+            If str, then assume it's a filename. BED, GFF, GTF, or VCF where
+            the "Name" field (that is, the value returned by feature['Name'])
+            or any arbitrary attribute
 
-        attribute : str
-            Attribute containing the name of the feature to use as the index.
+        attribute : str or int or None
+            If `x` is GFF or GTF format, and `attribute` is str, then attribute
+            containing the name of the feature to use. If `x` format is BED and
+            `attribute` is str, then use getattr on the interval (e.g., 'name'
+            or 'score'). If `attribute` is int, then use that column. If None,
+            then use the "name" attribute of the Interval, which falls back to
+            one of "gene_id", "Name", "transcript_id" for GFF/GTF.
         """
-        names = [i[attribute] for i in x]
+        if (
+            attribute is not None and (
+                x.file_type == 'gff' or
+                isinstance(attribute, int)
+            )
+        ):
+            names = [i[attribute] for i in x]
+
+        else:
+            if attribute is None:
+                attribute = 'name'
+            names = [getattr(i, attribute) for i in x]
+
         new = self.copy()
         new.data = new.data.reindex(names)
         return new
@@ -212,8 +231,14 @@ class ResultsTable(object):
             For example::
 
                 [
-                    (x.log2FoldChange < 0, dict(color='b', label='downregulated')),
-                    (x.log2FoldChange > 0, dict(color='r', label='upregulated')),
+                    (
+                        x.log2FoldChange < 0,
+                        dict(color='b', label='downregulated')
+                    ),
+                    (
+                        x.log2FoldChange > 0,
+                        dict(color='r', label='upregulated')
+                    ),
                 ]
 
             Each dictionary updates a copy of `general_kwargs`. If
@@ -447,7 +472,6 @@ class ResultsTable(object):
             xhist_kwargs = updated_kwargs.pop('xhist_kwargs', None)
             yhist_kwargs = updated_kwargs.pop('yhist_kwargs', None)
 
-
             # MarginalHistScatter does most of the actual plotting work.
             scatter_ind = ind & x_valid & y_valid
             self.marginal.append(
@@ -524,7 +548,6 @@ class ResultsTable(object):
         def wrapped_callback(event):
             for _id in self._id_callback(event):
                 callback(_id)
-
 
         # Connect the callback.
         ax.figure.canvas.mpl_connect('pick_event', wrapped_callback)
@@ -710,8 +733,8 @@ class DifferentialExpressionResults(ResultsTable):
             will be returned that has been subsetted.
         """
         ind = (
-            (self.data[self.pval_column] <= alpha)
-            & (np.abs(self.data[self.lfc_column]) >= lfc)
+            (self.data[self.pval_column] <= alpha) &
+            (np.abs(self.data[self.lfc_column]) >= lfc)
         )
 
         if idx:
@@ -758,14 +781,14 @@ class DifferentialExpressionResults(ResultsTable):
             will be returned that has been subsetted.
         """
         ind = (
-            (self.data[self.pval_column] <= alpha)
-            & (self.data[self.lfc_column] >= lfc)
+            (self.data[self.pval_column] <= alpha) &
+            (self.data[self.lfc_column] >= lfc)
         )
         if idx:
             return ind
         return self[ind]
 
-    def downregulated(self, alpha=0.05, lfc=lfc, idx=True):
+    def downregulated(self, alpha=0.05, lfc=0, idx=True):
         """
         Downregulated features.
 
@@ -783,8 +806,8 @@ class DifferentialExpressionResults(ResultsTable):
             will be returned that has been subsetted.
         """
         ind = (
-            (self.data[self.pval_column] <= alpha)
-            & (self.data[self.lfc_column] <= lfc)
+            (self.data[self.pval_column] <= alpha) &
+            (self.data[self.lfc_column] <= lfc)
         )
         if idx:
             return ind
@@ -836,9 +859,6 @@ class DifferentialExpressionResults(ResultsTable):
         if zero_line:
             ax.axhline(0, **zero_line)
         return ax
-
-    threshdoc = """
-    """
 
 
 class EdgeRResults(DifferentialExpressionResults):
@@ -1037,7 +1057,7 @@ class LazyDict(object):
         self._cls = cls
 
     def _load(self, key):
-        return obj = self._cls(self.fn_dict[key])
+        return self._cls(self.fn_dict[key])
 
     def __getitem__(self, key):
         if self.index is None:
@@ -1206,13 +1226,17 @@ class MarginalHistScatter(object):
         # Only plot hists if there's valid data
         if len(hx) > 0:
             if len(hx) == 1:
-                _xhk = utils.updatecopy(orig=xhk, update_with=dict(bins=[hx[0], hx[0]]), keys=['bins'])
+                _xhk = utils.updatecopy(
+                    orig=xhk, update_with=dict(bins=[hx[0], hx[0]]),
+                    keys=['bins'])
                 axhistx.hist(hx, **_xhk)
             else:
                 axhistx.hist(hx, **xhk)
         if len(hy) > 0:
             if len(hy) == 1:
-                _yhk = utils.updatecopy(orig=yhk, update_with=dict(bins=[hy[0], hy[0]]), keys=['bins'])
+                _yhk = utils.updatecopy(
+                    orig=yhk, update_with=dict(bins=[hy[0], hy[0]]),
+                    keys=['bins'])
                 axhisty.hist(hy, **_yhk)
             else:
                 axhisty.hist(hy, **yhk)
