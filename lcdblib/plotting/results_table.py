@@ -705,12 +705,8 @@ class DifferentialExpressionResults(ResultsTable):
         import_kwargs = kwargs.pop('import_kwargs', {})
         if header_check and isinstance(data, str):
             comment_char = import_kwargs.get('comment', '#')
-            for i, line in enumerate(open(data)):
-                if line[0] != comment_char:
-                    break
-            import_kwargs['skiprows'] = i
+            import_kwargs['comment'] = comment_char
         import_kwargs['na_values'] = ['nan']
-
         import_kwargs['index_col'] = import_kwargs.pop('index_col', 0)
         super(DifferentialExpressionResults, self).__init__(
             data=data, db=db, import_kwargs=import_kwargs, **kwargs)
@@ -1002,8 +998,8 @@ class DESeq2Results(DESeqResults):
 
 
 class LazyDict(object):
-    def __init__(self, fn_dict, index_file, extra=None, cls=DESeqResults,
-                 modifier=None):
+    def __init__(self, fn_dict, index_file=None, index_from=None, extra=None,
+                 cls=DESeqResults):
         """
         Dictionary-like object that lazily-loads ResultsTable objects.
 
