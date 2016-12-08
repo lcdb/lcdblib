@@ -8,6 +8,11 @@ def patterns():
         'fastq':   'samples/{sample}/{sample}_R{N}.fastq.gz',
         'cutadapt': 'samples/{sample}/{sample}_R{N}.cutadapt.fastq.gz',
         'bam':     'samples/{sample}/{sample}.cutadapt.bam',
+        'fastqc': {
+            'raw': 'samples/{sample}/fastqc/{sample}_R{N}.fastq.gz_fastqc.zip',
+            'cutadapt': 'samples/{sample}/fastqc/{sample}_R{N}.cutadapt.fastq.gz_fastqc.zip',
+            'bam': 'samples/{sample}/fastqc/{sample}.cutadapt.bam_fastqc.zip',
+        },
     }
 
     return patterns
