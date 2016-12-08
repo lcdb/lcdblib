@@ -27,7 +27,7 @@ def fill_patterns(patterns, fill, combination=product):
     def update(d, u, c):
         for k, v in u.items():
             if isinstance(v, collections.Mapping):
-                r = update(d.get(k, {}), v)
+                r = update(d.get(k, {}), v, c)
                 d[k] = r
             else:
                 if isinstance(fill, pd.DataFrame):
