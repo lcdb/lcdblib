@@ -1,9 +1,11 @@
+#!/usr/bin/env python
+
 import os
 import subprocess as sp
 
 def get_version():
     try:
-        res = sp.check_output(['git', 'describe'], stdout=sp.PIPE, stderr=sp.STDOUT, universal_newlines=True)
+        res = sp.check_output(['git', 'describe'], universal_newlines=True)
     except sp.CalledProcessError as e:
         # probably no tag to use as a reference
         # "fatal: No names found, cannot describe anything"
@@ -25,3 +27,19 @@ def get_version():
         build = toks[1]
 
     return version, build
+
+if __name__ == "__main__":
+    import sys
+    version, build = get_version()
+
+    usage = 'usage: {0} [version|build]'.format(sys.argv[0])
+    try:
+        if sys.argv[1] == 'build':
+            print(build)
+        elif sys.argv[1] == 'version':
+            print(version)
+        else:
+            print(usage)
+            sys.exit(1)
+    except IndexError:
+        print(usage)

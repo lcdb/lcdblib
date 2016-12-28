@@ -14,4 +14,7 @@ conda config --add channels bioconda
 
 conda install -y --file requirements.txt
 
+# we also want conda-build to build a conda package
+conda install -y conda-build
+
 ~/anaconda/bin/python setup.py install

@@ -1,0 +1,47 @@
+package:
+  name: lcdblib
+  version: {{ LCDBLIB_VERSION }}
+source:
+  git_url: https://github.com/lcdb/lcdblib.git
+  git_rev: master
+
+build:
+  number: {{ LCDBLIB_BUILD }}
+
+requirements:
+  build:
+    - pytest-runner
+    - pytest
+    - snakemake
+    - pandas
+    - seaborn
+    - numpy
+    - matplotlib
+    - ipython
+    - jsonschema
+    - pyyaml
+    - pybedtools
+    - pysam
+    - biopython
+run:
+    - pytest-runner
+    - pytest
+    - snakemake
+    - pandas
+    - seaborn
+    - numpy
+    - matplotlib
+    - ipython
+    - jsonschema
+    - pyyaml
+    - pybedtools
+    - pysam
+    - biopython
+
+test:
+  imports:
+    - lcdblib
+
+about:
+  home: https://github.com/lcdb/lcdblib
+  license: MIT
