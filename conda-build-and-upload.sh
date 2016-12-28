@@ -7,7 +7,7 @@ export LCDBLIB_BUILD=$(./_version.py build)
 conda build conda-recipe
 
 if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
-  conda install anaconda
+  conda install anaconda -y
   anaconda upload \
     -t $ANACONDA_TOKEN \
     /home/travis/anaconda/conda-bld/linux-64/lcdblib-${LCDBLIB_VERSION}-${LCDBLIB_BUILD}.tar.bz2
