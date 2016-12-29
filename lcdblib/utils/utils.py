@@ -1,4 +1,20 @@
 from collections.abc import Iterable
+import contextlib
+
+@contextlib.contextmanager
+def temp_env(env):
+    """
+    Context manager to temporarily set os.environ.
+    """
+    env = dict(env)
+    orig = os.environ.copy()
+    _env = {k: str(v) for k, v in env.items()}
+    os.environ.update(_env)
+    try:
+        yield
+    finally:
+        os.environ.clear()
+        os.environ.update(orig)
 
 def flatten(iter):
     """
