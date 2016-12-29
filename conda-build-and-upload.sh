@@ -11,6 +11,6 @@ if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
   anaconda \
     -t $ANACONDA_TOKEN \
     upload \
-    -u lcdb \
+    -u daler \
     /home/travis/anaconda/conda-bld/linux-64/lcdblib-${LCDBLIB_VERSION}-${LCDBLIB_BUILD}.tar.bz2
 fi
