@@ -2,7 +2,6 @@
 lcdblib
 ===============================
 
-
 .. image:: https://img.shields.io/pypi/v/lcdblib.svg
         :target: https://pypi.python.org/pypi/lcdblib
 
