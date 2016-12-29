@@ -1,7 +1,15 @@
-from lcdblib.utils import imports
+from lcdblib.utils import imports, utils
 import sys
 import os
 from textwrap import dedent
+
+
+def test_temp_env():
+    assert 'new_key_testing' not in os.environ
+    with utils.temp_env(dict(new_key_testing='asdf')):
+        assert os.environ['new_key_testing'] == 'asdf'
+    assert 'new_key_testing' not in os.environ
+
 
 def test_resolve_name(tmpdir):
     t = str(tmpdir)

@@ -1,5 +1,6 @@
-from collections.abc import Iterable
+import os
 import contextlib
+from collections.abc import Iterable
 
 @contextlib.contextmanager
 def temp_env(env):
