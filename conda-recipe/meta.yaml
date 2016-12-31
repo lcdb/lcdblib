@@ -23,7 +23,7 @@ requirements:
     - pybedtools
     - pysam
     - biopython
-run:
+  run:
     - pytest-runner
     - pytest
     - snakemake
@@ -41,6 +41,7 @@ run:
 test:
   imports:
     - lcdblib
+    - lcdblib.snakemake.helpers
 
 about:
   home: https://github.com/lcdb/lcdblib
