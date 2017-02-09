@@ -21,7 +21,6 @@ lcdblib
 
 A set of helper function for bioinformatic analysis with snakemake.
 
-
 * Free software: MIT license
 * Documentation: https://lcdblib.readthedocs.io.
 
