@@ -12,5 +12,5 @@ if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
     -t $ANACONDA_TOKEN \
     upload \
     -u lcdb \
-    /home/travis/anaconda/conda-bld/linux-64/lcdblib-${LCDBLIB_VERSION}-${LCDBLIB_BUILD}.tar.bz2
+    $(conda build --output conda-recipe)
 fi
