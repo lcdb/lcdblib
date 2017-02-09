@@ -14,6 +14,7 @@ def test_hisat2_prefixes():
 
     assert aligners.hisat2_index_from_prefix('a/b/c') == files
     assert aligners.prefix_from_hisat2_index(files) == 'a/b/c'
+    assert aligners.prefix_from_hisat2_index(files[0]) == 'a/b/c'
 
     with pytest.raises(ValueError):
         aligners.prefix_from_hisat2_index(['a/b.1.ht2', 'z/b.2.ht2'])
@@ -31,6 +32,7 @@ def test_bowtie2_prefixes():
 
     assert aligners.bowtie2_index_from_prefix('a/b/c') == files
     assert aligners.prefix_from_bowtie2_index(files) == 'a/b/c'
+    assert aligners.prefix_from_bowtie2_index(files[0]) == 'a/b/c'
 
     with pytest.raises(ValueError):
         aligners.prefix_from_bowtie2_index(['a/b.1.bt2', 'z/b.2.bt2'])

@@ -13,10 +13,13 @@ def prefix_from_hisat2_index(index_files):
     """
     Given a list of index files for hisat2, return the corresponding prefix.
     """
-    prefixes = list(set(map(lambda x: '.'.join(x.split('.')[:-2]), index_files)))
-    if len(prefixes) != 1:
-        raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
-    return prefixes[0]
+    if isinstance(index_files, str):
+        return '.'.join(index_files.split('.')[:-2])
+    else:
+        prefixes = list(set(map(lambda x: '.'.join(x.split('.')[:-2]), index_files)))
+        if len(prefixes) != 1:
+            raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
+        return prefixes[0]
 
 
 def bowtie2_index_from_prefix(prefix):
@@ -38,7 +41,10 @@ def prefix_from_bowtie2_index(index_files):
     """
     Given a list of index files for bowtie2, return the corresponding prefix.
     """
-    prefixes = list(set(map(lambda x: '.'.join(x.replace('.rev', '').split('.')[:-2]), index_files)))
-    if len(prefixes) != 1:
-        raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
-    return prefixes[0]
+    if isinstance(index_files, str):
+        return '.'.join(index_files.replace('.rev', '').split('.')[:-2])
+    else:
+        prefixes = list(set(map(lambda x: '.'.join(x.replace('.rev', '').split('.')[:-2]), index_files)))
+        if len(prefixes) != 1:
+            raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
+        return prefixes[0]
