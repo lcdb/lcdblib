@@ -10,33 +10,33 @@ build:
 
 requirements:
   build:
-    - pytest-runner
-    - pytest
-    - snakemake
-    - pandas
-    - seaborn
-    - numpy
-    - matplotlib
-    - ipython
-    - jsonschema
-    - pyyaml
-    - pybedtools
-    - pysam
-    - biopython
+    - biopython ==1.68
+    - ipython ==5.1.0
+    - jsonschema ==2.5.1
+    - matplotlib ==1.5.3
+    - numpy ==1.11.3
+    - pandas ==0.19.2
+    - pybedtools ==0.7.8
+    - pysam ==0.9.1.4
+    - pytest ==3.0.5
+    - pytest-runner ==2.11
+    - pyyaml ==3.12
+    - seaborn ==0.7.1
+    - snakemake ==3.10.1
   run:
-    - pytest-runner
-    - pytest
-    - snakemake
-    - pandas
-    - seaborn
-    - numpy
-    - matplotlib
-    - ipython
-    - jsonschema
-    - pyyaml
-    - pybedtools
-    - pysam
-    - biopython
+    - biopython ==1.68
+    - ipython ==5.1.0
+    - jsonschema ==2.5.1
+    - matplotlib ==1.5.3
+    - numpy ==1.11.3
+    - pandas ==0.19.2
+    - pybedtools ==0.7.8
+    - pysam ==0.9.1.4
+    - pytest ==3.0.5
+    - pytest-runner ==2.11
+    - pyyaml ==3.12
+    - seaborn ==0.7.1
+    - snakemake ==3.10.1
 
 test:
   imports:
