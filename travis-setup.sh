@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-set -x
 
 curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/anaconda
@@ -12,6 +11,10 @@ conda config --add channels defaults
 conda config --add channels r
 conda config --add channels bioconda
 
+conda install -y python=3.5
 conda install -y --file requirements.txt
+
+# we also want conda-build to build a conda package
+conda install -y conda-build
 
 ~/anaconda/bin/python setup.py install

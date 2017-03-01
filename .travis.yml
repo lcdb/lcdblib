@@ -7,3 +7,4 @@ script:
     - which python
     - python -c 'import lcdblib; print(lcdblib.__file__)'
     - py.test tests/ -v
+    - ./conda-build-and-upload.sh

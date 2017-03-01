@@ -2,7 +2,6 @@
 lcdblib
 ===============================
 
-
 .. image:: https://img.shields.io/pypi/v/lcdblib.svg
         :target: https://pypi.python.org/pypi/lcdblib
 
@@ -21,7 +20,6 @@ lcdblib
     :target: https://travis-ci.org/lcdb/lcdblib
 
 A set of helper function for bioinformatic analysis with snakemake.
-
 
 * Free software: MIT license
 * Documentation: https://lcdblib.readthedocs.io.

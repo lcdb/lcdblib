@@ -1,4 +1,5 @@
 import pandas as pd
+from itertools import product
 
 def tidy_dataframe(df, column, sep='|'):
     """
@@ -28,3 +29,40 @@ def tidy_dataframe(df, column, sep='|'):
     df2 = df.loc[i].copy()
     df2[column] = s.values
     return df2
+
+def cartesian_product(df1, df2):
+    """ Calculates the carteisan product and returns expanded DataFrame.
+
+    Given a pandas.DataFrame:
+
+    | sample | tissue |
+    |--------|--------|
+    | one    | ovary  |
+    | two    | testis |
+
+    and some set of values `{'num': [100, 200]}` build:
+
+    | sample | tissue | num |
+    |--------|--------|-----|
+    | one    | ovary  | 100 |
+    | one    | ovary  | 200 |
+    | two    | testis | 100 |
+    | two    | testis | 200 |
+
+    Parameters
+    ----------
+    df1: pandas.DataFrame
+        A DataFrame that you want to expand.
+    df2: dict of array-like | pandas.DataFrame | pandas.Series
+        The set of values that you want to expand df1 by.
+
+    """
+    if isinstance(df2, dict):
+        df2 = pd.DataFrame(df2)
+    elif isinstance(df2, pd.Series):
+        df2 = df2.to_frame()
+
+    rows = product(df1.iterrows(), df2.iterrows())
+    df = pd.DataFrame(left.append(right) for (_, left), (_, right) in rows)
+
+    return df.reset_index(drop=True)
