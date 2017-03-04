@@ -3,6 +3,8 @@
 import os
 import pandas as pd
 from io import StringIO
+from zipfile import ZipFile
+from tempfile import TemporaryDirectory
 
 from lcdblib.logger import logger
 
@@ -46,6 +48,15 @@ class FastQC(object):
     def items(self):
         return self.blocks.items()
 
+    @classmethod
+    def parse_from_zip(cls, id, filename):
+        """Parse from ZipFile."""
+        with TemporaryDirectory() as tmp:
+            with ZipFile(filename, 'r') as archive:
+                fname = [x.filename for x in archive.filelist if 'fastqc_data.txt' in x.filename][0]
+                archive.extract(fname, path=tmp)
+                fq = cls(id, os.path.join(tmp, fname))
+        return fq
 
 
 class FastQCBlock(object):
