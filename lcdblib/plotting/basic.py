@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from seaborn import utils
 
+
 def corrfunc(x, y, type='spearman', **kwargs):
     """ Adds text to the current axes with either the sparman or pearson r.
 
@@ -30,7 +31,8 @@ def corrfunc(x, y, type='spearman', **kwargs):
         corr = pearsonr
 
     ax = plt.gca()
-    ax.text(0.1, .9, "r={:0.4}".format(corr(x, y)[0]), transform=ax.transAxes, **kwargs)
+    ax.text(0.1, .9, "r={:0.4}".format(corr(x, y)[0]), transform=ax.transAxes,
+            **kwargs)
 
 
 def maPlot(x, y, data=None, title=None, log=False, **kwargs):
@@ -60,7 +62,8 @@ def maPlot(x, y, data=None, title=None, log=False, **kwargs):
     Example
     -------
     Given that 'x' and 'y' are column names in df:
-        >>> maPlot('x', 'y', data=df, log=True, fig_reg=True, line_kws={'color': 'red'})
+        >>> maPlot('x', 'y', data=df, log=True, fig_reg=True,
+        ... line_kws={'color': 'red'})
 
     Given that 'x' and 'y' are pandas.Series
         >>> maPlot(x, y, log=True, fig_reg=True, line_kws={'color': 'red'})
@@ -68,46 +71,47 @@ def maPlot(x, y, data=None, title=None, log=False, **kwargs):
 
     """
     if isinstance(x, str) and isinstance(y, str) and data is not None:
-        dat = data[[x,y]].copy()
+        dat = data[[x, y]].copy()
         xlabel = x
         ylabel = y
     elif isinstance(x, pd.Series) and isinstance(y, pd.Series):
-        dat = pd.DataFrame(pd.concat([x,y], axis=1))
+        dat = pd.DataFrame(pd.concat([x, y], axis=1))
         xlabel = x.name
         ylabel = y.name
     else:
-        raise ValueError("x and y must be a column name in data or pandas.Series")
-        
+        raise ValueError("x and y must be a column name in data or "
+                         "pandas.Series")
+
     dat.reset_index(drop=True, inplace=True)
-    
+
     if log:
         dat = dat[~(dat == 0).any(axis=1)]
 
         # Calculate differences and mean
-        dat['difference'] = np.log2(dat.iloc[:, 0] /  dat.iloc[:, 1])
+        dat['difference'] = np.log2(dat.iloc[:, 0] / dat.iloc[:, 1])
         dat['average'] = np.log2(np.sqrt(dat.iloc[:, 0] * dat.iloc[:, 1]))
         diff = 'log2({x} / {y})'.format(x=xlabel, y=ylabel)
         avg = 'log2(sqrt({x} * {y}))'.format(x=xlabel, y=ylabel)
     else:
-        dat['difference'] = dat.iloc[:, 0] -  dat.iloc[:, 1]
+        dat['difference'] = dat.iloc[:, 0] - dat.iloc[:, 1]
         dat['average'] = (dat.iloc[:, 0] + dat.iloc[:, 1]) / 2
         diff = '{x} - {y}'.format(x=xlabel, y=ylabel)
         avg = '({x} + {y}) / 2'.format(x=xlabel, y=ylabel)
-    
+
     # Plot
-    if not 'fit_reg' in kwargs:
+    if 'fit_reg' not in kwargs:
         kwargs['fit_reg'] = False
-    if not 'ci' in kwargs:
+    if 'ci' not in kwargs:
         kwargs['ci'] = False
-        
+
     ax = sns.regplot('average', 'difference', data=dat, **kwargs)
     ax.set_xlabel(avg)
     ax.set_ylabel(diff)
     ax.axhline(0, ls='--', color='r')
-    
+
     if title is not None:
         ax.set_title(title)
-    
+
     return ax
 
 
@@ -117,12 +121,12 @@ class PairGrid(sns.PairGrid):
                  diag_sharey=True, size=2.5, aspect=1,
                  despine=True, dropna=True, subplots_kws={}):
         """A slight modification of seaborn.PairGrid.
-        
+
         PairGrid required that the axes of the plots be shared. I contacted the
         author about allowing the axes to be separate, but he did not like that
         idea. I have subclassed seaborn.PairGrid and just modified the
         __init__() to allow separate axes.
-        
+
         Initialize the plot figure and PairGrid object.
 
         Parameters
@@ -281,7 +285,7 @@ class PairGrid(sns.PairGrid):
         # Create the figure and the array of subplots
         figsize = len(x_vars) * size * aspect, len(y_vars) * size
 
-        kwargs = {'figsize': figsize, 'sharex': "col", 
+        kwargs = {'figsize': figsize, 'sharex': "col",
                   'sharey': "row", 'squeeze': False}
         kwargs.update(subplots_kws)
         fig, axes = plt.subplots(len(y_vars), len(x_vars), **kwargs)
@@ -321,9 +325,10 @@ class PairGrid(sns.PairGrid):
         if despine:
             utils.despine(fig=fig)
         fig.tight_layout()
-    
+
+
 def lowerTriangle(df, func, func_kw={}, pairgrid_kw={}, **kwargs):
-    """ Create a PairGrid lower triangle panel. 
+    """ Create a PairGrid lower triangle panel.
 
     Parameters
     ----------
@@ -332,7 +337,7 @@ def lowerTriangle(df, func, func_kw={}, pairgrid_kw={}, **kwargs):
 
     func: function or list of functions
         The function you want to plot in a PairGrid
-    
+
     Returns
     -------
     seaborn.PairGrid

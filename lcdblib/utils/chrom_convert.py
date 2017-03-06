@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """ Converts between chromosome names. """
-import os
 import sys
 import argparse
 from argparse import RawDescriptionHelpFormatter as Raw
@@ -12,8 +11,6 @@ import pysam
 import pybedtools
 from Bio import SeqIO
 
-from lcdblib.logger import logger
-
 
 def arguments():
     """ Function to pull command line arguments """
@@ -21,8 +18,8 @@ def arguments():
     DESCRIPTION = """\
     Converts between chromosome names.
 
-    In D. melanogaster there are four common varieties of chromosomes names that
-    are used.
+    In D. melanogaster there are four common varieties of chromosomes names
+    that are used.
 
     * FlyBase style: 2L, 2R, 3L, etc.
     * UCSC style: chr2L, chr2R, chr3L, etc.
@@ -61,7 +58,8 @@ def arguments():
 
     parser.add_argument("-o", "--output", dest="output", action='store',
                         required=False, default='-',
-                        help="Output file, if none given or `-o -` then STDOUT.")
+                        help="Output file, if none given or `-o -` "
+                        "then STDOUT.")
 
     parser.add_argument("--debug", dest="debug", action='store_true',
                         required=False, help="Enable debug output.")
@@ -87,10 +85,14 @@ def import_conversion(f, t):
     """
 
     # Get location of the file
-    gz = pkg_resources.resource_filename('lcdblib', 'data/GCF_000001215.4.assembly.txt.gz')
+    gz = pkg_resources.resource_filename(
+        'lcdblib',
+        'data/GCF_000001215.4.assembly.txt.gz'
+    )
 
     # Import file
-    df = pd.read_csv(gz, compression='gzip', comment='#', sep='\t', header=None)
+    df = pd.read_csv(gz, compression='gzip', comment='#', sep='\t',
+                     header=None)
 
     # Make mapping from keyword to column number
     # col#   Header

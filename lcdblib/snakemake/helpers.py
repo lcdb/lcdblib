@@ -4,6 +4,7 @@ import pandas as pd
 from snakemake.shell import shell
 from snakemake.io import expand
 
+
 def fill_patterns(patterns, fill, combination=product):
     """
     Fills in a dictionary of patterns with the dictionary or DataFrame `fill`.

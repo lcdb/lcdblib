@@ -2,6 +2,7 @@
 Helper functions for working with aligners within Snakefiles
 """
 
+
 def hisat2_index_from_prefix(prefix):
     """
     Given a prefix, return a list of the corresponding hisat2 index files.
@@ -16,9 +17,16 @@ def prefix_from_hisat2_index(index_files):
     if isinstance(index_files, str):
         return '.'.join(index_files.split('.')[:-2])
     else:
-        prefixes = list(set(map(lambda x: '.'.join(x.split('.')[:-2]), index_files)))
+        prefixes = list(
+            set(
+                map(
+                    lambda x: '.'.join(x.split('.')[:-2]), index_files)
+            )
+        )
         if len(prefixes) != 1:
-            raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
+            raise ValueError(
+                "More than one prefix detected from '{0}'".format(prefixes)
+            )
         return prefixes[0]
 
 
@@ -44,7 +52,15 @@ def prefix_from_bowtie2_index(index_files):
     if isinstance(index_files, str):
         return '.'.join(index_files.replace('.rev', '').split('.')[:-2])
     else:
-        prefixes = list(set(map(lambda x: '.'.join(x.replace('.rev', '').split('.')[:-2]), index_files)))
+        prefixes = list(
+            set(
+                map(
+                    lambda x: '.'.join(x.replace('.rev', '').split('.')[:-2]),
+                    index_files)
+            )
+        )
         if len(prefixes) != 1:
-            raise ValueError("More than one prefix detected from '{0}'".format(prefixes))
+            raise ValueError(
+                "More than one prefix detected from '{0}'".format(prefixes)
+            )
         return prefixes[0]

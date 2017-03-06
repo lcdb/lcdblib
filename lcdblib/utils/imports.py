@@ -1,6 +1,3 @@
-import importlib
-
-
 def resolve_name(name):
     """
     Imports a specific object from a dotted path and returns just that object.
