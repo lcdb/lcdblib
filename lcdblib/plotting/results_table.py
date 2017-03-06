@@ -1,5 +1,3 @@
-import itertools
-import copy
 from textwrap import dedent
 import numpy as np
 import pandas
@@ -10,12 +8,12 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.transforms import blended_transform_factory
 from matplotlib.ticker import MaxNLocator
 from matplotlib.collections import EventCollection
-from mpl_toolkits.axes_grid1 import make_axes_locatable
 import gffutils
 import pybedtools
 from pybedtools import featurefuncs
 
 from .. utils import utils
+from . import colormap_adjust
 
 _base_doc = """%s
 The underlying pandas.DataFrame is always available with the `data`
@@ -914,8 +912,9 @@ class DESeqResults(DifferentialExpressionResults):
                 if lfc < 0:
                     score *= -1
                 feature.score = str(score)
-                feature = extend_fields(
-                    gff2bed(gffutils.helpers.asinterval(feature)), 9)
+                feature = featurefuncs.extend_fields(
+                    featurefuncs.gff2bed(
+                        gffutils.helpers.asinterval(feature)), 9)
                 fields = feature.fields[:]
                 fields[6] = fields[1]
                 fields[7] = fields[2]
@@ -929,14 +928,14 @@ class DESeqResults(DifferentialExpressionResults):
         x = pybedtools.BedTool(scored_feature_generator(self)).saveas()
         norm = x.colormap_normalize()
         if cmap is None:
-            cmap = cm.RdBu_r
+            cmap = matplotlib.cm.RdBu_r
         cmap = colormap_adjust.cmap_center_point_adjust(
             cmap, [norm.vmin, norm.vmax], 0)
 
         def score_zeroer(f):
             f.score = '0'
             return f
-        return x.each(add_color, cmap=cmap, norm=norm)\
+        return x.each(featurefuncs.add_color, cmap=cmap, norm=norm)\
                 .sort()\
                 .each(score_zeroer)\
                 .truncate_to_chrom(genome)\

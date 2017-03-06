@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """ Quick and dirty Fastqc parser """
-import os
 import pandas as pd
 from io import StringIO
 
 from lcdblib.logger import logger
 
 logger.setLevel(10)
+
 
 class FastQC(object):
     def __init__(self, id, filename):
@@ -45,7 +45,6 @@ class FastQC(object):
 
     def items(self):
         return self.blocks.items()
-
 
 
 class FastQCBlock(object):

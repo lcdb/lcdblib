@@ -2,6 +2,7 @@ import os
 import contextlib
 from collections.abc import Iterable
 
+
 @contextlib.contextmanager
 def temp_env(env):
     """
@@ -17,6 +18,7 @@ def temp_env(env):
         os.environ.clear()
         os.environ.update(orig)
 
+
 def flatten(iter):
     """
     Flatten an arbitrarily nested iterable whose innermost items are strings
@@ -24,6 +26,7 @@ def flatten(iter):
     """
     if isinstance(iter, dict):
         iter = iter.values()
+
     def gen():
         for item in iter:
             if isinstance(item, dict):
@@ -39,7 +42,7 @@ def test_flatten():
     assert sorted(flatten({
         'a': {
             'b': {
-                'c': ['a','b','c'],
+                'c': ['a', 'b', 'c'],
             },
         },
         'x': ['e', 'f', 'g'],
