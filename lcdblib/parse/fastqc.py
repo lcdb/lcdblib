@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """ Quick and dirty Fastqc parser """
+import os
 import pandas as pd
 from io import StringIO
 from zipfile import ZipFile
