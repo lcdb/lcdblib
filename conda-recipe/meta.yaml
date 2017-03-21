@@ -23,7 +23,7 @@ requirements:
     - pytest-runner ==2.11
     - pyyaml ==3.12
     - seaborn ==0.7.1
-    - snakemake ==3.10.1
+    - snakemake ==3.11.2
   run:
     - biopython ==1.68
     - gffutils ==0.8.7.1
