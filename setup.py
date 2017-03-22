@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+from _version import get_version
+VERSION, BLD = get_version()
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -13,7 +15,7 @@ requirements = [i.strip() for i in open('requirements.txt').readlines()]
 
 setup(
     name='lcdblib',
-    version='0.0.1',
+    version=VERSION,
     description="A set of helper functions for bioinformatics analysis with snakemake.",
     long_description=readme + '\n\n' + history,
     author="Ryan Dale",
