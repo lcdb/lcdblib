@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
-__author__ = 'Justin Fear'
-__email__ = 'justin.m.fear@gmail.com'
-__version__ = '0.0.1'
+import sys
+sys.path.insert(0, '../')
+from _version import get_version
+__version__, __build__ = get_version()
