@@ -205,6 +205,6 @@ def fisher_tables(table, row_names=['class 1', 'not'],
     s.append('')
     s.append(print_col_perc_table(table, row_names, col_names))
     oddsratio, pval = fisher(table)
-    s.append('odds ratio: {}'.format(oddsratio))
-    s.append('2-sided pval: {}'.format(pval))
+    s.append('odds ratio: {:g}'.format(oddsratio))
+    s.append('2-sided pval: {:g}'.format(pval))
     return '\n'.join(s)
