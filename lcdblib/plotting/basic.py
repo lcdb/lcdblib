@@ -7,7 +7,7 @@ import seaborn as sns
 from seaborn import utils
 
 
-def corrfunc(x, y, type='spearman', **kwargs):
+def corrfunc(x, y, loc=(0.1, .5), type='spearman', **kwargs):
     """ Adds text to the current axes with either the sparman or pearson r.
 
     Parameters
@@ -31,7 +31,7 @@ def corrfunc(x, y, type='spearman', **kwargs):
         corr = pearsonr
 
     ax = plt.gca()
-    ax.text(0.1, .9, "r={:0.4}".format(corr(x, y)[0]), transform=ax.transAxes,
+    ax.text(*loc, "r={:0.4}".format(corr(x, y)[0]), transform=ax.transAxes,
             **kwargs)
 
 
