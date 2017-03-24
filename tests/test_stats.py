@@ -71,6 +71,6 @@ def test_fisher_tables():
     does not     0.71     0.29
     total        1.00     1.00
     ============ ======== ====
-    odds ratio: 0.16551724137931034
-    2-sided pval: 0.08026855207410491
+    odds ratio: 0.165517
+    2-sided pval: 0.0802686
     """)
