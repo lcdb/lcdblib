@@ -10,4 +10,5 @@ pysam >=0.10.0
 pytest >=3.0.5
 pyyaml >=3.12
 seaborn >=0.7.1
+scipy >=0.18.1
 snakemake >=3.11.2
