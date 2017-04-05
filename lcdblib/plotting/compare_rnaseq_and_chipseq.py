@@ -1,4 +1,5 @@
 import os
+import sys
 import matplotlib
 from matplotlib import pyplot as plt
 import numpy as np
@@ -66,10 +67,17 @@ from argh import arg
     help='''Optional column from which to take gene labels found in
     genes-to-label (e.g., "symbol"). If the value in this column is missing,
     fall back to the index.''')
+@arg(
+    '--report',
+    help='''Where to write out Fisher's exact test results. Default is
+    stdout''')
+@arg('--gene-lists', help='''Prefix to gene lists. Will have "*.up.tsv" and
+     "*.dn.tsv" suffixes added.''')
 def plot(de_results, regions=None, peaks=None, x='baseMean',
          y='log2FoldChange', disable_logx=False, logy=False, pval_col='padj',
          alpha=0.1, lfc_cutoff=0, plot_filename=None,
          disable_raster_points=False, genes_to_label=None, label_column=None,
+         report=None, gene_lists=None
     ):
     """
     M-A plot showing up- and downregulated genes with optional labeling and
@@ -79,7 +87,7 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
     points can be clicked for interactive exploration.
 
     If --peaks and --regions are specified, then results from Fishers exact
-    tests will be printed to stdout.
+    tests will be printed to stdout, or to --report if specified
     """
     rasterized = not disable_raster_points
     rt = results_table.DESeq2Results(de_results, import_kwargs=dict(index_col=0))
@@ -160,10 +168,14 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
         npeaks = len(peaks)
         nregions = len(regions)
         npeaks_in_region = len(in_region)
-        print('Total peaks: {}'.format(npeaks))
-        print('Peaks in regions: {0} ({1:.2f}%)\n'.format(npeaks_in_region, npeaks_in_region / npeaks))
+        if report is None:
+            output = sys.stdout
+        else:
+            output = open(report, 'w')
 
-        print(
+        output.write('Total peaks: {}\n'.format(npeaks))
+        output.write('Peaks in regions: {0} ({1:.2f}%)\n\n'.format(npeaks_in_region, npeaks_in_region / npeaks * 100))
+        output.write(
             fisher.fisher_tables(
                 table=fisher.table_from_bool(has_peak, up),
                 row_names=['has peak', 'no peak'],
@@ -171,8 +183,11 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
                 title='Upregulated (lfc>{0}; padj<{1})'.format(lfc_cutoff, alpha)
             )
         )
-        print('\n')
-        print(
+
+        if gene_lists is not None:
+            rt.data[has_peak & up].to_csv(gene_lists + '.up.tsv', sep='\t')
+        output.write('\n\n')
+        output.write(
             fisher.fisher_tables(
                 table=fisher.table_from_bool(has_peak, dn),
                 row_names=['has peak', 'no peak'],
@@ -180,6 +195,11 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
                 title='Downregulated (lfc<-{0}; padj<{1})'.format(lfc_cutoff, alpha)
             )
         )
+        if gene_lists is not None:
+            rt.data[has_peak & dn].to_csv(gene_lists + '.dn.tsv', sep='\t')
+
+        if report is not None:
+            output.close()
 
     fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(111)
