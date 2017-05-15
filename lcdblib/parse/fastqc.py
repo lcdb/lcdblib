@@ -59,6 +59,7 @@ class FastQC(object):
                 fq = cls(id, os.path.join(tmp, fname))
         return fq
 
+
 class FastQCBlock(object):
     def __init__(self, block):
         self.id = block[0].split('\t')[0]
@@ -72,3 +73,208 @@ class FastQCBlock(object):
             block[1] = block[1].lstrip('#')
             block_str = '\n'.join(block[1:])
             self.df = pd.read_csv(StringIO(block_str), sep='\t', index_col=0)
+
+
+def split_ranges(df):
+    """Split ranges into bases.
+
+    Fastqc sometimes collapses bases into ranges, this splits them back out.
+    """
+    rows = []
+    for i, row in df.iterrows():
+        try:
+            if '-' in i:
+                start, end = [int(x) for x in i.split('-')]
+                for j in range(start, end + 1):
+                    curr_row = row.copy()
+                    curr_row.name = j
+                    rows.append(curr_row)
+            else:
+                row.name = int(i)
+                rows.append(row)
+        except TypeError:
+            rows.append(row)
+
+    df = pd.concat(rows, axis=1).T
+    df.index.name = 'base'
+    return df
+
+
+def parse_fastqc(sample, file, field=''):
+    """Parse fastqc zip file.
+
+    Takes a zip file and makes a FastQC object.
+
+    Parameters
+    ----------
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    field: str
+        Name of specific Fastqc section to return. Look at
+        lcdblib.parse.fastqc.FastQC.keys() for a list of possible names.
+
+    Returns
+    -------
+    lcdblib.parse.fastqc.FastQC or lcdblib.parse.fastqc.FastQCBlock if `field`
+    is provided.
+
+    """
+    if field:
+        return FastQC.parse_from_zip(sample, file)[field]
+    else:
+        return FastQC.parse_from_zip(sample, file)
+
+
+def parse_fastqc_per_seq_quality(sample, file):
+    """Parse fastqc Per Seq Quality.
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Per sequence quality scores')
+    df = fqc.df
+    wide = df.T
+    wide['sample'] = sample
+    return wide.set_index('sample')
+
+
+def parse_fastqc_per_base_seq_quality(sample, file):
+    """Parse fastqc Per Base Quality
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Per base sequence quality')
+    df = fqc.df['Mean'].copy().to_frame()
+    splitRanges = split_ranges(df)
+    splitRanges['sample'] = sample
+    return splitRanges.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_adapter_content(sample, file):
+    """Parse fastqc Adapter Content.
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Adapter Content')
+    df = fqc.df
+    splitRanges = split_ranges(df)
+    splitRanges['sample'] = sample
+    return splitRanges.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_per_base_seq_content(sample, file):
+    """Parse fastqc Per Base Seq Content
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Per base sequence content')
+    df = fqc.df
+    splitRanges = split_ranges(df)
+    splitRanges['sample'] = sample
+    return splitRanges.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_sequence_length(sample, file):
+    """Parse fastqc Sequence Length
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Sequence Length Distribution')
+    df = fqc.df
+    df['sample'] = sample
+    return df.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_overrepresented_seq(sample, file):
+    """Parse fastqc Overrepresente Sequence
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Overrepresented sequences')
+    df = fqc.df
+    df['sample'] = sample
+    return df.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_basic_stats(sample, file):
+    """Parse fastqc Basic Stats
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Basic Statistics')
+    df = fqc.df.T
+    df['sample'] = sample
+    return df.set_index('sample')
+
+
+def parse_fastqc_kmer_content(sample, file):
+    """Parse fastqc Kmer Content
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Kmer Content')
+    df = fqc.df
+    df.reset_index(inplace=True)
+    df.set_index('Max Obs/Exp Position', inplace=True)
+    splitRanges = split_ranges(df)
+    splitRanges.index.name = 'Max Obs/Exp Position'
+    splitRanges.reset_index(inplace=True)
+    splitRanges['sample'] = sample
+    return splitRanges.sort_values(['Sequence', 'Max Obs/Exp Position']).set_index(['sample', 'Sequence'])
+
+
+def parse_fastqc_per_base_n_content(sample, file):
+    """Parse fastqc Per Base N Content
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Per base N content')
+    df = fqc.df
+    splitRanges = split_ranges(df)
+    splitRanges['sample'] = sample
+    return splitRanges.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_per_seq_gc_content(sample, file):
+    """Parse fastqc Per Seq GC Content
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Per sequence GC content')
+    df = fqc.df
+    df['sample'] = sample
+    return df.set_index(append=True, keys='sample').swaplevel()
+
+
+def parse_fastqc_seq_dup_level(sample, file):
+    """Parse fastqc Seq Duplication Level
+    sample: str
+        Sample name which will be added as row index.
+    file: str
+        Path to the fastqc zip file.
+    """
+    fqc = parse_fastqc(sample, file, field='Sequence Duplication Levels')
+    df = fqc.df
+    df['sample'] = sample
+    return df.set_index(append=True, keys='sample').swaplevel()
