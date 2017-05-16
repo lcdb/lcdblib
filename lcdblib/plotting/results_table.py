@@ -517,8 +517,10 @@ class ResultsTable(object):
                 (yi, ind & y_valid & x_is_neg_inf, neg_offset, rug_y_kwargs),
             ]
             for values, index, offset, kwargs in items:
+
+                # provide np.array rather than pandas.Series
                 coll = EventCollection(
-                    values[index], lineoffset=offset, **kwargs)
+                    values[index].values, lineoffset=offset, **kwargs)
                 coll.df = self.data
                 coll.ind = index
                 ax.add_collection(coll)
