@@ -224,8 +224,9 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
 
     if plot_filename:
         fig.savefig(plot_filename)
-    else:
-        plt.show()
+
+    return ax
 
 if __name__ == "__main__":
     argh.dispatch_commands([plot])
+    plt.show()
