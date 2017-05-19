@@ -12,68 +12,7 @@ import argh
 from argh import arg
 
 
-@arg(
-    'de_results',
-    help='''TSV of differential expression results, with first column as gene
-    ID.''')
-@arg(
-    '--regions',
-    help='''BED file where the 4th column contains gene IDs that are also
-    present in first column of `de_results`. Typically this would be a BED file
-    of promoters or gene bodies.''')
-@arg(
-    '--peaks',
-    help='''BED file to be intersected with `regions`. Typically called
-    peaks.''')
-@arg(
-    '-x',
-    help='''Column to use for x-axis. Default of "baseMean" expects DESeq2
-    results''')
-@arg(
-    '-y',
-    help='''Column to use for y-axis. Default of "log2FoldChange" expects
-    DESeq2 results''')
-@arg(
-    '--disable-logx',
-    help='''Disable default behavior of transforming x values using log10''')
-@arg(
-    '--logy',
-    help='Transform y values using log2.')
-@arg(
-    '-p', '--pval-col',
-    help='''Column to use for statistical significance''')
-@arg(
-    '-a', '--alpha',
-    help='''Threshold for calling significance. Applied to `pval-col`.''')
-@arg(
-    '-l', '--lfc-cutoff',
-    help='''Log2fold change cutoff to be applied to y values. Threshold is
-    applied post-transformation, if any specified (--logy argument)''')
-@arg(
-    '--plot-filename',
-    help='''File to save plot. Format auto-detected by extension''')
-@arg(
-    '--disable-raster-points',
-    help='''Disable the default behavior of rasterizing points in a PDF. Use
-    sparingly, since drawing 30k+ individual points in a PDF may slow down your
-    machine.''')
-@arg(
-    '--genes-to-label',
-    help='''Optional file containing genes to label. First column must be
-    a subset of the first column of `de_results`. Lines starting with '#' and
-    subsequent tab-separated columns will be ignored.''')
-@arg(
-    '--label-column',
-    help='''Optional column from which to take gene labels found in
-    genes-to-label (e.g., "symbol"). If the value in this column is missing,
-    fall back to the index.''')
-@arg(
-    '--report',
-    help='''Where to write out Fisher's exact test results. Default is
-    stdout''')
-@arg('--gene-lists', help='''Prefix to gene lists. Will have "*.up.tsv" and
-     "*.dn.tsv" suffixes added.''')
-def plot(de_results, regions=None, peaks=None, x='baseMean',
+def plot(de_results, regions=None, peaks=None, selected=None, x='baseMean',
          y='log2FoldChange', disable_logx=False, logy=False, pval_col='padj',
          alpha=0.1, lfc_cutoff=0, plot_filename=None,
          disable_raster_points=False, genes_to_label=None, label_column=None,
@@ -87,7 +26,91 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
     points can be clicked for interactive exploration.
 
     If --peaks and --regions are specified, then results from Fishers exact
-    tests will be printed to stdout, or to --report if specified
+    tests will be printed to stdout, or to --report if specified.
+
+    Parameters
+    ----------
+    de_results : str or pandas.DataFrame
+        If str, it's the filename of a TSV of differential expression results,
+        with first column as gene ID. It will be parsed into a dataframe where
+        the index is gene ID. When called as a library, an already-created
+        pandas.DataFrame can optionally be provided instead.
+
+    regions : str or pybedtools.BedTool
+        Gene regions in which to look for intersections with peaks. BED file
+        where the 4th column contains gene IDs that are also present in first
+        column of `de_results`. Typically this would be a BED file of promoters
+        or gene bodies. When called as a library, a pybedtools.BedTool object
+        can optionally be provided instead.
+
+    peaks : str or pybedtools.BedTool
+        BED file to be intersected with `regions`. When called as a library,
+        a pybedtools.BedTool object can optionally be provided instead.
+
+    selected : str or list-like
+        Replaces `regions` `peaks` arguments; useful for when you already know
+        which genes you want to select (e.g., upregulated from a different
+        experiment). If a string, assume it's a filename and use the first
+        column which will be used as an index into the `de_results` dataframe.
+        When called as a library, if `selected` is not a string it will be used
+        as an index into the dataframe.
+
+    x : str
+        Column to use for x-axis. Default of "baseMean" expects DESeq2
+        results
+
+    y : str
+        Column to use for y-axis. Default of "log2FoldChange" expects DESeq2
+        results
+
+    disable_logx : bool
+        Disable default behavior of transforming x values using log10
+
+    logy : bool
+        Transform y values using log2
+
+    pval-col : str
+        Column to use for statistical significance. Default "padj" expectes
+        DESeq2 results.
+
+    alpha : float
+        Threshold for calling significance. Applied to `pval_col`
+
+    lfc_cutoff : float
+        Log2fold change cutoff to be applied to y values. Threshold is applied
+        post-transformation, if any specified (e.g., `logy` argument).
+
+    plot_filename : str
+        File to save plot. Format auto-detected by extension. Output directory
+        will be created if needed.
+
+    disable_raster_points : bool
+        Disable the default behavior of rasterizing points in a PDF. Use
+        sparingly, since drawing 30k+ individual points in a PDF may slow down
+        your machine.
+
+    genes_to_label: str or list-like
+        Optional file containing genes to label with text. First column must be
+        a subset of the first column of `de_results`. Lines starting with '#'
+        and subsequent tab-separated columns will be ignored. When called as
+        a library, a list-like object of gene IDs can be provided.
+
+    label_column : str
+        Optional column from which to take gene labels found in
+        `genes_to_label` (e.g., "symbol"). If the value in this column is
+        missing, fall back to the index. Use this if your gene IDs are long
+        Ensembl IDs but you want the gene symbols to show up on the plot.
+
+    report : str
+        Where to write out Fisher's exact test results. Default is stdout
+
+    gene_lists : str
+        Prefix to gene lists. If specified, gene lists corresponding to the
+        cells of the 2x2 Fishers exact test will be written to
+        {prefix}.up.tsv and {prefix}.dn.tsv. These are subsets of `de_results`
+        where genes are up and have a peak in region (or are selected), or
+        downregulated and have a peak in region (or are selected),
+        respectively.
     """
     rasterized = not disable_raster_points
     rt = results_table.DESeq2Results(de_results, import_kwargs=dict(index_col=0))
@@ -150,53 +173,69 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
     else:
         xfunc=None
 
-    if peaks is not None and regions is not None:
+    if report is None:
+        output = sys.stdout
+    else:
+        output = open(report, 'w')
+
+    if selected and (peaks or regions):
+        raise ValueError(
+            "`selected` is mutually exclusive with `peaks` and `regions`")
+
+    do_fisher = False
+
+    if selected:
+        do_fisher = True
+        if isinstance(selected, str):
+            selected = list(pandas.read_table(selected, index_col=0).index)
+        selected_genes = rt.index.isin(selected)
+        row_names = ['selected', 'not selected']
+
+    elif peaks is not None and regions is not None:
+        do_fisher = True
+        row_names = ['has peak', 'no peak']
         regions = pybedtools.BedTool(regions)
         peaks = pybedtools.BedTool(peaks)
         with_peak = list(set([i.name for i in regions.intersect(peaks, u=True)]))
         in_region = peaks.intersect(regions, u=True)
-        genes_to_highlight.append(
-            (
-                rt.index.isin(with_peak),
-                dict(color='#ff9900', alpha=0.8, s=30,
-                    rasterized=rasterized)
-            )
-        )
 
-        has_peak = rt.index.isin(with_peak)
+        selected_genes = rt.index.isin(with_peak)
 
         npeaks = len(peaks)
         nregions = len(regions)
         npeaks_in_region = len(in_region)
-        if report is None:
-            output = sys.stdout
-        else:
-            output = open(report, 'w')
 
         output.write('Total peaks: {}\n'.format(npeaks))
         output.write('Peaks in regions: {0} ({1:.2f}%)\n\n'.format(npeaks_in_region, npeaks_in_region / npeaks * 100))
-        output.write(
-            fisher.fisher_tables(
-                table=fisher.table_from_bool(has_peak, up),
-                row_names=['has peak', 'no peak'],
-                col_names=['upregulated', 'not'],
-                title='Upregulated (lfc>{0}; padj<{1})'.format(lfc_cutoff, alpha)
+
+    if do_fisher:
+
+        genes_to_highlight.append(
+            (
+                selected_genes,
+                dict(color='#ff9900', alpha=0.8, s=30,
+                    rasterized=rasterized, label='{0} ({1})'.format(row_names[0], sum(selected_genes)))
             )
         )
 
-        if gene_lists is not None:
-            rt.data[has_peak & up].to_csv(gene_lists + '.up.tsv', sep='\t')
+        output.write(
+            fisher.fisher_tables(
+                table=fisher.table_from_bool(selected_genes, up),
+                row_names=row_names,
+                col_names=['upregulated', 'not'],
+                title='Upregulated (lfc>{0}; padj<{1})'.format(lfc_cutoff, alpha)))
+
         output.write('\n\n')
         output.write(
             fisher.fisher_tables(
-                table=fisher.table_from_bool(has_peak, dn),
-                row_names=['has peak', 'no peak'],
+                table=fisher.table_from_bool(selected_genes, dn),
+                row_names=row_names,
                 col_names=['downregulated', 'not'],
-                title='Downregulated (lfc<-{0}; padj<{1})'.format(lfc_cutoff, alpha)
-            )
-        )
+                title='Downregulated (lfc<-{0}; padj<{1})'.format(lfc_cutoff, alpha)))
+
         if gene_lists is not None:
-            rt.data[has_peak & dn].to_csv(gene_lists + '.dn.tsv', sep='\t')
+            rt.data[selected_genes & up].to_csv(gene_lists + '.up.tsv', sep='\t')
+            rt.data[selected_genes & dn].to_csv(gene_lists + '.dn.tsv', sep='\t')
 
         if report is not None:
             output.close()
@@ -223,9 +262,12 @@ def plot(de_results, regions=None, peaks=None, x='baseMean',
     ax.legend(loc='best', prop=dict(size=10))
 
     if plot_filename:
+        dirname = os.path.dirname(plot_filename)
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
         fig.savefig(plot_filename)
-    else:
-        plt.show()
+    return ax
 
 if __name__ == "__main__":
-    argh.dispatch_commands([plot])
+    argh.dispatch_command(plot)
+    plt.show()
