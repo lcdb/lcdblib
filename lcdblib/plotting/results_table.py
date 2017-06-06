@@ -711,7 +711,7 @@ class DifferentialExpressionResults(ResultsTable):
         super(DifferentialExpressionResults, self).__init__(
             data=data, db=db, import_kwargs=import_kwargs, **kwargs)
 
-    def changed(self, alpha=0.05, lfc=0, idx=True):
+    def changed(self, alpha=0.1, lfc=0, idx=True):
         """
         Changed features.
 
@@ -737,7 +737,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def unchanged(self, alpha=0.05, lfc=0, idx=True):
+    def unchanged(self, alpha=0.1, lfc=0, idx=True):
         """
         Unchanged features.
 
@@ -759,7 +759,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def upregulated(self, alpha=0.05, lfc=0, idx=True):
+    def upregulated(self, alpha=0.1, lfc=0, idx=True):
         """
         Upregulated features.
 
@@ -784,7 +784,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def downregulated(self, alpha=0.05, lfc=0, idx=True):
+    def downregulated(self, alpha=0.1, lfc=0, idx=True):
         """
         Downregulated features.
 
