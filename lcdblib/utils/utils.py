@@ -35,7 +35,10 @@ def flatten(iter):
                 yield from flatten(item)
             else:
                 yield item
-    return list(gen())
+    results = list(gen())
+    if len(results) == 1:
+        return results[0]
+    return results
 
 
 def test_flatten():
@@ -50,6 +53,9 @@ def test_flatten():
             'z': 'd'
         },
     })) == ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+
+    assert flatten('a') == 'a'
+    assert flatten(['a']) == 'a'
 
 
 def updatecopy(orig, update_with, keys=None, override=False):

@@ -90,7 +90,7 @@ def test_up_down(deseq_results):
     assert list(r.upregulated(idx=False).index) == [ 'g1', 'g3', 'g5', 'g18']
     assert list(r.upregulated(alpha=0.01, idx=False).index) == [ 'g1', 'g3', 'g5']
     assert list(r.upregulated(alpha=0.01, lfc=3.5, idx=False).index) == ['g3']
-    assert list(r.downregulated(idx=False).index) == [ 'g2', 'g4', 'g10', 'g11', 'g14']
+    assert list(r.downregulated(idx=False).index) == [ 'g2', 'g4', 'g10', 'g11', 'g14', 'g24']
     assert list(r.downregulated(alpha=0.01, idx=False).index) == ['g2', 'g4', 'g11', 'g14']
     assert list(r.downregulated(alpha=0.01, lfc=-3.5, idx=False).index) == ['g2']
 
