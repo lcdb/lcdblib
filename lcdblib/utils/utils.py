@@ -55,6 +55,7 @@ def test_flatten():
     })) == ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
     assert flatten('a') == 'a'
+    assert flatten(['a']) == 'a'
 
 
 def updatecopy(orig, update_with, keys=None, override=False):
