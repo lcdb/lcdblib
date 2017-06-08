@@ -13,7 +13,7 @@ def tidy_dataframe(df, column, sep='|'):
         1        g3      5
         2  g4|g5|g6      9
 
-    becomes:
+    becomes::
 
         tidy_dataframe(df, 'gene', sep='|')
         #   gene  score
@@ -33,21 +33,21 @@ def tidy_dataframe(df, column, sep='|'):
 def cartesian_product(df1, df2):
     """ Calculates the carteisan product and returns expanded DataFrame.
 
-    Given a pandas.DataFrame:
+    Given a pandas.DataFrame::
 
-    | sample | tissue |
-    |--------|--------|
-    | one    | ovary  |
-    | two    | testis |
+        | sample | tissue |
+        |--------|--------|
+        | one    | ovary  |
+        | two    | testis |
 
-    and some set of values `{'num': [100, 200]}` build:
+    and some set of values `{'num': [100, 200]}` build::
 
-    | sample | tissue | num |
-    |--------|--------|-----|
-    | one    | ovary  | 100 |
-    | one    | ovary  | 200 |
-    | two    | testis | 100 |
-    | two    | testis | 200 |
+        | sample | tissue | num |
+        |--------|--------|-----|
+        | one    | ovary  | 100 |
+        | one    | ovary  | 200 |
+        | two    | testis | 100 |
+        | two    | testis | 200 |
 
     Parameters
     ----------

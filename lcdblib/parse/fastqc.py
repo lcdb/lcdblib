@@ -107,11 +107,11 @@ def parse_fastqc(sample, file, field=''):
 
     Parameters
     ----------
-    sample: str
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
-    field: str
+    field : str
         Name of specific Fastqc section to return. Look at
         lcdblib.parse.fastqc.FastQC.keys() for a list of possible names.
 
@@ -129,9 +129,12 @@ def parse_fastqc(sample, file, field=''):
 
 def parse_fastqc_per_seq_quality(sample, file):
     """Parse fastqc Per Seq Quality.
-    sample: str
+
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Per sequence quality scores')
@@ -143,9 +146,11 @@ def parse_fastqc_per_seq_quality(sample, file):
 
 def parse_fastqc_per_base_seq_quality(sample, file):
     """Parse fastqc Per Base Quality
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Per base sequence quality')
@@ -157,9 +162,11 @@ def parse_fastqc_per_base_seq_quality(sample, file):
 
 def parse_fastqc_adapter_content(sample, file):
     """Parse fastqc Adapter Content.
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Adapter Content')
@@ -171,9 +178,11 @@ def parse_fastqc_adapter_content(sample, file):
 
 def parse_fastqc_per_base_seq_content(sample, file):
     """Parse fastqc Per Base Seq Content
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Per base sequence content')
@@ -185,9 +194,11 @@ def parse_fastqc_per_base_seq_content(sample, file):
 
 def parse_fastqc_sequence_length(sample, file):
     """Parse fastqc Sequence Length
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Sequence Length Distribution')
@@ -198,9 +209,11 @@ def parse_fastqc_sequence_length(sample, file):
 
 def parse_fastqc_overrepresented_seq(sample, file):
     """Parse fastqc Overrepresente Sequence
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Overrepresented sequences')
@@ -211,9 +224,11 @@ def parse_fastqc_overrepresented_seq(sample, file):
 
 def parse_fastqc_basic_stats(sample, file):
     """Parse fastqc Basic Stats
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Basic Statistics')
@@ -224,9 +239,11 @@ def parse_fastqc_basic_stats(sample, file):
 
 def parse_fastqc_kmer_content(sample, file):
     """Parse fastqc Kmer Content
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Kmer Content')
@@ -242,9 +259,11 @@ def parse_fastqc_kmer_content(sample, file):
 
 def parse_fastqc_per_base_n_content(sample, file):
     """Parse fastqc Per Base N Content
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Per base N content')
@@ -256,9 +275,11 @@ def parse_fastqc_per_base_n_content(sample, file):
 
 def parse_fastqc_per_seq_gc_content(sample, file):
     """Parse fastqc Per Seq GC Content
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Per sequence GC content')
@@ -269,9 +290,11 @@ def parse_fastqc_per_seq_gc_content(sample, file):
 
 def parse_fastqc_seq_dup_level(sample, file):
     """Parse fastqc Seq Duplication Level
-    sample: str
+    Parameters
+    ----------
+    sample : str
         Sample name which will be added as row index.
-    file: str
+    file : str
         Path to the fastqc zip file.
     """
     fqc = parse_fastqc(sample, file, field='Sequence Duplication Levels')

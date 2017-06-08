@@ -1,40 +1,33 @@
-===============================
 lcdblib
-===============================
+=======
 
-.. image:: https://img.shields.io/pypi/v/lcdblib.svg
-        :target: https://pypi.python.org/pypi/lcdblib
+`lcdblib` is a toolbox of functions and classes for working with genomic data.
+While developing code for other projects, if we decide something could be more
+generally useful then we add it to this package.
 
-.. image:: https://img.shields.io/travis/lcdb/lcdblib.svg
-        :target: https://travis-ci.org/lcdb/lcdblib
+Installation
+------------
 
-.. image:: https://readthedocs.org/projects/lcdblib/badge/?version=latest
-        :target: https://lcdblib.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+Installation is intended to be from `conda`, with the `bioconda
+<https://bioconda.github.io/>`_ channel and dependencies set up::
 
-.. image:: https://pyup.io/repos/github/lcdb/lcdblib/shield.svg
-     :target: https://pyup.io/repos/github/lcdb/lcdblib/
-     :alt: Updates
-
-.. image:: https://travis-ci.org/lcdb/lcdblib.svg?branch=master
-    :target: https://travis-ci.org/lcdb/lcdblib
-
-A set of helper function for bioinformatic analysis with snakemake.
-
-* Free software: MIT license
-* Documentation: https://lcdblib.readthedocs.io.
+    conda install -c lcdb lcdblib
 
 
-Features
---------
+You may want to permanently add the `lcdb` channel to your ``.condarc`` to
+avoid specifiying it each time::
 
-* TODO
+    conda config --add channels lcdb
 
-Credits
----------
+Then::
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+    conda install lcdblib
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+or if it's already installed::
 
+    conda update lcdblib
+
+Automated tests are run on `travis-ci
+<https://travis-ci.org/lcdb/lcdblib/builds>`_, and successful builds on the
+`master` branch are automatically uploaded to the `lcdb conda channel
+<https://anaconda.org/lcdb/lcdblib/files>`_.

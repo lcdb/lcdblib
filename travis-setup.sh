@@ -18,4 +18,3 @@ conda install -y --file requirements.txt
 conda install -y conda-build
 
 ~/anaconda/bin/python setup.py install
-
