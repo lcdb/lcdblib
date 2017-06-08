@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [i.strip() for i in open('conda-requirements.txt').readlines()]
+requirements = [i.strip() for i in open('requirements.txt').readlines()]
 
 setup(
     name='lcdblib',
