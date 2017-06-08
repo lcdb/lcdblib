@@ -12,3 +12,4 @@ pyyaml >=3.12
 seaborn >=0.7.1
 scipy >=0.18.1
 snakemake >=3.11.2
+guzzle_sphinx_theme
