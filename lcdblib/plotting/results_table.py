@@ -24,9 +24,10 @@ underlying pandas.DataFrame.
 
 Parameters
 ----------
+
 data : string or pandas.DataFrame
     If string, assumes it's a filename and calls
-    pandas.read_table(data, **import_kwargs).
+    `pandas.read_table(data, **import_kwargs)`.
 
 db : string or gffutils.FeatureDB
     Optional database that can be used to generate features
@@ -615,12 +616,11 @@ class ResultsTable(object):
 
         References
         ----------
-        [1]  Hoffman,P.E. et al. (1997) DNA visual and analytic data mining. In
-             the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
-             437-441.
-        [2] http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm
-        [3] http://pandas.pydata.org/pandas-docs/stable/visualization.html\
-                #radviz
+        1. Hoffman,P.E. et al. (1997) DNA visual and analytic data mining. In
+           the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
+           437-441.
+        2. http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm
+        3. http://pandas.pydata.org/pandas-docs/stable/visualization.html#radviz
         """
         # make a copy of data
         x = self.data[column_names].copy()
