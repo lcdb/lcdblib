@@ -7,8 +7,6 @@ script:
   - python -c 'import lcdblib; print(lcdblib.__file__)'
   - py.test tests/ -v
   - ci/conda-build-and-upload.sh
-before_install:
-  - openssl aes-256-cbc -K $encrypted_27b4c1eaf7da_key -iv $encrypted_27b4c1eaf7da_iv -in key.enc -out key -d
 env:
   global:
     - ENCRYPTION_LABEL: "27b4c1eaf7da"
