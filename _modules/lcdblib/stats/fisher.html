@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.stats.fisher &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.stats.fisher</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module for easily running and reporting Fishers exact tests.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">fisher_exact</span>
+
+
+<div class="viewcode-block" id="print_2x2_table"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.print_2x2_table">[docs]</a><span class="k">def</span> <span class="nf">print_2x2_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 1&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                    <span class="n">col_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 2&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints a table used for Fisher&#39;s exact test. Adds row, column, and grand</span>
+<span class="sd">    totals.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table : list or tuple, length=4</span>
+<span class="sd">        The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</span>
+
+<span class="sd">    row_labels : list</span>
+<span class="sd">        A length-2 list of row names</span>
+<span class="sd">    col_labels : list</span>
+<span class="sd">        A length-2 list of column names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">grand</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+    <span class="c1"># Separate table into components and get row/col sums</span>
+    <span class="n">t11</span><span class="p">,</span> <span class="n">t12</span><span class="p">,</span> <span class="n">t21</span><span class="p">,</span> <span class="n">t22</span> <span class="o">=</span> <span class="n">table</span>
+
+    <span class="c1"># Row sums, col sums, and grand total</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">t11</span> <span class="o">+</span> <span class="n">t12</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">t21</span> <span class="o">+</span> <span class="n">t22</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">t11</span> <span class="o">+</span> <span class="n">t21</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">t12</span> <span class="o">+</span> <span class="n">t22</span>
+
+    <span class="c1"># Re-cast everything as the appropriate format</span>
+    <span class="n">t11</span><span class="p">,</span> <span class="n">t12</span><span class="p">,</span> <span class="n">t21</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">grand</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">fmt</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="n">t11</span><span class="p">,</span> <span class="n">t12</span><span class="p">,</span> <span class="n">t21</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">grand</span><span class="p">]]</span>
+
+    <span class="c1"># Construct rows and columns the long way...</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">col_labels</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">row_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t11</span><span class="p">,</span> <span class="n">t12</span><span class="p">,</span> <span class="n">r1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">row_labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t21</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">r2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">grand</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">col_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t11</span><span class="p">,</span> <span class="n">t21</span><span class="p">,</span> <span class="n">c1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">col_labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t12</span><span class="p">,</span> <span class="n">t22</span><span class="p">,</span> <span class="n">c2</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">grand</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Get max column width for each column; need this for nice justification</span>
+    <span class="n">widths</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+        <span class="n">widths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">col</span><span class="p">))</span>
+
+    <span class="c1"># ReST-formatted header</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">widths</span><span class="p">]</span>
+
+    <span class="c1"># Construct the table one row at a time with nice justification</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sep</span><span class="p">))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">widths</span><span class="p">)))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sep</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">widths</span><span class="p">)))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="print_row_perc_table"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.print_row_perc_table">[docs]</a><span class="k">def</span> <span class="nf">print_row_perc_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 1&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                         <span class="n">col_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 2&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a string form of the table showing row percentages.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table : list or tuple, length=4</span>
+<span class="sd">        The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</span>
+
+<span class="sd">    row_labels : list</span>
+<span class="sd">        A length-2 list of row names</span>
+<span class="sd">    col_labels : list</span>
+<span class="sd">        A length-2 list of column names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r1c1</span><span class="p">,</span> <span class="n">r1c2</span><span class="p">,</span> <span class="n">r2c1</span><span class="p">,</span> <span class="n">r2c2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+    <span class="n">row1</span> <span class="o">=</span> <span class="n">r1c1</span> <span class="o">+</span> <span class="n">r1c2</span>
+    <span class="n">row2</span> <span class="o">=</span> <span class="n">r2c1</span> <span class="o">+</span> <span class="n">r2c2</span>
+
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">r1c1</span><span class="p">,</span> <span class="n">row1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r1c2</span><span class="p">,</span> <span class="n">row1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r2c1</span><span class="p">,</span> <span class="n">row2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r2c2</span><span class="p">,</span> <span class="n">row2</span><span class="p">)]</span>
+
+    <span class="n">new_table</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cell</span> <span class="o">/</span> <span class="n">row</span>
+        <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">new_table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">print_2x2_table</span><span class="p">(</span><span class="n">new_table</span><span class="p">,</span> <span class="n">row_labels</span><span class="p">,</span> <span class="n">col_labels</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">s</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="print_col_perc_table"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.print_col_perc_table">[docs]</a><span class="k">def</span> <span class="nf">print_col_perc_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 1&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                         <span class="n">col_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 2&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a string form of the table showing column percentages.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table : list or tuple, length=4</span>
+<span class="sd">        The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</span>
+
+<span class="sd">    row_labels : list</span>
+<span class="sd">        A length-2 list of row names</span>
+
+<span class="sd">    col_labels : list</span>
+<span class="sd">        A length-2 list of column names</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r1c1</span><span class="p">,</span> <span class="n">r1c2</span><span class="p">,</span> <span class="n">r2c1</span><span class="p">,</span> <span class="n">r2c2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span>
+    <span class="n">col1</span> <span class="o">=</span> <span class="n">r1c1</span> <span class="o">+</span> <span class="n">r2c1</span>
+    <span class="n">col2</span> <span class="o">=</span> <span class="n">r1c2</span> <span class="o">+</span> <span class="n">r2c2</span>
+
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">r1c1</span><span class="p">,</span> <span class="n">col1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r1c2</span><span class="p">,</span> <span class="n">col2</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r2c1</span><span class="p">,</span> <span class="n">col1</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">r2c2</span><span class="p">,</span> <span class="n">col2</span><span class="p">)]</span>
+
+    <span class="n">new_table</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cell</span> <span class="o">/</span> <span class="n">row</span>
+        <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">new_table</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">print_2x2_table</span><span class="p">(</span><span class="n">new_table</span><span class="p">,</span> <span class="n">row_labels</span><span class="p">,</span> <span class="n">col_labels</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">last_space</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">new_s</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[:</span><span class="n">last_space</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">new_s</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="fisher"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.fisher">[docs]</a><span class="k">def</span> <span class="nf">fisher</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform a Fisher&#39;s exact test.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    table : list or tuple, length=4</span>
+<span class="sd">        The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple of (odds ratio, two-sided pvalue)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fisher_exact</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">table</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">table</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span>
+        <span class="p">]</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="table_from_bool"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.table_from_bool">[docs]</a><span class="k">def</span> <span class="nf">table_from_bool</span><span class="p">(</span><span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given two boolean arrays, return the 2x2 contingency table</span>
+
+<span class="sd">    ind1, ind2 : array-like</span>
+<span class="sd">        Arrays of the same length</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">ind1</span> <span class="o">&amp;</span> <span class="n">ind2</span><span class="p">),</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">ind1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">ind2</span><span class="p">),</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="o">~</span><span class="n">ind1</span> <span class="o">&amp;</span> <span class="n">ind2</span><span class="p">),</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="o">~</span><span class="n">ind1</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">ind2</span><span class="p">),</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="fisher_tables"><a class="viewcode-back" href="../../../autodocs/lcdblib.stats.html#lcdblib.stats.fisher.fisher_tables">[docs]</a><span class="k">def</span> <span class="nf">fisher_tables</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 1&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                  <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class 2&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print all tables along with the FET results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">print_2x2_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_names</span><span class="p">,</span> <span class="n">col_names</span><span class="p">))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">print_row_perc_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_names</span><span class="p">,</span> <span class="n">col_names</span><span class="p">))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">print_col_perc_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">row_names</span><span class="p">,</span> <span class="n">col_names</span><span class="p">))</span>
+    <span class="n">oddsratio</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">fisher</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;odds ratio: </span><span class="si">{:g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oddsratio</span><span class="p">))</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;2-sided pval: </span><span class="si">{:g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pval</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

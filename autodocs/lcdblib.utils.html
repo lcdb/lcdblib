@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.utils package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="lcdblib.stats package" href="lcdblib.stats.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.stats.html" title="lcdblib.stats package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-utils-package">
+<h1>lcdblib.utils package<a class="headerlink" href="#lcdblib-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.utils.chrom_convert">
+<span id="lcdblib-utils-chrom-convert-module"></span><h2>lcdblib.utils.chrom_convert module<a class="headerlink" href="#module-lcdblib.utils.chrom_convert" title="Permalink to this headline">¶</a></h2>
+<p>Converts between chromosome names.</p>
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.arguments">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">arguments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to pull command line arguments</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.convertFeature">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">convertFeature</code><span class="sig-paren">(</span><em>f</em>, <em>mapper</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#convertFeature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.convertFeature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.fasta_convert">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">fasta_convert</code><span class="sig-paren">(</span><em>input</em>, <em>output</em>, <em>mapper</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#fasta_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.fasta_convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses Biopython.SeqIO to convert FASTA headers.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.import_conversion">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">import_conversion</code><span class="sig-paren">(</span><em>f</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#import_conversion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.import_conversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import NCBI conversion table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>str {FlyBase</em><em>, </em><em>UCSC</em><em>, </em><em>NCBI}</em>) &#8211; The current chromosome format.</li>
+<li><strong>t</strong> (<em>str {FlyBase</em><em>, </em><em>UCSC</em><em>, </em><em>NCBI}</em>) &#8211; The desired chromosome format.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dict</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Mapping {f: t}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.main">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.pybedtools_convert">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">pybedtools_convert</code><span class="sig-paren">(</span><em>input</em>, <em>output</em>, <em>mapper</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#pybedtools_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.pybedtools_convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use pybedtools to convert chromosomes in BED, GTF, or GFF.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.chrom_convert.pysam_convert">
+<code class="descclassname">lcdblib.utils.chrom_convert.</code><code class="descname">pysam_convert</code><span class="sig-paren">(</span><em>input</em>, <em>output</em>, <em>kind</em>, <em>mapper</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/chrom_convert.html#pysam_convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.chrom_convert.pysam_convert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use pysam to convert chromosomes in BAM and SAM files.</p>
+<p>pysam uses a header to define chromosomes, then each read is just mapped
+back to this header. Only the header needs to be modified, and reads
+need to be written to the new output file which uses this header.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.utils.imports">
+<span id="lcdblib-utils-imports-module"></span><h2>lcdblib.utils.imports module<a class="headerlink" href="#module-lcdblib.utils.imports" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.utils.imports.resolve_name">
+<code class="descclassname">lcdblib.utils.imports.</code><code class="descname">resolve_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/imports.html#resolve_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.imports.resolve_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports a specific object from a dotted path and returns just that object.</p>
+<p>From nose.utils.resolve_name (with the logging parts taken out) which in
+turn is from unittest.TestLoader.loadTestByName</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.utils.utils">
+<span id="lcdblib-utils-utils-module"></span><h2>lcdblib.utils.utils module<a class="headerlink" href="#module-lcdblib.utils.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.utils.utils.boolean_labels">
+<code class="descclassname">lcdblib.utils.utils.</code><code class="descname">boolean_labels</code><span class="sig-paren">(</span><em>names</em>, <em>idx</em>, <em>mapping={False: 'NOT'</em>, <em>True: 'AND'}</em>, <em>strip='AND_'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/utils.html#boolean_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.utils.boolean_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates labels for boolean lists.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exp1&#39;</span><span class="p">,</span> <span class="s1">&#39;exp2&#39;</span><span class="p">,</span> <span class="s1">&#39;exp3&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">boolean_labels</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+<span class="go">&#39;exp1_AND_exp2_NOT_exp3&#39;</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>names</strong> (<em>list</em>) &#8211; List of names to include in output</li>
+<li><strong>idx</strong> (<em>list</em>) &#8211; List of booleans, same size as <cite>names</cite></li>
+<li><strong>mapping</strong> (<em>dict</em>) &#8211; Linking words to use for True and False</li>
+<li><strong>strip</strong> (<em>str</em>) &#8211; Strip this text off the beginning of labels.</li>
+<li><strong>a list of names and a same-size boolean</strong><strong>, </strong><strong>return strings like</strong> (<em>given</em>) &#8211; </li>
+<li><strong>a_NOT_b_AND_c</strong> &#8211; </li>
+<li><strong>or</strong> &#8211; </li>
+<li><strong>a_AND_b_AND_c_NOT_d_AND_e</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.utils.flatten">
+<code class="descclassname">lcdblib.utils.utils.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iter</em>, <em>unlist=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/utils.html#flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.utils.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten an arbitrarily nested iterable whose innermost items are strings
+into a flat list of strings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>iter</strong> (<em>iterable</em>) &#8211; </li>
+<li><strong>unlist</strong> (<em>bool</em>) &#8211; If True, convert single-item lists into a bare string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.utils.temp_env">
+<code class="descclassname">lcdblib.utils.utils.</code><code class="descname">temp_env</code><span class="sig-paren">(</span><em>env</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/utils.html#temp_env"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.utils.temp_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context manager to temporarily set os.environ.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.utils.test_flatten">
+<code class="descclassname">lcdblib.utils.utils.</code><code class="descname">test_flatten</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/utils.html#test_flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.utils.test_flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.utils.utils.updatecopy">
+<code class="descclassname">lcdblib.utils.utils.</code><code class="descname">updatecopy</code><span class="sig-paren">(</span><em>orig</em>, <em>update_with</em>, <em>keys=None</em>, <em>override=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/utils/utils.html#updatecopy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.utils.utils.updatecopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a copy of a dictionary, with a bit more control than the built-in
+dict.update.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>orig</strong> (<em>dict</em>) &#8211; Dict to update</li>
+<li><strong>update_with</strong> (<em>dict</em>) &#8211; Dict with new values</li>
+<li><strong>keys</strong> (<em>list</em><em> or </em><em>None</em>) &#8211; If not None, then only consider these keys in <cite>update_with</cite>. Otherwise
+consider all.</li>
+<li><strong>override</strong> (<em>bool</em>) &#8211; If True, then this is similar to <cite>dict.update</cite>, except only those keys
+in <cite>keys</cite> will be considered. If False (default), then if a key exists
+in both <cite>orig</cite> and <cite>update_with</cite>, no updating will occur so <cite>orig</cite> will
+retain its original value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.utils.chrom_convert">lcdblib.utils.chrom_convert module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.utils.imports">lcdblib.utils.imports module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.utils.utils">lcdblib.utils.utils module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.stats.html"
+                        title="previous chapter">lcdblib.stats package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.stats.html" title="lcdblib.stats package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

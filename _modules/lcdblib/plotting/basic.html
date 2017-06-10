@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.plotting.basic &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.plotting.basic</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot; Set of basic plotting functions. &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">seaborn</span> <span class="k">import</span> <span class="n">utils</span>
+
+
+<div class="viewcode-block" id="corrfunc"><a class="viewcode-back" href="../../../autodocs/lcdblib.plotting.html#lcdblib.plotting.basic.corrfunc">[docs]</a><span class="k">def</span> <span class="nf">corrfunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span> <span class="n">template</span><span class="o">=</span><span class="s2">&quot;r = </span><span class="si">{:0.4f}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Adds text to the current axes with either the sparman or pearson r.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x: array-like</span>
+<span class="sd">        Vector of values.</span>
+
+<span class="sd">    y: array-like</span>
+<span class="sd">        Vector of values.</span>
+
+<span class="sd">    type: str</span>
+<span class="sd">        Which type of correlation coefficient to use. Either &quot;spearman&quot; or</span>
+<span class="sd">        &quot;pearson&quot;. Uses scipy.stats module.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">spearmanr</span><span class="p">,</span> <span class="n">pearsonr</span>
+
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;spearman&#39;</span><span class="p">:</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">spearmanr</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;pearson&#39;</span><span class="p">:</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">pearsonr</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">*</span><span class="n">loc</span><span class="p">,</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">corr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="maPlot"><a class="viewcode-back" href="../../../autodocs/lcdblib.plotting.html#lcdblib.plotting.basic.maPlot">[docs]</a><span class="k">def</span> <span class="nf">maPlot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Creates a MA plot.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y: string, series, or vector array</span>
+<span class="sd">        Input variables. If strings, these should correspond with column names</span>
+<span class="sd">        in ``data``. When pandas objects are used, axes will be labeled with</span>
+<span class="sd">        the series name.</span>
+<span class="sd">    data : DataFrame</span>
+<span class="sd">        Tidy (&quot;long-form&quot;) dataframe where each column is a variable and each</span>
+<span class="sd">        row is an observation.</span>
+<span class="sd">    title: str</span>
+<span class="sd">        Title to add to the plot</span>
+<span class="sd">    log: bool</span>
+<span class="sd">        If true the log2 of the Geometric mean and ratio will be used instead</span>
+<span class="sd">        of the mean and difference.</span>
+<span class="sd">    **kwargs: dict</span>
+<span class="sd">        Values to pass to seaborn.regplot</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.axes.Axes: A matplotlib axes.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    Given that &#39;x&#39; and &#39;y&#39; are column names in df:</span>
+<span class="sd">        &gt;&gt;&gt; maPlot(&#39;x&#39;, &#39;y&#39;, data=df, log=True, fig_reg=True,</span>
+<span class="sd">        ... line_kws={&#39;color&#39;: &#39;red&#39;})</span>
+
+<span class="sd">    Given that &#39;x&#39; and &#39;y&#39; are pandas.Series</span>
+<span class="sd">        &gt;&gt;&gt; maPlot(x, y, log=True, fig_reg=True, line_kws={&#39;color&#39;: &#39;red&#39;})</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">xlabel</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">xlabel</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;x and y must be a column name in data or &quot;</span>
+                         <span class="s2">&quot;pandas.Series&quot;</span><span class="p">)</span>
+
+    <span class="n">dat</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">dat</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">dat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="c1"># Calculate differences and mean</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s1">&#39;difference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="s1">&#39;log2(</span><span class="si">{x}</span><span class="s1"> / </span><span class="si">{y}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="s1">&#39;log2(sqrt(</span><span class="si">{x}</span><span class="s1"> * </span><span class="si">{y}</span><span class="s1">))&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s1">&#39;difference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">dat</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{x}</span><span class="s1"> - </span><span class="si">{y}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{x}</span><span class="s1"> + </span><span class="si">{y}</span><span class="s1">) / 2&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ylabel</span><span class="p">)</span>
+
+    <span class="c1"># Plot</span>
+    <span class="k">if</span> <span class="s1">&#39;fit_reg&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;fit_reg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="s1">&#39;ci&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;ci&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="s1">&#39;difference&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">dat</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+
+<div class="viewcode-block" id="PairGrid"><a class="viewcode-back" href="../../../autodocs/lcdblib.plotting.html#lcdblib.plotting.basic.PairGrid">[docs]</a><span class="k">class</span> <span class="nc">PairGrid</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">PairGrid</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hue_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">hue_kws</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">diag_sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                 <span class="n">despine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subplots_kws</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="sd">&quot;&quot;&quot;A slight modification of seaborn.PairGrid.</span>
+
+<span class="sd">        PairGrid required that the axes of the plots be shared. I contacted the</span>
+<span class="sd">        author about allowing the axes to be separate, but he did not like that</span>
+<span class="sd">        idea. I have subclassed seaborn.PairGrid and just modified the</span>
+<span class="sd">        __init__() to allow separate axes.</span>
+
+<span class="sd">        Initialize the plot figure and PairGrid object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : DataFrame</span>
+<span class="sd">            Tidy (long-form) dataframe where each column is a variable and</span>
+<span class="sd">            each row is an observation.</span>
+<span class="sd">        hue : string (variable name), optional</span>
+<span class="sd">            Variable in ``data`` to map plot aspects to different colors.</span>
+<span class="sd">        hue_order : list of strings</span>
+<span class="sd">            Order for the levels of the hue variable in the palette</span>
+<span class="sd">        palette : dict or seaborn color palette</span>
+<span class="sd">            Set of colors for mapping the ``hue`` variable. If a dict, keys</span>
+<span class="sd">            should be values  in the ``hue`` variable.</span>
+<span class="sd">        hue_kws : dictionary of param -&gt; list of values mapping</span>
+<span class="sd">            Other keyword arguments to insert into the plotting call to let</span>
+<span class="sd">            other plot attributes vary across levels of the hue variable (e.g.</span>
+<span class="sd">            the markers in a scatterplot).</span>
+<span class="sd">        vars : list of variable names, optional</span>
+<span class="sd">            Variables within ``data`` to use, otherwise use every column with</span>
+<span class="sd">            a numeric datatype.</span>
+<span class="sd">        {x, y}_vars : lists of variable names, optional</span>
+<span class="sd">            Variables within ``data`` to use separately for the rows and</span>
+<span class="sd">            columns of the figure; i.e. to make a non-square plot.</span>
+<span class="sd">        size : scalar, optional</span>
+<span class="sd">            Height (in inches) of each facet.</span>
+<span class="sd">        aspect : scalar, optional</span>
+<span class="sd">            Aspect * size gives the width (in inches) of each facet.</span>
+<span class="sd">        despine : boolean, optional</span>
+<span class="sd">            Remove the top and right spines from the plots.</span>
+<span class="sd">        dropna : boolean, optional</span>
+<span class="sd">            Drop missing values from the data before plotting.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        pairplot : Easily drawing common uses of :class:`PairGrid`.</span>
+<span class="sd">        FacetGrid : Subplot grid for plotting conditional relationships.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        Draw a scatterplot for each pairwise relationship:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">            &gt;&gt;&gt; import seaborn as sns; sns.set()</span>
+<span class="sd">            &gt;&gt;&gt; iris = sns.load_dataset(&quot;iris&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map(plt.scatter)</span>
+
+<span class="sd">        Show a univariate distribution on the diagonal:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_diag(plt.hist)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_offdiag(plt.scatter)</span>
+
+<span class="sd">        (It&#39;s not actually necessary to catch the return value every time,</span>
+<span class="sd">        as it is the same object, but it makes it easier to deal with the</span>
+<span class="sd">        doctests).</span>
+
+<span class="sd">        Color the points using a categorical variable:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris, hue=&quot;species&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_diag(plt.hist)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_offdiag(plt.scatter)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.add_legend()</span>
+
+<span class="sd">        Use a different style to show multiple histograms:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris, hue=&quot;species&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_diag(plt.hist, histtype=&quot;step&quot;, linewidth=3)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_offdiag(plt.scatter)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.add_legend()</span>
+
+<span class="sd">        Plot a subset of variables</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris, vars=[&quot;sepal_length&quot;, &quot;sepal_width&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map(plt.scatter)</span>
+
+<span class="sd">        Pass additional keyword arguments to the functions</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_diag(plt.hist, edgecolor=&quot;w&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_offdiag(plt.scatter, edgecolor=&quot;w&quot;, s=40)</span>
+
+<span class="sd">        Use different variables for the rows and columns:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris,</span>
+<span class="sd">            ...                  x_vars=[&quot;sepal_length&quot;, &quot;sepal_width&quot;],</span>
+<span class="sd">            ...                  y_vars=[&quot;petal_length&quot;, &quot;petal_width&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map(plt.scatter)</span>
+
+<span class="sd">        Use different functions on the upper and lower triangles:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_upper(plt.scatter)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_lower(sns.kdeplot, cmap=&quot;Blues_d&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map_diag(sns.kdeplot, lw=3, legend=False)</span>
+
+<span class="sd">        Use different colors and markers for each categorical level:</span>
+
+<span class="sd">        .. plot::</span>
+<span class="sd">            :context: close-figs</span>
+
+<span class="sd">            &gt;&gt;&gt; g = sns.PairGrid(iris, hue=&quot;species&quot;, palette=&quot;Set2&quot;,</span>
+<span class="sd">            ...                  hue_kws={&quot;marker&quot;: [&quot;o&quot;, &quot;s&quot;, &quot;D&quot;]})</span>
+<span class="sd">            &gt;&gt;&gt; g = g.map(plt.scatter, linewidths=1, edgecolor=&quot;w&quot;, s=40)</span>
+<span class="sd">            &gt;&gt;&gt; g = g.add_legend()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Sort out the variables that define the grid</span>
+        <span class="k">if</span> <span class="nb">vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+            <span class="n">y_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">x_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y_vars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x_vars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">y_vars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Must specify `x_vars` and `y_vars`&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">numeric_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_numeric_cols</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">x_vars</span> <span class="o">=</span> <span class="n">numeric_cols</span>
+            <span class="n">y_vars</span> <span class="o">=</span> <span class="n">numeric_cols</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">x_vars</span><span class="p">):</span>
+            <span class="n">x_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_vars</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">y_vars</span><span class="p">):</span>
+            <span class="n">y_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_vars</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_vars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_vars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_vars</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">square_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_vars</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_vars</span>
+
+        <span class="c1"># Create the figure and the array of subplots</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_vars</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span> <span class="o">*</span> <span class="n">aspect</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_vars</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span>
+
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figsize&#39;</span><span class="p">:</span> <span class="n">figsize</span><span class="p">,</span> <span class="s1">&#39;sharex&#39;</span><span class="p">:</span> <span class="s2">&quot;col&quot;</span><span class="p">,</span>
+                  <span class="s1">&#39;sharey&#39;</span><span class="p">:</span> <span class="s2">&quot;row&quot;</span><span class="p">,</span> <span class="s1">&#39;squeeze&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">subplots_kws</span><span class="p">)</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_vars</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_vars</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">fig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="c1"># Save what we are going to do with the diagonal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diag_sharey</span> <span class="o">=</span> <span class="n">diag_sharey</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diag_axes</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Label the axes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_axis_labels</span><span class="p">()</span>
+
+        <span class="c1"># Sort out the hue variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hue_var</span> <span class="o">=</span> <span class="n">hue</span>
+        <span class="k">if</span> <span class="n">hue</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hue_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_nolegend_&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hue_vals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;_nolegend_&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                      <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hue_names</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">categorical_order</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">hue</span><span class="p">],</span> <span class="n">hue_order</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dropna</span><span class="p">:</span>
+                <span class="c1"># Filter NA from the list of unique hue names</span>
+                <span class="n">hue_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">,</span> <span class="n">hue_names</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hue_names</span> <span class="o">=</span> <span class="n">hue_names</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hue_vals</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">hue</span><span class="p">]</span>
+
+        <span class="c1"># Additional dict of kwarg -&gt; list of values for mapping the hue var</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hue_kws</span> <span class="o">=</span> <span class="n">hue_kws</span> <span class="k">if</span> <span class="n">hue_kws</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">palette</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_palette</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">hue</span><span class="p">,</span> <span class="n">hue_order</span><span class="p">,</span> <span class="n">palette</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_legend_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Make the plot look nice</span>
+        <span class="k">if</span> <span class="n">despine</span><span class="p">:</span>
+            <span class="n">utils</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="lowerTriangle"><a class="viewcode-back" href="../../../autodocs/lcdblib.plotting.html#lcdblib.plotting.basic.lowerTriangle">[docs]</a><span class="k">def</span> <span class="nf">lowerTriangle</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">func_kw</span><span class="o">=</span><span class="p">{},</span> <span class="n">pairgrid_kw</span><span class="o">=</span><span class="p">{},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Create a PairGrid lower triangle panel.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df: pandas.DataFrame</span>
+<span class="sd">        DataFrame containing the columns you want to plot in a PairGrid.</span>
+
+<span class="sd">    func: function or list of functions</span>
+<span class="sd">        The function you want to plot in a PairGrid</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    seaborn.PairGrid</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">PairGrid</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">**</span><span class="n">pairgrid_kw</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">func_kw</span><span class="p">):</span>
+            <span class="n">kw</span> <span class="o">=</span> <span class="n">func_kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="p">{})</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">map_lower</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">map_lower</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">func_kw</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">p</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

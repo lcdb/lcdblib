@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lcdblib.stats package" href="lcdblib.stats.html" />
+    <link rel="prev" title="lcdblib.plotting package" href="lcdblib.plotting.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.stats.html" title="lcdblib.stats package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-snakemake-package">
+<h1>lcdblib.snakemake package<a class="headerlink" href="#lcdblib-snakemake-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.snakemake.aligners">
+<span id="lcdblib-snakemake-aligners-module"></span><h2>lcdblib.snakemake.aligners module<a class="headerlink" href="#module-lcdblib.snakemake.aligners" title="Permalink to this headline">¶</a></h2>
+<p>Helper functions for working with aligners within Snakefiles</p>
+<dl class="function">
+<dt id="lcdblib.snakemake.aligners.bowtie2_index_from_prefix">
+<code class="descclassname">lcdblib.snakemake.aligners.</code><code class="descname">bowtie2_index_from_prefix</code><span class="sig-paren">(</span><em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/aligners.html#bowtie2_index_from_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.aligners.bowtie2_index_from_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a prefix, return a list of the corresponding bowtie2 index files.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.snakemake.aligners.hisat2_index_from_prefix">
+<code class="descclassname">lcdblib.snakemake.aligners.</code><code class="descname">hisat2_index_from_prefix</code><span class="sig-paren">(</span><em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/aligners.html#hisat2_index_from_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.aligners.hisat2_index_from_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a prefix, return a list of the corresponding hisat2 index files.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.snakemake.aligners.prefix_from_bowtie2_index">
+<code class="descclassname">lcdblib.snakemake.aligners.</code><code class="descname">prefix_from_bowtie2_index</code><span class="sig-paren">(</span><em>index_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/aligners.html#prefix_from_bowtie2_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.aligners.prefix_from_bowtie2_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of index files for bowtie2, return the corresponding prefix.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.snakemake.aligners.prefix_from_hisat2_index">
+<code class="descclassname">lcdblib.snakemake.aligners.</code><code class="descname">prefix_from_hisat2_index</code><span class="sig-paren">(</span><em>index_files</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/aligners.html#prefix_from_hisat2_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.aligners.prefix_from_hisat2_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of index files for hisat2, return the corresponding prefix.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.snakemake.helpers">
+<span id="lcdblib-snakemake-helpers-module"></span><h2>lcdblib.snakemake.helpers module<a class="headerlink" href="#module-lcdblib.snakemake.helpers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.snakemake.helpers.fill_patterns">
+<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class 'itertools.product'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills in a dictionary of patterns with the dictionary or DataFrame <cite>fill</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="go">[&#39;one_R1.fastq&#39;, &#39;one_R2.fastq&#39;, &#39;two_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="go">[&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="go">[&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.snakemake.helpers.rscript">
+<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">rscript</code><span class="sig-paren">(</span><em>string</em>, <em>scriptname</em>, <em>log=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#rscript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.rscript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the string as <cite>scriptname</cite> and then runs it</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>string</strong> (<em>str</em>) &#8211; Filled-in template to be written as R script</li>
+<li><strong>scriptname</strong> (<em>str</em>) &#8211; File to save script to</li>
+<li><strong>log</strong> (<em>str</em>) &#8211; File to redirect stdout and stderr to. If None, no redirection occurs.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.snakemake.interface">
+<span id="lcdblib-snakemake-interface-module"></span><h2>lcdblib.snakemake.interface module<a class="headerlink" href="#module-lcdblib.snakemake.interface" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lcdblib.snakemake.interface.SampleHandler">
+<em class="property">class </em><code class="descclassname">lcdblib.snakemake.interface.</code><code class="descname">SampleHandler</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Basic interface to help handle filenames in snakemake</p>
+<dl class="method">
+<dt id="lcdblib.snakemake.interface.SampleHandler.build_targets">
+<code class="descname">build_targets</code><span class="sig-paren">(</span><em>patterns</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.build_targets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.build_targets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build target file names based on pattern naming scheme.</p>
+<p>Given a list of string formatted patterns will use config information
+to fill in the patterns and generate a list of file targets.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patterns</strong> (<em>list</em>) &#8211; List of files with string formating marks that can be filled in
+from the config or the sampleTable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Filled in list of file names.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.snakemake.interface.SampleHandler.find_level">
+<code class="descname">find_level</code><span class="sig-paren">(</span><em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.find_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.find_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure out which regex the prefix matches.</p>
+<p>Scans each level and tries to identify which level the prefix matches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> (<em>str</em>) &#8211; string that you want to match to the prefix, this string would have
+sample information filled in.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[0] is a string indicating which level
+[1] is a dict with sample information</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; Too lazy to make a custom exception, <cite>raises</cite> ValueError if the
+prefix does not match any of the patterns.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla/treated1/treated1_treated_1_0001_R1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
+<span class="go">&#39;rawLevel&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span><span class="p">{</span><span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated1&#39;</span><span class="p">,</span> <span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This prefix doesn&#8217;t resolve to an actual sample defined in the
+sampletable (note mismatch between &#8220;1&#8221; in everything but the last
+&#8220;_2_&#8221;. Should this raise ValueError?</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
+<span class="go">&#39;runLevel&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>Run-level prefix:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
+<span class="go">&#39;runLevel&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span><span class="p">{</span><span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated2&#39;</span><span class="p">,</span> <span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Agg-level prefix (note the multiple sets of attributes returned):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_agg/treated&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
+<span class="go">&#39;aggLevel&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span><span class="p">{</span><span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated1&#39;</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">{</span><span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated2&#39;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.snakemake.interface.SampleHandler.find_sample">
+<code class="descname">find_sample</code><span class="sig-paren">(</span><em>pattern</em>, <em>prefix</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.find_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.find_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find which sample(s) to use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pattern</strong> (<em>str</em>) &#8211; A regex expression for the level</li>
+<li><strong>prefix</strong> (<em>str</em>) &#8211; The prefix that is being matched to the pattern</li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>--------</strong> &#8211; </li>
+<li><strong>dict</strong> &#8211; Sample attributes corresponding to the sample(s) that the prefix
+contains.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span><span class="s1">&#39;pasilla_sample\/(?P&lt;sampleID&gt;treated1|treated2|untreated1|untreated2)&#39;</span>
+<span class="gp">... </span><span class="s1">&#39;\/(?P=sampleID)_(?P&lt;treatment&gt;treated|untreated)_(?P&lt;replicate&gt;1|2)_R1&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span><span class="p">{</span><span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated2&#39;</span><span class="p">,</span> <span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.snakemake.interface.SampleHandler.make_input">
+<code class="descname">make_input</code><span class="sig-paren">(</span><em>prefix='prefix'</em>, <em>midfix=''</em>, <em>suffix=''</em>, <em>agg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.make_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.make_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates Input Function based on wildcards.</p>
+<p class="rubric">Notes</p>
+<p>example: &#8216;{first_element}{second_element}{third_element}&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>prefix</strong> (<em>str</em>) &#8211; This can either be the entire prefix, or the name of the string
+formatting group that contains the prefix. This would be the
+&#8216;first_element&#8217; in the example.</li>
+<li><strong>midfix</strong> (<em>str</em>) &#8211; This can either be the entire midfix, or the name of the string
+formating group that contains the midfix. This would be the
+&#8216;second_element&#8217; in the example.</li>
+<li><strong>suffix</strong> (<em>str</em>) &#8211; This can either be the entire suffix, or the name of the string
+formating group that contains the suffix. This would be the
+&#8216;third_element&#8217; in the example.</li>
+<li><strong>agg</strong> (<em>bool</em>) &#8211; True if you want file names from the level above the current
+prefix.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Retruns a snakemake input function that generates a list of files.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">({</span><span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;pasilla&#39;</span><span class="p">})</span>
+<span class="go">[&#39;pasilla.fastq&#39;]</span>
+</pre></div>
+</div>
+<p>Instead of directly specifying the midfix, we pull it from the
+wildcards dict entry for &#8220;asdf&#8221;:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">({</span><span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;pasilla&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">:</span> <span class="s1">&#39;.cutadapt&#39;</span><span class="p">})</span>
+<span class="go">[&#39;pasilla.cutadapt.fastq&#39;]</span>
+</pre></div>
+</div>
+<p>We want to aggregate into &#8220;pasilla_agg/treated.fastq&#8221;, but the
+following doesn&#8217;t work because we need the directory slash:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
+</pre></div>
+</div>
+<p>Also doesn&#8217;t work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/&#39;</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
+</pre></div>
+</div>
+<p>However if we provide most of the path in the prefix it works:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">func</span><span class="p">({}))</span> <span class="o">==</span> <span class="p">[</span>
+<span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated1/treated1_treated_1_R1.fastq&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1.fastq&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated2/treated2_treated_1_R1.fastq&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1.fastq&#39;</span>
+<span class="gp">... </span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.snakemake">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.snakemake" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.snakemake package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.aligners">lcdblib.snakemake.aligners module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.helpers">lcdblib.snakemake.helpers module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.interface">lcdblib.snakemake.interface module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.plotting.html"
+                        title="previous chapter">lcdblib.plotting package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.stats.html"
+                        title="next chapter">lcdblib.stats package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.snakemake.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.stats.html" title="lcdblib.stats package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

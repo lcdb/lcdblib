@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.utils.chrom_convert &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.utils.chrom_convert</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot; Converts between chromosome names. &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">RawDescriptionHelpFormatter</span> <span class="k">as</span> <span class="n">Raw</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">gzip</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pysam</span>
+<span class="kn">import</span> <span class="nn">pybedtools</span>
+<span class="kn">from</span> <span class="nn">Bio</span> <span class="k">import</span> <span class="n">SeqIO</span>
+
+
+<div class="viewcode-block" id="arguments"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.arguments">[docs]</a><span class="k">def</span> <span class="nf">arguments</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Function to pull command line arguments &quot;&quot;&quot;</span>
+
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">    Converts between chromosome names.</span>
+
+<span class="s2">    In D. melanogaster there are four common varieties of chromosomes names</span>
+<span class="s2">    that are used.</span>
+
+<span class="s2">    * FlyBase style: 2L, 2R, 3L, etc.</span>
+<span class="s2">    * UCSC style: chr2L, chr2R, chr3L, etc.</span>
+<span class="s2">    * RefSeq style: NT_033779.5, NT_033778.4, NT_037436.4, etc.</span>
+<span class="s2">    * GenBank style: AE014134.6, AE013599.5, AE014296.5, etc.</span>
+
+<span class="s2">    Each style has its benefits: FlyBase is the standard, UCSC is compatible</span>
+<span class="s2">    with the genome browser, and RefSeq and GenBank are the most explicit. It</span>
+<span class="s2">    is common to come across files that use these different styles of</span>
+<span class="s2">    chromosome name, this tool aims to easily convert chromosome names in a</span>
+<span class="s2">    variety of file format.</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">DESCRIPTION</span><span class="p">,</span>
+                                     <span class="n">formatter_class</span><span class="o">=</span><span class="n">Raw</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--from&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;orig&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;FlyBase&#39;</span><span class="p">,</span> <span class="s1">&#39;UCSC&#39;</span><span class="p">,</span> <span class="s1">&#39;RefSeq&#39;</span><span class="p">,</span> <span class="s1">&#39;GenBank&#39;</span><span class="p">],</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Current type of chromosome name.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--to&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;FlyBase&#39;</span><span class="p">,</span> <span class="s1">&#39;UCSC&#39;</span><span class="p">,</span> <span class="s1">&#39;RefSeq&#39;</span><span class="p">,</span> <span class="s1">&#39;GenBank&#39;</span><span class="p">],</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The type of chromosome name wanted.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--fileType&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SAM&#39;</span><span class="p">,</span> <span class="s1">&#39;BAM&#39;</span><span class="p">,</span> <span class="s1">&#39;BED&#39;</span><span class="p">,</span> <span class="s1">&#39;GFF&#39;</span><span class="p">,</span> <span class="s1">&#39;GTF&#39;</span><span class="p">,</span> <span class="s1">&#39;FASTA&#39;</span><span class="p">],</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;What is the input format.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--input&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Input file to convert. If `-i -`, STDIN is</span>
+<span class="s2">                        used. Note if using SAM/BAM with STDIN, you must</span>
+<span class="s2">                        include headrs.&quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output file, if none given or `-o -` &quot;</span>
+                        <span class="s2">&quot;then STDOUT.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--debug&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable debug output.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="import_conversion"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.import_conversion">[docs]</a><span class="k">def</span> <span class="nf">import_conversion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import NCBI conversion table.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f: str {FlyBase, UCSC, NCBI}</span>
+<span class="sd">        The current chromosome format.</span>
+<span class="sd">    t: str {FlyBase, UCSC, NCBI}</span>
+<span class="sd">        The desired chromosome format.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict: Mapping {f: t}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get location of the file</span>
+    <span class="n">gz</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span>
+        <span class="s1">&#39;lcdblib&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;data/GCF_000001215.4.assembly.txt.gz&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Import file</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">gz</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span>
+                     <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Make mapping from keyword to column number</span>
+    <span class="c1"># col#   Header</span>
+    <span class="c1"># 0      Sequence-Name</span>
+    <span class="c1"># 1      Sequence-Role</span>
+    <span class="c1"># 2      Assigned-Molecule</span>
+    <span class="c1"># 3      Assigned-Molecule-Location/Type</span>
+    <span class="c1"># 4      GenBank-Accn</span>
+    <span class="c1"># 5      Relationship</span>
+    <span class="c1"># 6      RefSeq-Accn</span>
+    <span class="c1"># 7      Assembly-Unit</span>
+    <span class="c1"># 8      Sequence-Length</span>
+    <span class="c1"># 9      UCSC-style-name</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;FlyBase&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;UCSC&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;GenBank&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;RefSeq&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+
+    <span class="c1"># This table has a small error were FlyBase mitochondrion_genome is MT</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;MT&#39;</span><span class="p">,</span> <span class="s1">&#39;mitochondrion_genome&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[[</span><span class="n">mapping</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">mapping</span><span class="p">[</span><span class="n">t</span><span class="p">]]]</span><span class="o">.</span><span class="n">values</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="pysam_convert"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.pysam_convert">[docs]</a><span class="k">def</span> <span class="nf">pysam_convert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use pysam to convert chromosomes in BAM and SAM files.</span>
+
+<span class="sd">    pysam uses a header to define chromosomes, then each read is just mapped</span>
+<span class="sd">    back to this header. Only the header needs to be modified, and reads</span>
+<span class="sd">    need to be written to the new output file which uses this header.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Determine SAM or BAM flags</span>
+    <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;BAM&#39;</span><span class="p">:</span>
+        <span class="n">flag_in</span> <span class="o">=</span> <span class="s1">&#39;rb&#39;</span>
+        <span class="n">flag_out</span> <span class="o">=</span> <span class="s1">&#39;wb&#39;</span>
+    <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;SAM&#39;</span><span class="p">:</span>
+        <span class="n">flag_in</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span>
+        <span class="n">flag_out</span> <span class="o">=</span> <span class="s1">&#39;wh&#39;</span>
+
+    <span class="n">curr</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">AlignmentFile</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">flag_in</span><span class="p">)</span>
+
+    <span class="c1"># Change chromosome in the header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">curr</span><span class="o">.</span><span class="n">header</span>
+    <span class="k">for</span> <span class="n">chrom</span> <span class="ow">in</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;SQ&#39;</span><span class="p">]:</span>
+        <span class="n">chrom</span><span class="p">[</span><span class="s1">&#39;SN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">[</span><span class="n">chrom</span><span class="p">[</span><span class="s1">&#39;SN&#39;</span><span class="p">]]</span>
+
+    <span class="k">with</span> <span class="n">pysam</span><span class="o">.</span><span class="n">AlignmentFile</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">flag_out</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span> <span class="k">as</span> <span class="n">OUT</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">curr</span><span class="p">:</span>
+            <span class="n">OUT</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">read</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="convertFeature"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.convertFeature">[docs]</a><span class="k">def</span> <span class="nf">convertFeature</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">chrom</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">chrom</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="pybedtools_convert"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.pybedtools_convert">[docs]</a><span class="k">def</span> <span class="nf">pybedtools_convert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Use pybedtools to convert chromosomes in BED, GTF, or GFF. &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+        <span class="c1"># Use STDIN</span>
+        <span class="n">bt</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">BedTool</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bt</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">BedTool</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+        <span class="c1"># Use STDOUT</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="n">convertFeature</span><span class="p">,</span> <span class="n">mapper</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bt</span><span class="o">.</span><span class="n">each</span><span class="p">(</span><span class="n">convertFeature</span><span class="p">,</span> <span class="n">mapper</span><span class="p">)</span><span class="o">.</span><span class="n">saveas</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fasta_convert"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.fasta_convert">[docs]</a><span class="k">def</span> <span class="nf">fasta_convert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Uses Biopython.SeqIO to convert FASTA headers. &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+        <span class="c1"># Use STDIN</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span>
+    <span class="k">elif</span> <span class="nb">input</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.gz&#39;</span><span class="p">):</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+        <span class="c1"># Use STDOUT</span>
+        <span class="n">oh</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="k">elif</span> <span class="n">output</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.gz&#39;</span><span class="p">):</span>
+        <span class="n">oh</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">oh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fh</span><span class="p">,</span> <span class="s1">&#39;fasta&#39;</span><span class="p">):</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">seq</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">mapper</span><span class="p">[</span><span class="n">seq</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">[</span><span class="n">seq</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">[</span><span class="n">seq</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+        <span class="n">SeqIO</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">oh</span><span class="p">,</span> <span class="s1">&#39;fasta&#39;</span><span class="p">)</span>
+
+    <span class="c1"># close file handlers</span>
+    <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">oh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.chrom_convert.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Import commandline arguments.</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">arguments</span><span class="p">()</span>
+
+    <span class="c1"># Get mapping dict</span>
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">import_conversion</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">orig</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;BAM&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;SAM&#39;</span><span class="p">):</span>
+        <span class="n">pysam_convert</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">mapper</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;BED&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;GFF&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;GTF&#39;</span><span class="p">):</span>
+        <span class="n">pybedtools_convert</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">mapper</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;FASTA&#39;</span><span class="p">):</span>
+        <span class="n">fasta_convert</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">mapper</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

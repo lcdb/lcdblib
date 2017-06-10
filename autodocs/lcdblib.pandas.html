@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.pandas package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lcdblib.parse package" href="lcdblib.parse.html" />
+    <link rel="prev" title="lcdblib.images package" href="lcdblib.images.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.images.html" title="lcdblib.images package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-pandas-package">
+<h1>lcdblib.pandas package<a class="headerlink" href="#lcdblib-pandas-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.pandas.utils">
+<span id="lcdblib-pandas-utils-module"></span><h2>lcdblib.pandas.utils module<a class="headerlink" href="#module-lcdblib.pandas.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.pandas.utils.cartesian_product">
+<code class="descclassname">lcdblib.pandas.utils.</code><code class="descname">cartesian_product</code><span class="sig-paren">(</span><em>df1</em>, <em>df2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/pandas/utils.html#cartesian_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.pandas.utils.cartesian_product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the carteisan product and returns expanded DataFrame.</p>
+<p>Given a pandas.DataFrame:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span>
+<span class="o">|--------|--------|</span>
+<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>and some set of values <cite>{&#8216;num&#8217;: [100, 200]}</cite> build:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span> <span class="n">num</span> <span class="o">|</span>
+<span class="o">|--------|--------|-----|</span>
+<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>df1</strong> (<em>pandas.DataFrame</em>) &#8211; A DataFrame that you want to expand.</li>
+<li><strong>df2</strong> (<em>dict of array-like | pandas.DataFrame | pandas.Series</em>) &#8211; The set of values that you want to expand df1 by.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.pandas.utils.tidy_dataframe">
+<code class="descclassname">lcdblib.pandas.utils.</code><code class="descname">tidy_dataframe</code><span class="sig-paren">(</span><em>df</em>, <em>column</em>, <em>sep='|'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/pandas/utils.html#tidy_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.pandas.utils.tidy_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a dataframe with a delimiter-separated string, create a new dataframe
+with separate rows for each value in each corresponding string.</p>
+<p>E.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>       <span class="n">gene</span>  <span class="n">score</span>
+<span class="mi">0</span>     <span class="n">g1</span><span class="o">|</span><span class="n">g2</span>      <span class="mi">1</span>
+<span class="mi">1</span>        <span class="n">g3</span>      <span class="mi">5</span>
+<span class="mi">2</span>  <span class="n">g4</span><span class="o">|</span><span class="n">g5</span><span class="o">|</span><span class="n">g6</span>      <span class="mi">9</span>
+</pre></div>
+</div>
+<p>becomes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tidy_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+<span class="c1">#   gene  score</span>
+<span class="c1"># 0   g1      1</span>
+<span class="c1"># 0   g2      1</span>
+<span class="c1"># 1   g3      5</span>
+<span class="c1"># 2   g4      9</span>
+<span class="c1"># 2   g5      9</span>
+<span class="c1"># 2   g6      9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.pandas">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.pandas" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.pandas package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.pandas.utils">lcdblib.pandas.utils module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.pandas">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.images.html"
+                        title="previous chapter">lcdblib.images package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.parse.html"
+                        title="next chapter">lcdblib.parse package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.pandas.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.images.html" title="lcdblib.images package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

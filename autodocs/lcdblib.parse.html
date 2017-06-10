@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.parse package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lcdblib.plotting package" href="lcdblib.plotting.html" />
+    <link rel="prev" title="lcdblib.pandas package" href="lcdblib.pandas.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.pandas.html" title="lcdblib.pandas package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-parse-package">
+<h1>lcdblib.parse package<a class="headerlink" href="#lcdblib-parse-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.parse.atropos">
+<span id="lcdblib-parse-atropos-module"></span><h2>lcdblib.parse.atropos module<a class="headerlink" href="#module-lcdblib.parse.atropos" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.atropos.parse_atropos">
+<code class="descclassname">lcdblib.parse.atropos.</code><code class="descname">parse_atropos</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/atropos.html#parse_atropos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.atropos.parse_atropos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse atropos.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.bamtools">
+<span id="lcdblib-parse-bamtools-module"></span><h2>lcdblib.parse.bamtools module<a class="headerlink" href="#module-lcdblib.parse.bamtools" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.bamtools.parse_bamtools_stats">
+<code class="descclassname">lcdblib.parse.bamtools.</code><code class="descname">parse_bamtools_stats</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/bamtools.html#parse_bamtools_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.bamtools.parse_bamtools_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse bamtools stats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.dupradar">
+<span id="lcdblib-parse-dupradar-module"></span><h2>lcdblib.parse.dupradar module<a class="headerlink" href="#module-lcdblib.parse.dupradar" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.dupradar.parse_dupradar">
+<code class="descclassname">lcdblib.parse.dupradar.</code><code class="descname">parse_dupradar</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/dupradar.html#parse_dupradar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.dupradar.parse_dupradar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for dupradar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.fastq_screen">
+<span id="lcdblib-parse-fastq-screen-module"></span><h2>lcdblib.parse.fastq_screen module<a class="headerlink" href="#module-lcdblib.parse.fastq_screen" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.fastq_screen.parse_fqscreen">
+<code class="descclassname">lcdblib.parse.fastq_screen.</code><code class="descname">parse_fqscreen</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastq_screen.html#parse_fqscreen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastq_screen.parse_fqscreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser fastq screen summary table.</p>
+<p>Adapted from multiqc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pandas.DataFrame</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A single row dataframe.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.fastqc">
+<span id="lcdblib-parse-fastqc-module"></span><h2>lcdblib.parse.fastqc module<a class="headerlink" href="#module-lcdblib.parse.fastqc" title="Permalink to this headline">¶</a></h2>
+<p>Quick and dirty Fastqc parser</p>
+<dl class="class">
+<dt id="lcdblib.parse.fastqc.FastQC">
+<em class="property">class </em><code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">FastQC</code><span class="sig-paren">(</span><em>id</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="lcdblib.parse.fastqc.FastQC.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQC.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQC.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.parse.fastqc.FastQC.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQC.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQC.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="lcdblib.parse.fastqc.FastQC.parse_from_zip">
+<em class="property">classmethod </em><code class="descname">parse_from_zip</code><span class="sig-paren">(</span><em>id</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQC.parse_from_zip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQC.parse_from_zip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse from ZipFile.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.parse.fastqc.FastQC.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQC.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQC.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.parse.fastqc.FastQCBlock">
+<em class="property">class </em><code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">FastQCBlock</code><span class="sig-paren">(</span><em>block</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#FastQCBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.FastQCBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em>, <em>field=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc zip file.</p>
+<p>Takes a zip file and makes a FastQC object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+<li><strong>field</strong> (<em>str</em>) &#8211; Name of specific Fastqc section to return. Look at
+lcdblib.parse.fastqc.FastQC.keys() for a list of possible names.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li>lcdblib.parse.fastqc.FastQC or lcdblib.parse.fastqc.FastQCBlock if <cite>field</cite></li>
+<li><em>is provided.</em></li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_adapter_content">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_adapter_content</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_adapter_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_adapter_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Adapter Content.
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_basic_stats">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_basic_stats</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_basic_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_basic_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Basic Stats
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_kmer_content">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_kmer_content</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_kmer_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_kmer_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Kmer Content
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_overrepresented_seq">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_overrepresented_seq</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_overrepresented_seq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_overrepresented_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Overrepresente Sequence
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_per_base_n_content">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_per_base_n_content</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_per_base_n_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_per_base_n_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Per Base N Content
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_per_base_seq_content">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_per_base_seq_content</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_per_base_seq_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_per_base_seq_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Per Base Seq Content
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_per_base_seq_quality">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_per_base_seq_quality</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_per_base_seq_quality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_per_base_seq_quality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Per Base Quality
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_per_seq_gc_content">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_per_seq_gc_content</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_per_seq_gc_content"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_per_seq_gc_content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Per Seq GC Content
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_per_seq_quality">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_per_seq_quality</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_per_seq_quality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_per_seq_quality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Per Seq Quality.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_seq_dup_level">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_seq_dup_level</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_seq_dup_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_seq_dup_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Seq Duplication Level
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.parse_fastqc_sequence_length">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">parse_fastqc_sequence_length</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#parse_fastqc_sequence_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.parse_fastqc_sequence_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse fastqc Sequence Length
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.fastqc.split_ranges">
+<code class="descclassname">lcdblib.parse.fastqc.</code><code class="descname">split_ranges</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/fastqc.html#split_ranges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.fastqc.split_ranges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split ranges into bases.</p>
+<p>Fastqc sometimes collapses bases into ranges, this splits them back out.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.featurecounts">
+<span id="lcdblib-parse-featurecounts-module"></span><h2>lcdblib.parse.featurecounts module<a class="headerlink" href="#module-lcdblib.parse.featurecounts" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.featurecounts.parse_featureCounts_counts">
+<code class="descclassname">lcdblib.parse.featurecounts.</code><code class="descname">parse_featureCounts_counts</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/featurecounts.html#parse_featureCounts_counts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.featurecounts.parse_featureCounts_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for featurecounts counts table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.featurecounts.parse_featureCounts_summary">
+<code class="descclassname">lcdblib.parse.featurecounts.</code><code class="descname">parse_featureCounts_summary</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/featurecounts.html#parse_featureCounts_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.featurecounts.parse_featureCounts_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse featurecounts summary table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.picard">
+<span id="lcdblib-parse-picard-module"></span><h2>lcdblib.parse.picard module<a class="headerlink" href="#module-lcdblib.parse.picard" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.picard.parse_picardCollect_hist">
+<code class="descclassname">lcdblib.parse.picard.</code><code class="descname">parse_picardCollect_hist</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/picard.html#parse_picardCollect_hist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.picard.parse_picardCollect_hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for picard collectRNAMetrics summary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.picard.parse_picardCollect_summary">
+<code class="descclassname">lcdblib.parse.picard.</code><code class="descname">parse_picardCollect_summary</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/picard.html#parse_picardCollect_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.picard.parse_picardCollect_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for picard collectRNAMetrics summary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.picard.parse_picard_markduplicate_metrics">
+<code class="descclassname">lcdblib.parse.picard.</code><code class="descname">parse_picard_markduplicate_metrics</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/picard.html#parse_picard_markduplicate_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.picard.parse_picard_markduplicate_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parser for picard markduplicates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.rseqc">
+<span id="lcdblib-parse-rseqc-module"></span><h2>lcdblib.parse.rseqc module<a class="headerlink" href="#module-lcdblib.parse.rseqc" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.rseqc.parse_bamStat">
+<code class="descclassname">lcdblib.parse.rseqc.</code><code class="descname">parse_bamStat</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/rseqc.html#parse_bamStat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.rseqc.parse_bamStat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse rseqc bam stat.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.rseqc.parse_geneBodyCoverage">
+<code class="descclassname">lcdblib.parse.rseqc.</code><code class="descname">parse_geneBodyCoverage</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/rseqc.html#parse_geneBodyCoverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.rseqc.parse_geneBodyCoverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse rseqc genebody coverage.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.rseqc.parse_inferExperiment">
+<code class="descclassname">lcdblib.parse.rseqc.</code><code class="descname">parse_inferExperiment</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/rseqc.html#parse_inferExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.rseqc.parse_inferExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse rseqc infer expeirment.
+:param sample: Sample name which will be added as row index.
+:type sample: str
+:param file: Path to the fastqc zip file.
+:type file: str</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.parse.rseqc.parse_tin">
+<code class="descclassname">lcdblib.parse.rseqc.</code><code class="descname">parse_tin</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/rseqc.html#parse_tin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.rseqc.parse_tin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse rseqc tin.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse.samtools">
+<span id="lcdblib-parse-samtools-module"></span><h2>lcdblib.parse.samtools module<a class="headerlink" href="#module-lcdblib.parse.samtools" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.parse.samtools.parse_samtools_stats">
+<code class="descclassname">lcdblib.parse.samtools.</code><code class="descname">parse_samtools_stats</code><span class="sig-paren">(</span><em>sample</em>, <em>file</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/parse/samtools.html#parse_samtools_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.parse.samtools.parse_samtools_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse samtools stats.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sample</strong> (<em>str</em>) &#8211; Sample name which will be added as row index.</li>
+<li><strong>file</strong> (<em>str</em>) &#8211; Path to the fastqc zip file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.parse">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.parse" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.parse package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.atropos">lcdblib.parse.atropos module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.bamtools">lcdblib.parse.bamtools module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.dupradar">lcdblib.parse.dupradar module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.fastq_screen">lcdblib.parse.fastq_screen module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.fastqc">lcdblib.parse.fastqc module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.featurecounts">lcdblib.parse.featurecounts module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.picard">lcdblib.parse.picard module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.rseqc">lcdblib.parse.rseqc module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse.samtools">lcdblib.parse.samtools module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.parse">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.pandas.html"
+                        title="previous chapter">lcdblib.pandas package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.plotting.html"
+                        title="next chapter">lcdblib.plotting package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.parse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.pandas.html" title="lcdblib.pandas package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.plotting.compare_rnaseq_and_chipseq &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.plotting.compare_rnaseq_and_chipseq</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">lcdblib.plotting</span> <span class="k">import</span> <span class="n">results_table</span>
+<span class="kn">from</span> <span class="nn">lcdblib.stats</span> <span class="k">import</span> <span class="n">fisher</span>
+<span class="kn">import</span> <span class="nn">pybedtools</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">argh</span>
+<span class="kn">from</span> <span class="nn">argh</span> <span class="k">import</span> <span class="n">arg</span>
+
+
+<div class="viewcode-block" id="plot"><a class="viewcode-back" href="../../../autodocs/lcdblib.plotting.html#lcdblib.plotting.compare_rnaseq_and_chipseq.plot">[docs]</a><span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">de_results</span><span class="p">,</span> <span class="n">regions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">peaks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;baseMean&#39;</span><span class="p">,</span>
+         <span class="n">y</span><span class="o">=</span><span class="s1">&#39;log2FoldChange&#39;</span><span class="p">,</span> <span class="n">disable_logx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pval_col</span><span class="o">=</span><span class="s1">&#39;padj&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">lfc_cutoff</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">plot_filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+         <span class="n">disable_raster_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">genes_to_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+         <span class="n">report</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gene_lists</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    M-A plot showing up- and downregulated genes with optional labeling and</span>
+<span class="sd">    Fishers exact tests.</span>
+
+<span class="sd">    If --plot-filename is not specified, then the plot will be displayed and</span>
+<span class="sd">    points can be clicked for interactive exploration.</span>
+
+<span class="sd">    If --peaks and --regions are specified, then results from Fishers exact</span>
+<span class="sd">    tests will be printed to stdout, or to --report if specified.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    de_results : str or pandas.DataFrame</span>
+<span class="sd">        If str, it&#39;s the filename of a TSV of differential expression results,</span>
+<span class="sd">        with first column as gene ID. It will be parsed into a dataframe where</span>
+<span class="sd">        the index is gene ID. When called as a library, an already-created</span>
+<span class="sd">        pandas.DataFrame can optionally be provided instead.</span>
+
+<span class="sd">    regions : str or pybedtools.BedTool</span>
+<span class="sd">        Gene regions in which to look for intersections with peaks. BED file</span>
+<span class="sd">        where the 4th column contains gene IDs that are also present in first</span>
+<span class="sd">        column of `de_results`. Typically this would be a BED file of promoters</span>
+<span class="sd">        or gene bodies. When called as a library, a pybedtools.BedTool object</span>
+<span class="sd">        can optionally be provided instead.</span>
+
+<span class="sd">    peaks : str or pybedtools.BedTool</span>
+<span class="sd">        BED file to be intersected with `regions`. When called as a library,</span>
+<span class="sd">        a pybedtools.BedTool object can optionally be provided instead.</span>
+
+<span class="sd">    selected : str or list-like</span>
+<span class="sd">        Replaces `regions` `peaks` arguments; useful for when you already know</span>
+<span class="sd">        which genes you want to select (e.g., upregulated from a different</span>
+<span class="sd">        experiment). If a string, assume it&#39;s a filename and use the first</span>
+<span class="sd">        column which will be used as an index into the `de_results` dataframe.</span>
+<span class="sd">        When called as a library, if `selected` is not a string it will be used</span>
+<span class="sd">        as an index into the dataframe.</span>
+
+<span class="sd">    x : str</span>
+<span class="sd">        Column to use for x-axis. Default of &quot;baseMean&quot; expects DESeq2</span>
+<span class="sd">        results</span>
+
+<span class="sd">    y : str</span>
+<span class="sd">        Column to use for y-axis. Default of &quot;log2FoldChange&quot; expects DESeq2</span>
+<span class="sd">        results</span>
+
+<span class="sd">    disable_logx : bool</span>
+<span class="sd">        Disable default behavior of transforming x values using log10</span>
+
+<span class="sd">    logy : bool</span>
+<span class="sd">        Transform y values using log2</span>
+
+<span class="sd">    pval-col : str</span>
+<span class="sd">        Column to use for statistical significance. Default &quot;padj&quot; expectes</span>
+<span class="sd">        DESeq2 results.</span>
+
+<span class="sd">    alpha : float</span>
+<span class="sd">        Threshold for calling significance. Applied to `pval_col`</span>
+
+<span class="sd">    lfc_cutoff : float</span>
+<span class="sd">        Log2fold change cutoff to be applied to y values. Threshold is applied</span>
+<span class="sd">        post-transformation, if any specified (e.g., `logy` argument).</span>
+
+<span class="sd">    plot_filename : str</span>
+<span class="sd">        File to save plot. Format auto-detected by extension. Output directory</span>
+<span class="sd">        will be created if needed.</span>
+
+<span class="sd">    disable_raster_points : bool</span>
+<span class="sd">        Disable the default behavior of rasterizing points in a PDF. Use</span>
+<span class="sd">        sparingly, since drawing 30k+ individual points in a PDF may slow down</span>
+<span class="sd">        your machine.</span>
+
+<span class="sd">    genes_to_label: str or list-like</span>
+<span class="sd">        Optional file containing genes to label with text. First column must be</span>
+<span class="sd">        a subset of the first column of `de_results`. Lines starting with &#39;#&#39;</span>
+<span class="sd">        and subsequent tab-separated columns will be ignored. When called as</span>
+<span class="sd">        a library, a list-like object of gene IDs can be provided.</span>
+
+<span class="sd">    label_column : str</span>
+<span class="sd">        Optional column from which to take gene labels found in</span>
+<span class="sd">        `genes_to_label` (e.g., &quot;symbol&quot;). If the value in this column is</span>
+<span class="sd">        missing, fall back to the index. Use this if your gene IDs are long</span>
+<span class="sd">        Ensembl IDs but you want the gene symbols to show up on the plot.</span>
+
+<span class="sd">    report : str</span>
+<span class="sd">        Where to write out Fisher&#39;s exact test results. Default is stdout</span>
+
+<span class="sd">    gene_lists : str</span>
+<span class="sd">        Prefix to gene lists. If specified, gene lists corresponding to the</span>
+<span class="sd">        cells of the 2x2 Fishers exact test will be written to</span>
+<span class="sd">        {prefix}.up.tsv and {prefix}.dn.tsv. These are subsets of `de_results`</span>
+<span class="sd">        where genes are up and have a peak in region (or are selected), or</span>
+<span class="sd">        downregulated and have a peak in region (or are selected),</span>
+<span class="sd">        respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rasterized</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">disable_raster_points</span>
+    <span class="n">rt</span> <span class="o">=</span> <span class="n">results_table</span><span class="o">.</span><span class="n">DESeq2Results</span><span class="p">(</span><span class="n">de_results</span><span class="p">,</span> <span class="n">import_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">upregulated</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">lfc</span><span class="o">=</span><span class="n">lfc_cutoff</span><span class="p">)</span>
+    <span class="n">dn</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">downregulated</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">lfc</span><span class="o">=-</span><span class="n">lfc_cutoff</span><span class="p">)</span>
+    <span class="n">un</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">up</span> <span class="o">|</span> <span class="n">dn</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">general_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="n">picker</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="n">rasterized</span><span class="p">)</span>
+    <span class="n">genes_to_highlight</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="n">up</span><span class="p">,</span>
+            <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#990000&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;up (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">up</span><span class="p">))</span>
+        <span class="p">),</span>
+        <span class="p">(</span>
+            <span class="n">dn</span><span class="p">,</span>
+            <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#005c99&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;down (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dn</span><span class="p">))</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">genes_to_label</span><span class="p">:</span>
+        <span class="n">_genes_to_label</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">genes_to_label</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">genes_to_label</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">_genes_to_label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_genes_to_label</span> <span class="o">=</span> <span class="n">genes_to_label</span>
+
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">_genes_to_label</span><span class="p">)</span>
+
+        <span class="c1"># Don&#39;t add labels if a coordinate is null</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">ind</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">label_column</span><span class="p">:</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ind</span><span class="p">,</span> <span class="n">label_column</span><span class="p">]</span>
+
+            <span class="c1"># Fill in nulls with index to avoid labeling all genes with no</span>
+            <span class="c1"># symbol as &quot;nan&quot;</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+            <span class="n">names</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
+
+        <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+
+        <span class="n">genes_to_highlight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">ind</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">rasterized</span><span class="o">=</span><span class="n">rasterized</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                     <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">disable_logx</span><span class="p">:</span>
+        <span class="n">xfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xfunc</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">report</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">selected</span> <span class="ow">and</span> <span class="p">(</span><span class="n">peaks</span> <span class="ow">or</span> <span class="n">regions</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;`selected` is mutually exclusive with `peaks` and `regions`&quot;</span><span class="p">)</span>
+
+    <span class="n">do_fisher</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">selected</span><span class="p">:</span>
+        <span class="n">do_fisher</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pandas</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">selected_genes</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span>
+        <span class="n">row_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;selected&#39;</span><span class="p">,</span> <span class="s1">&#39;not selected&#39;</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">peaks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">regions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">do_fisher</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">row_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;has peak&#39;</span><span class="p">,</span> <span class="s1">&#39;no peak&#39;</span><span class="p">]</span>
+        <span class="n">regions</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">BedTool</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
+        <span class="n">peaks</span> <span class="o">=</span> <span class="n">pybedtools</span><span class="o">.</span><span class="n">BedTool</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span>
+        <span class="n">with_peak</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">regions</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">peaks</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">True</span><span class="p">)]))</span>
+        <span class="n">in_region</span> <span class="o">=</span> <span class="n">peaks</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">regions</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">selected_genes</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">with_peak</span><span class="p">)</span>
+
+        <span class="n">npeaks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span>
+        <span class="n">nregions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
+        <span class="n">npeaks_in_region</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">in_region</span><span class="p">)</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Total peaks: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">npeaks</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Peaks in regions: </span><span class="si">{0}</span><span class="s1"> (</span><span class="si">{1:.2f}</span><span class="s1">%)</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">npeaks_in_region</span><span class="p">,</span> <span class="n">npeaks_in_region</span> <span class="o">/</span> <span class="n">npeaks</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">do_fisher</span><span class="p">:</span>
+
+        <span class="n">genes_to_highlight</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">selected_genes</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff9900&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                    <span class="n">rasterized</span><span class="o">=</span><span class="n">rasterized</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> (</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row_names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">sum</span><span class="p">(</span><span class="n">selected_genes</span><span class="p">)))</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">fisher</span><span class="o">.</span><span class="n">fisher_tables</span><span class="p">(</span>
+                <span class="n">table</span><span class="o">=</span><span class="n">fisher</span><span class="o">.</span><span class="n">table_from_bool</span><span class="p">(</span><span class="n">selected_genes</span><span class="p">,</span> <span class="n">up</span><span class="p">),</span>
+                <span class="n">row_names</span><span class="o">=</span><span class="n">row_names</span><span class="p">,</span>
+                <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;upregulated&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Upregulated (lfc&gt;</span><span class="si">{0}</span><span class="s1">; padj&lt;</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lfc_cutoff</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)))</span>
+
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">fisher</span><span class="o">.</span><span class="n">fisher_tables</span><span class="p">(</span>
+                <span class="n">table</span><span class="o">=</span><span class="n">fisher</span><span class="o">.</span><span class="n">table_from_bool</span><span class="p">(</span><span class="n">selected_genes</span><span class="p">,</span> <span class="n">dn</span><span class="p">),</span>
+                <span class="n">row_names</span><span class="o">=</span><span class="n">row_names</span><span class="p">,</span>
+                <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;downregulated&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Downregulated (lfc&lt;-</span><span class="si">{0}</span><span class="s1">; padj&lt;</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lfc_cutoff</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">gene_lists</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">selected_genes</span> <span class="o">&amp;</span> <span class="n">up</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">gene_lists</span> <span class="o">+</span> <span class="s1">&#39;.up.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">selected_genes</span> <span class="o">&amp;</span> <span class="n">dn</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">gene_lists</span> <span class="o">+</span> <span class="s1">&#39;.dn.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">report</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+        <span class="n">xfunc</span><span class="o">=</span><span class="n">xfunc</span><span class="p">,</span>
+        <span class="n">genes_to_highlight</span><span class="o">=</span><span class="n">genes_to_highlight</span><span class="p">,</span>
+        <span class="n">general_kwargs</span><span class="o">=</span><span class="n">general_kwargs</span><span class="p">,</span>
+        <span class="n">offset_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">),</span>
+        <span class="n">label_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
+            <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">zorder</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+            <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">plot_filename</span><span class="p">:</span>
+        <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">plot_filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dirname</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_filename</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">argh</span><span class="o">.</span><span class="n">dispatch_command</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

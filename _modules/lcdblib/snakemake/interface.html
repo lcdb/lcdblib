@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.snakemake.interface &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.snakemake.interface</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">snakemake.io</span> <span class="k">import</span> <span class="n">expand</span><span class="p">,</span> <span class="n">regex</span>
+
+
+<div class="viewcode-block" id="SampleHandler"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.interface.SampleHandler">[docs]</a><span class="k">class</span> <span class="nc">SampleHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Basic interface to help handle filenames in snakemake &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="c1"># Load sampleTable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_sample_table</span><span class="p">()</span>
+
+        <span class="c1"># Build all regexs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compile_regex</span><span class="p">()</span>
+
+        <span class="c1"># Order Dict to specify hierarchy of levels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">levelMap</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;runLevel&#39;</span><span class="p">:</span> <span class="s1">&#39;rawLevel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sampleLevel&#39;</span><span class="p">:</span> <span class="s1">&#39;runLevel&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;aggLevel&#39;</span><span class="p">:</span> <span class="s1">&#39;runLevel&#39;</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Use snakemake regex to compile regex from format string.</span>
+
+<span class="sd">        Snakemake provides a nice regex function that converts format strings</span>
+<span class="sd">        to regex. To help I also add sampleTable values to the regex to limit</span>
+<span class="sd">        the results.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        level: str</span>
+<span class="sd">            A string consiting of rawLevel, runLevel, sampleLevel, aggLevel</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            regex pattern generated by snakemake.io.regex</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &gt;&gt;&gt; SH = SampleHandler(test_config)</span>
+<span class="sd">        &gt;&gt;&gt; level = &#39;runLevel&#39;</span>
+<span class="sd">        &gt;&gt;&gt; pattern = SH.config[level]</span>
+
+<span class="sd">        &gt;&gt;&gt; pattern</span>
+<span class="sd">        &#39;pasilla_sample/{sampleID}/{sampleID}_{treatment}_{replicate}_R1&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; assert SH._compile(level) == (</span>
+<span class="sd">        ... &#39;pasilla_sample\\\\/(?P&lt;sampleID&gt;treated1|treated2|untreated1&#39;</span>
+<span class="sd">        ... &#39;|untreated2)\\\\/(?P=sampleID)_(?P&lt;treatment&gt;treated|untreated)&#39;</span>
+<span class="sd">        ... &#39;_(?P&lt;replicate&gt;1|2)_R1&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">level</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleTable</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Subsitute the first instance of each sampleTable column name and</span>
+            <span class="c1"># add the unique list of column values. This will help narrow down</span>
+            <span class="c1"># regex. NOTE: This may not be needed, but thought it might be useful.</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                <span class="s1">&#39;{{</span><span class="si">{name}</span><span class="s1">}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">),</span>
+                <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{name}</span><span class="s1">, </span><span class="si">{res}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
+                <span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Retrun regex removing the &#39;$&#39; off of the end to allow partial matches</span>
+        <span class="k">return</span> <span class="n">regex</span><span class="p">(</span><span class="n">pattern</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_compile_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Compile regex for each level</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        raw: str</span>
+<span class="sd">            compiled regex for raw</span>
+<span class="sd">        run: str</span>
+<span class="sd">            compiled regex for run</span>
+<span class="sd">        sample: str</span>
+<span class="sd">            compiled regex for sample</span>
+<span class="sd">        agg: str</span>
+<span class="sd">            compiled regex for agg</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="s1">&#39;rawLevel&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="s1">&#39;runLevel&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="s1">&#39;sampleLevel&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="s1">&#39;aggLevel&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_load_sample_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Import the sample table and make a dictionary version too.</span>
+
+<span class="sd">        This function imports the sample table and saves its information in two</span>
+<span class="sd">        formats. The first is a pandas.DataFrame and the second is a list of</span>
+<span class="sd">        dictionaries.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        sampleTable: pandas.DataFrame</span>
+<span class="sd">        samples: list of dict</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampleTable</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;sampletable&#39;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampleTable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;sampleID&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleTable</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SampleHandler.find_level"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.interface.SampleHandler.find_level">[docs]</a>    <span class="k">def</span> <span class="nf">find_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Figure out which regex the prefix matches.</span>
+
+<span class="sd">        Scans each level and tries to identify which level the prefix matches.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prefix: str</span>
+<span class="sd">            string that you want to match to the prefix, this string would have</span>
+<span class="sd">            sample information filled in.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple:</span>
+<span class="sd">            [0] is a string indicating which level</span>
+<span class="sd">            [1] is a dict with sample information</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Too lazy to make a custom exception, `raises` ValueError if the</span>
+<span class="sd">            prefix does not match any of the patterns.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; SH = SampleHandler(test_config)</span>
+<span class="sd">        &gt;&gt;&gt; prefix = &#39;pasilla/treated1/treated1_treated_1_0001_R1&#39;</span>
+<span class="sd">        &gt;&gt;&gt; level, attrs = SH.find_level(prefix)</span>
+
+<span class="sd">        &gt;&gt;&gt; level</span>
+<span class="sd">        &#39;rawLevel&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; assert attrs == [</span>
+<span class="sd">        ... {&#39;replicate&#39;: &#39;1&#39;, &#39;sampleID&#39;: &#39;treated1&#39;, &#39;treatment&#39;: &#39;treated&#39;}</span>
+<span class="sd">        ... ]</span>
+
+<span class="sd">        This prefix doesn&#39;t resolve to an actual sample defined in the</span>
+<span class="sd">        sampletable (note mismatch between &quot;1&quot; in everything but the last</span>
+<span class="sd">        &quot;_2_&quot;. Should this raise ValueError?</span>
+
+<span class="sd">        &gt;&gt;&gt; prefix = &#39;pasilla_sample/treated1/treated1_treated_2_R1&#39;</span>
+<span class="sd">        &gt;&gt;&gt; level, attrs = SH.find_level(prefix)</span>
+<span class="sd">        &gt;&gt;&gt; level</span>
+<span class="sd">        &#39;runLevel&#39;</span>
+<span class="sd">        &gt;&gt;&gt; assert attrs == []</span>
+
+<span class="sd">        Run-level prefix:</span>
+
+<span class="sd">        &gt;&gt;&gt; prefix = &#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+<span class="sd">        &gt;&gt;&gt; level, attrs = SH.find_level(prefix)</span>
+<span class="sd">        &gt;&gt;&gt; level</span>
+<span class="sd">        &#39;runLevel&#39;</span>
+<span class="sd">        &gt;&gt;&gt; assert attrs == [</span>
+<span class="sd">        ... {&#39;replicate&#39;: &#39;2&#39;, &#39;sampleID&#39;: &#39;treated2&#39;, &#39;treatment&#39;: &#39;treated&#39;}</span>
+<span class="sd">        ... ]</span>
+
+<span class="sd">        Agg-level prefix (note the multiple sets of attributes returned):</span>
+
+<span class="sd">        &gt;&gt;&gt; prefix = &#39;pasilla_agg/treated&#39;</span>
+<span class="sd">        &gt;&gt;&gt; level, attrs = SH.find_level(prefix)</span>
+<span class="sd">        &gt;&gt;&gt; level</span>
+<span class="sd">        &#39;aggLevel&#39;</span>
+<span class="sd">        &gt;&gt;&gt; assert attrs == [</span>
+<span class="sd">        ... {&#39;treatment&#39;: &#39;treated&#39;, &#39;replicate&#39;: &#39;1&#39;, &#39;sampleID&#39;: &#39;treated1&#39;},</span>
+<span class="sd">        ... {&#39;treatment&#39;: &#39;treated&#39;, &#39;replicate&#39;: &#39;2&#39;, &#39;sampleID&#39;: &#39;treated2&#39;}</span>
+<span class="sd">        ... ]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;rawLevel&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;runLevel&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;sampleLevel&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agg</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;aggLevel&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agg</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t find a match for </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">prefix</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SampleHandler.find_sample"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.interface.SampleHandler.find_sample">[docs]</a>    <span class="k">def</span> <span class="nf">find_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Find which sample(s) to use.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pattern: str</span>
+<span class="sd">            A regex expression for the level</span>
+
+<span class="sd">        prefix: str</span>
+<span class="sd">            The prefix that is being matched to the pattern</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        --------</span>
+<span class="sd">        dict:</span>
+<span class="sd">            Sample attributes corresponding to the sample(s) that the prefix</span>
+<span class="sd">            contains.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; SH = SampleHandler(test_config)</span>
+
+<span class="sd">        &gt;&gt;&gt; pattern = (</span>
+<span class="sd">        ... &#39;pasilla_sample\\/(?P&lt;sampleID&gt;treated1|treated2|untreated1|untreated2)&#39;</span>
+<span class="sd">        ... &#39;\\/(?P=sampleID)_(?P&lt;treatment&gt;treated|untreated)_(?P&lt;replicate&gt;1|2)_R1&#39;</span>
+<span class="sd">        ... )</span>
+
+<span class="sd">        &gt;&gt;&gt; prefix = &#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; assert SH.find_sample(pattern, prefix) == [</span>
+<span class="sd">        ... {&#39;treatment&#39;: &#39;treated&#39;, &#39;sampleID&#39;: &#39;treated2&#39;, &#39;replicate&#39;: &#39;2&#39;}</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+        <span class="n">_samples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_samples</span></div>
+
+<div class="viewcode-block" id="SampleHandler.make_input"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.interface.SampleHandler.make_input">[docs]</a>    <span class="k">def</span> <span class="nf">make_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Generates Input Function based on wildcards.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+
+<span class="sd">        example: &#39;{first_element}{second_element}{third_element}&#39;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prefix: str</span>
+<span class="sd">            This can either be the entire prefix, or the name of the string</span>
+<span class="sd">            formatting group that contains the prefix. This would be the</span>
+<span class="sd">            &#39;first_element&#39; in the example.</span>
+
+<span class="sd">        midfix: str</span>
+<span class="sd">            This can either be the entire midfix, or the name of the string</span>
+<span class="sd">            formating group that contains the midfix. This would be the</span>
+<span class="sd">            &#39;second_element&#39; in the example.</span>
+
+<span class="sd">        suffix: str</span>
+<span class="sd">            This can either be the entire suffix, or the name of the string</span>
+<span class="sd">            formating group that contains the suffix. This would be the</span>
+<span class="sd">            &#39;third_element&#39; in the example.</span>
+
+<span class="sd">        agg: bool</span>
+<span class="sd">            True if you want file names from the level above the current</span>
+<span class="sd">            prefix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        function:</span>
+<span class="sd">            Retruns a snakemake input function that generates a list of files.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; SH = SampleHandler(test_config)</span>
+<span class="sd">        &gt;&gt;&gt; func = SH.make_input(&#39;prefix&#39;, &#39;&#39;, &#39;.fastq&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; func({&#39;prefix&#39;: &#39;pasilla&#39;})</span>
+<span class="sd">        [&#39;pasilla.fastq&#39;]</span>
+
+<span class="sd">        Instead of directly specifying the midfix, we pull it from the</span>
+<span class="sd">        wildcards dict entry for &quot;asdf&quot;:</span>
+
+<span class="sd">        &gt;&gt;&gt; func = SH.make_input(&#39;prefix&#39;, &#39;asdf&#39;, &#39;.fastq&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; func({&#39;prefix&#39;: &#39;pasilla&#39;, &#39;asdf&#39;: &#39;.cutadapt&#39;})</span>
+<span class="sd">        [&#39;pasilla.cutadapt.fastq&#39;]</span>
+
+<span class="sd">        We want to aggregate into &quot;pasilla_agg/treated.fastq&quot;, but the</span>
+<span class="sd">        following doesn&#39;t work because we need the directory slash:</span>
+
+<span class="sd">        &gt;&gt;&gt; func = SH.make_input(&#39;pasilla_agg&#39;, &#39;treated&#39;, &#39;.fastq&#39;, agg=True)</span>
+<span class="sd">        &gt;&gt;&gt; assertRaises(ValueError, func, {})</span>
+
+<span class="sd">        Also doesn&#39;t work:</span>
+
+<span class="sd">        &gt;&gt;&gt; func = SH.make_input(&#39;pasilla_agg/&#39;, midfix=&#39;treated&#39;, suffix=&#39;.fastq&#39;, agg=True)</span>
+<span class="sd">        &gt;&gt;&gt; assertRaises(ValueError, func, {})</span>
+
+<span class="sd">        However if we provide most of the path in the prefix it works:</span>
+
+<span class="sd">        &gt;&gt;&gt; func = SH.make_input(&#39;pasilla_agg/treated&#39;, suffix=&#39;.fastq&#39;, agg=True)</span>
+<span class="sd">        &gt;&gt;&gt; assert sorted(func({})) == [</span>
+<span class="sd">        ... &#39;pasilla_sample/treated1/treated1_treated_1_R1.fastq&#39;,</span>
+<span class="sd">        ... &#39;pasilla_sample/treated1/treated1_treated_2_R1.fastq&#39;,</span>
+<span class="sd">        ... &#39;pasilla_sample/treated2/treated2_treated_1_R1.fastq&#39;,</span>
+<span class="sd">        ... &#39;pasilla_sample/treated2/treated2_treated_2_R1.fastq&#39;</span>
+<span class="sd">        ... ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">_input</span><span class="p">(</span><span class="n">wildcards</span><span class="p">):</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_prefix</span> <span class="o">=</span> <span class="n">wildcards</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">_prefix</span> <span class="o">=</span> <span class="n">prefix</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_midfix</span> <span class="o">=</span> <span class="n">wildcards</span><span class="p">[</span><span class="n">midfix</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">_midfix</span> <span class="o">=</span> <span class="n">midfix</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_suffix</span> <span class="o">=</span> <span class="n">wildcards</span><span class="p">[</span><span class="n">suffix</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">_suffix</span> <span class="o">=</span> <span class="n">suffix</span>
+
+            <span class="k">if</span> <span class="n">agg</span><span class="p">:</span>
+                <span class="n">level</span><span class="p">,</span> <span class="n">_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">_prefix</span><span class="p">)</span>
+                <span class="n">_sampleList</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">_samples</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Combine midfix and suffix and expand out any format strings</span>
+                <span class="n">_suffix</span> <span class="o">=</span> <span class="n">expand</span><span class="p">(</span><span class="n">_midfix</span> <span class="o">+</span> <span class="n">_suffix</span><span class="p">,</span> <span class="o">**</span><span class="n">_sampleList</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+                <span class="c1"># Retrun a list of sample ids by comining format string for higher level along with the full suffix.</span>
+                <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">levelMap</span><span class="p">[</span><span class="n">level</span><span class="p">]]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="si">{suffix}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="n">_suffix</span><span class="p">,</span> <span class="o">**</span><span class="n">_sampleList</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">expand</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{prefix}{midfix}{suffix}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">_prefix</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="n">_midfix</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="n">_suffix</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_input</span></div>
+
+<div class="viewcode-block" id="SampleHandler.build_targets"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.interface.SampleHandler.build_targets">[docs]</a>    <span class="k">def</span> <span class="nf">build_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patterns</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Build target file names based on pattern naming scheme.</span>
+
+<span class="sd">        Given a list of string formatted patterns will use config information</span>
+<span class="sd">        to fill in the patterns and generate a list of file targets.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        patterns: list</span>
+<span class="sd">            List of files with string formating marks that can be filled in</span>
+<span class="sd">            from the config or the sampleTable.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list:</span>
+<span class="sd">            Filled in list of file names.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_targets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">samples</span><span class="p">:</span>
+                <span class="n">e</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+                <span class="n">_targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">_targets</span><span class="p">))</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="kn">from</span> <span class="nn">textwrap</span> <span class="k">import</span> <span class="n">dedent</span>
+    <span class="kn">from</span> <span class="nn">unittest</span> <span class="k">import</span> <span class="n">TestCase</span>
+
+    <span class="k">def</span> <span class="nf">assertRaises</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">TestCase</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># so that paths in config files work correctly</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+    <span class="n">test_sampletable</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">    sampleID	treatment	replicate</span>
+<span class="s2">    treated1	treated	1</span>
+<span class="s2">    treated2	treated	2</span>
+<span class="s2">    untreated1	untreated	1</span>
+<span class="s2">    untreated2	untreated	2</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="n">sampletable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;test_sampletable.tsv&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sampletable</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+        <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">test_sampletable</span><span class="p">)</span>
+
+    <span class="n">test_config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    sampletable: test/test_sampletable.tsv</span>
+<span class="s2">    sample_dir: pasilla</span>
+<span class="s2">    assembly: dm6</span>
+<span class="s2">    data_dir: references</span>
+
+<span class="s2">    rawLevel: &#39;pasilla/</span><span class="si">{sampleID}</span><span class="s2">/</span><span class="si">{sampleID}</span><span class="s2">_</span><span class="si">{treatment}</span><span class="s2">_</span><span class="si">{replicate}</span><span class="s2">_0001_R1&#39;</span>
+<span class="s2">    runLevel: &#39;pasilla_sample/</span><span class="si">{sampleID}</span><span class="s2">/</span><span class="si">{sampleID}</span><span class="s2">_</span><span class="si">{treatment}</span><span class="s2">_</span><span class="si">{replicate}</span><span class="s2">_R1&#39;</span>
+<span class="s2">    sampleLevel: &#39;pasilla_sample/</span><span class="si">{sampleID}</span><span class="s2">/</span><span class="si">{sampleID}</span><span class="s2">_</span><span class="si">{treatment}</span><span class="s2">&#39;</span>
+<span class="s2">    aggLevel: &#39;pasilla_agg/</span><span class="si">{treatment}</span><span class="s2">&#39;</span>
+<span class="s2">    aggLevel2:</span>
+<span class="s2">        - &#39;</span><span class="si">{treatment}</span><span class="s2">&#39;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;test/test_sampletable.tsv&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

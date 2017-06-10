@@ -1,0 +1,1070 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.plotting package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lcdblib.snakemake package" href="lcdblib.snakemake.html" />
+    <link rel="prev" title="lcdblib.parse package" href="lcdblib.parse.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.snakemake.html" title="lcdblib.snakemake package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-plotting-package">
+<h1>lcdblib.plotting package<a class="headerlink" href="#lcdblib-plotting-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.plotting.basic">
+<span id="lcdblib-plotting-basic-module"></span><h2>lcdblib.plotting.basic module<a class="headerlink" href="#module-lcdblib.plotting.basic" title="Permalink to this headline">¶</a></h2>
+<p>Set of basic plotting functions.</p>
+<dl class="class">
+<dt id="lcdblib.plotting.basic.PairGrid">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">PairGrid</code><span class="sig-paren">(</span><em>data</em>, <em>hue=None</em>, <em>hue_order=None</em>, <em>palette=None</em>, <em>hue_kws=None</em>, <em>vars=None</em>, <em>x_vars=None</em>, <em>y_vars=None</em>, <em>diag_sharey=True</em>, <em>size=2.5</em>, <em>aspect=1</em>, <em>despine=True</em>, <em>dropna=True</em>, <em>subplots_kws={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#PairGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.PairGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">seaborn.axisgrid.PairGrid</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.basic.corrfunc">
+<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">corrfunc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>loc=(0.1</em>, <em>0.5)</em>, <em>template='r = {:0.4f}'</em>, <em>type='spearman'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#corrfunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.corrfunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds text to the current axes with either the sparman or pearson r.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array-like</em>) &#8211; Vector of values.</li>
+<li><strong>y</strong> (<em>array-like</em>) &#8211; Vector of values.</li>
+<li><strong>type</strong> (<em>str</em>) &#8211; Which type of correlation coefficient to use. Either &#8220;spearman&#8221; or
+&#8220;pearson&#8221;. Uses scipy.stats module.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.basic.lowerTriangle">
+<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">lowerTriangle</code><span class="sig-paren">(</span><em>df</em>, <em>func</em>, <em>func_kw={}</em>, <em>pairgrid_kw={}</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#lowerTriangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.lowerTriangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a PairGrid lower triangle panel.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> (<em>pandas.DataFrame</em>) &#8211; DataFrame containing the columns you want to plot in a PairGrid.</li>
+<li><strong>func</strong> (<em>function</em><em> or </em><em>list of functions</em>) &#8211; The function you want to plot in a PairGrid</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">seaborn.PairGrid</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.basic.maPlot">
+<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">maPlot</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>data=None</em>, <em>title=None</em>, <em>log=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#maPlot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.maPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a MA plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Input variables. If strings, these should correspond with column names
+in <code class="docutils literal"><span class="pre">data</span></code>. When pandas objects are used, axes will be labeled with
+the series name.</li>
+<li><strong>data</strong> (<em>DataFrame</em>) &#8211; Tidy (&#8220;long-form&#8221;) dataframe where each column is a variable and each
+row is an observation.</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; Title to add to the plot</li>
+<li><strong>log</strong> (<em>bool</em>) &#8211; If true the log2 of the Geometric mean and ratio will be used instead
+of the mean and difference.</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) &#8211; Values to pass to seaborn.regplot</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>matplotlib.axes.Axes</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A matplotlib axes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<dl class="docutils">
+<dt>Given that &#8216;x&#8217; and &#8216;y&#8217; are column names in df:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maPlot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fig_reg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+<dt>Given that &#8216;x&#8217; and &#8216;y&#8217; are pandas.Series</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maPlot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fig_reg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.plotting.colormap_adjust">
+<span id="lcdblib-plotting-colormap-adjust-module"></span><h2>lcdblib.plotting.colormap_adjust module<a class="headerlink" href="#module-lcdblib.plotting.colormap_adjust" title="Permalink to this headline">¶</a></h2>
+<p>Module to handle custom colormaps.</p>
+<p><cite>cmap_powerlaw_adjust</cite>, <cite>cmap_center_adjust</cite>, and
+<cite>cmap_center_adjust</cite> are from
+<a class="reference external" href="https://sites.google.com/site/theodoregoetz/notes/matplotlib_colormapadjust">https://sites.google.com/site/theodoregoetz/notes/matplotlib_colormapadjust</a></p>
+<dl class="function">
+<dt id="lcdblib.plotting.colormap_adjust.cmap_center_adjust">
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">cmap_center_adjust</code><span class="sig-paren">(</span><em>cmap</em>, <em>center_ratio</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#cmap_center_adjust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.cmap_center_adjust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new colormap based on the one given
+but adjusted so that the old center point higher
+(&gt;0.5) or lower (&lt;0.5)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cmap</strong> &#8211; colormap instance (e.g., cm.jet)</li>
+<li><strong>center_ratio</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.colormap_adjust.cmap_center_point_adjust">
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">cmap_center_point_adjust</code><span class="sig-paren">(</span><em>cmap</em>, <em>range</em>, <em>center</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#cmap_center_point_adjust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.cmap_center_point_adjust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts center to a ratio between 0 and 1 of the
+range given and calls cmap_center_adjust(). returns
+a new adjusted colormap accordingly</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cmap</strong> &#8211; colormap instance</li>
+<li><strong>range</strong> &#8211; Tuple of (min, max)</li>
+<li><strong>center</strong> &#8211; New cmap center</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.colormap_adjust.cmap_powerlaw_adjust">
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">cmap_powerlaw_adjust</code><span class="sig-paren">(</span><em>cmap</em>, <em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#cmap_powerlaw_adjust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.cmap_powerlaw_adjust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new colormap based on the one given
+but adjusted via power-law, <cite>newcmap = oldcmap**a</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cmap</strong> &#8211; colormap instance (e.g., cm.jet)</li>
+<li><strong>a</strong> &#8211; power</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.colormap_adjust.color_test">
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">color_test</code><span class="sig-paren">(</span><em>color</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#color_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.color_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure filled in with <cite>color</cite>; useful for troubleshooting or experimenting
+with colors</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.plotting.colormap_adjust.smart_colormap">
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">smart_colormap</code><span class="sig-paren">(</span><em>vmin</em>, <em>vmax</em>, <em>color_high='#b11902'</em>, <em>hue_low=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#smart_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.smart_colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a &#8220;smart&#8221; colormap that is centered on zero, and accounts for
+asymmetrical vmin and vmax by matching saturation/value of high and low
+colors.</p>
+<p>It works by first creating a colormap from white to <cite>color_high</cite>.  Setting
+this color to the max(abs([vmin, vmax])), it then determines what the color
+of min(abs([vmin, vmax])) should be on that scale.  Then it shifts the
+color to the new hue <cite>hue_low</cite>, and finally creates a new colormap with the
+new hue-shifted as the low, <cite>color_high</cite> as the max, and centered on zero.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>color_high</strong> &#8211; a matplotlib color &#8211; try &#8220;#b11902&#8221; for a nice red</li>
+<li><strong>hue_low</strong> &#8211; float in [0, 1] &#8211; try 0.6 for a nice blue</li>
+<li><strong>vmin</strong> &#8211; lowest value in data you&#8217;ll be plotting</li>
+<li><strong>vmax</strong> &#8211; highest value in data you&#8217;ll be plotting</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.plotting.compare_rnaseq_and_chipseq">
+<span id="lcdblib-plotting-compare-rnaseq-and-chipseq-module"></span><h2>lcdblib.plotting.compare_rnaseq_and_chipseq module<a class="headerlink" href="#module-lcdblib.plotting.compare_rnaseq_and_chipseq" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.plotting.compare_rnaseq_and_chipseq.plot">
+<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x='baseMean'</em>, <em>y='log2FoldChange'</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col='padj'</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>M-A plot showing up- and downregulated genes with optional labeling and
+Fishers exact tests.</p>
+<p>If &#8211;plot-filename is not specified, then the plot will be displayed and
+points can be clicked for interactive exploration.</p>
+<p>If &#8211;peaks and &#8211;regions are specified, then results from Fishers exact
+tests will be printed to stdout, or to &#8211;report if specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>de_results</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If str, it&#8217;s the filename of a TSV of differential expression results,
+with first column as gene ID. It will be parsed into a dataframe where
+the index is gene ID. When called as a library, an already-created
+pandas.DataFrame can optionally be provided instead.</li>
+<li><strong>regions</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; Gene regions in which to look for intersections with peaks. BED file
+where the 4th column contains gene IDs that are also present in first
+column of <cite>de_results</cite>. Typically this would be a BED file of promoters
+or gene bodies. When called as a library, a pybedtools.BedTool object
+can optionally be provided instead.</li>
+<li><strong>peaks</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; BED file to be intersected with <cite>regions</cite>. When called as a library,
+a pybedtools.BedTool object can optionally be provided instead.</li>
+<li><strong>selected</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Replaces <cite>regions</cite> <cite>peaks</cite> arguments; useful for when you already know
+which genes you want to select (e.g., upregulated from a different
+experiment). If a string, assume it&#8217;s a filename and use the first
+column which will be used as an index into the <cite>de_results</cite> dataframe.
+When called as a library, if <cite>selected</cite> is not a string it will be used
+as an index into the dataframe.</li>
+<li><strong>x</strong> (<em>str</em>) &#8211; Column to use for x-axis. Default of &#8220;baseMean&#8221; expects DESeq2
+results</li>
+<li><strong>y</strong> (<em>str</em>) &#8211; Column to use for y-axis. Default of &#8220;log2FoldChange&#8221; expects DESeq2
+results</li>
+<li><strong>disable_logx</strong> (<em>bool</em>) &#8211; Disable default behavior of transforming x values using log10</li>
+<li><strong>logy</strong> (<em>bool</em>) &#8211; Transform y values using log2</li>
+<li><strong>pval-col</strong> (<em>str</em>) &#8211; Column to use for statistical significance. Default &#8220;padj&#8221; expectes
+DESeq2 results.</li>
+<li><strong>alpha</strong> (<em>float</em>) &#8211; Threshold for calling significance. Applied to <cite>pval_col</cite></li>
+<li><strong>lfc_cutoff</strong> (<em>float</em>) &#8211; Log2fold change cutoff to be applied to y values. Threshold is applied
+post-transformation, if any specified (e.g., <cite>logy</cite> argument).</li>
+<li><strong>plot_filename</strong> (<em>str</em>) &#8211; File to save plot. Format auto-detected by extension. Output directory
+will be created if needed.</li>
+<li><strong>disable_raster_points</strong> (<em>bool</em>) &#8211; Disable the default behavior of rasterizing points in a PDF. Use
+sparingly, since drawing 30k+ individual points in a PDF may slow down
+your machine.</li>
+<li><strong>genes_to_label</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Optional file containing genes to label with text. First column must be
+a subset of the first column of <cite>de_results</cite>. Lines starting with &#8216;#&#8217;
+and subsequent tab-separated columns will be ignored. When called as
+a library, a list-like object of gene IDs can be provided.</li>
+<li><strong>label_column</strong> (<em>str</em>) &#8211; Optional column from which to take gene labels found in
+<cite>genes_to_label</cite> (e.g., &#8220;symbol&#8221;). If the value in this column is
+missing, fall back to the index. Use this if your gene IDs are long
+Ensembl IDs but you want the gene symbols to show up on the plot.</li>
+<li><strong>report</strong> (<em>str</em>) &#8211; Where to write out Fisher&#8217;s exact test results. Default is stdout</li>
+<li><strong>gene_lists</strong> (<em>str</em>) &#8211; Prefix to gene lists. If specified, gene lists corresponding to the
+cells of the 2x2 Fishers exact test will be written to
+{prefix}.up.tsv and {prefix}.dn.tsv. These are subsets of <cite>de_results</cite>
+where genes are up and have a peak in region (or are selected), or
+downregulated and have a peak in region (or are selected),
+respectively.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.plotting.results_table">
+<span id="lcdblib-plotting-results-table-module"></span><h2>lcdblib.plotting.results_table module<a class="headerlink" href="#module-lcdblib.plotting.results_table" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.DESeq2Results">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">DESeq2Results</code><span class="sig-paren">(</span><em>data</em>, <em>db=None</em>, <em>header_check=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DESeq2Results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.DESeqResults" title="lcdblib.plotting.results_table.DESeqResults"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.DESeqResults</span></code></a></p>
+<p>Class for working with results from DESeq2.</p>
+<p>Just like a DifferentialExpressionResults object, but sets the
+pval_column, lfc_column, and mean_column to the names used in edgeR&#8217;s
+output.</p>
+<p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
+attribute.</p>
+<p>Any attributes not explicitly in this class will be looked for in the
+underlying pandas.DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+a filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DESeq2Results.lfc_column">
+<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.lfc_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DESeq2Results.mean_column">
+<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.mean_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DESeq2Results.pval_column">
+<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.pval_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.DESeqResults">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">DESeqResults</code><span class="sig-paren">(</span><em>data</em>, <em>db=None</em>, <em>header_check=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DESeqResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DESeqResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.DifferentialExpressionResults" title="lcdblib.plotting.results_table.DifferentialExpressionResults"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.DifferentialExpressionResults</span></code></a></p>
+<p>Class for working with results from DESeq.</p>
+<p>Just like a DifferentialExpressionResults object, but sets the
+pval_column, lfc_column, and mean_column to the names used in DESeq
+(v1) output.</p>
+<p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
+attribute.</p>
+<p>Any attributes not explicitly in this class will be looked for in the
+underlying pandas.DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+a filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DESeqResults.autosql_file">
+<code class="descname">autosql_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DESeqResults.autosql_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DESeqResults.autosql_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the autosql for DESeq results (to create bigBed)</p>
+<p>Returns a temp filename containing the autosql defining the extra
+fields.</p>
+<p>This for creating bigBed files from BED files created by
+colormapped_bed.  When a user clicks on a feature, the DESeq results
+will be reported.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DESeqResults.colormapped_bedfile">
+<code class="descname">colormapped_bedfile</code><span class="sig-paren">(</span><em>genome</em>, <em>cmap=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DESeqResults.colormapped_bedfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DESeqResults.colormapped_bedfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a BED file with padj encoded as color</p>
+<p>Features will be colored according to adjusted pval (phred
+transformed).  Downregulated features have the sign flipped.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmap</strong> (<em>matplotlib colormap</em>) &#8211; Default is matplotlib.cm.RdBu_r</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Requires a FeatureDB to be attached.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">DifferentialExpressionResults</code><span class="sig-paren">(</span><em>data</em>, <em>db=None</em>, <em>header_check=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.ResultsTable" title="lcdblib.plotting.results_table.ResultsTable"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.ResultsTable</span></code></a></p>
+<p>A ResultsTable subclass for working with differential expression results.</p>
+<p>Adds methods for up/down regulation, ma_plot, and sets class variables for
+which columns should be considered for pval, log fold change, and mean
+values. This class acts as a parent for subclasses like DESeqResults,
+EdgeRResults, and others/</p>
+<p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
+attribute.</p>
+<p>Any attributes not explicitly in this class will be looked for in the
+underlying pandas.DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+a filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.changed">
+<code class="descname">changed</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>lfc=0</em>, <em>idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults.changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changed features.</p>
+<p>Helper function to get where the pval is &lt;= alpha and the
+absolute value log2foldchange is &gt;= lfc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
+<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
+<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+will be returned that has been subsetted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.downregulated">
+<code class="descname">downregulated</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>lfc=0</em>, <em>idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults.downregulated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.downregulated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downregulated features.</p>
+<p>Helper function to get where the pval is &lt;= alpha and the
+log2foldchange is &lt;= lfc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
+<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
+<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+will be returned that has been subsetted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column">
+<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.ma_plot">
+<code class="descname">ma_plot</code><span class="sig-paren">(</span><em>alpha</em>, <em>up_kwargs=None</em>, <em>dn_kwargs=None</em>, <em>zero_line=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults.ma_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.ma_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>MA plot.</p>
+<p>Plots the average read count across treatments (x-axis) vs the log2
+fold change (y-axis).</p>
+<p>Additional kwargs are passed to self.scatter (useful ones might include
+<cite>genes_to_highlight</cite>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> (<em>float</em>) &#8211; Features with values &lt;= <cite>alpha</cite> will be highlighted in the plot.</li>
+<li><strong>dn_kwargs</strong> (<em>up_kwargs</em><em>,</em>) &#8211; Kwargs passed to matplotlib&#8217;s scatter(), used for styling up/down
+regulated features (defined by <cite>alpha</cite> and <cite>col</cite>)</li>
+<li><strong>zero_line</strong> (<em>None</em><em> or </em><em>dict</em>) &#8211; Kwargs passed to matplotlib.axhline(0).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column">
+<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column">
+<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.unchanged">
+<code class="descname">unchanged</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>lfc=0</em>, <em>idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults.unchanged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.unchanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unchanged features.</p>
+<p>Helper function to get where the pval is &gt; alpha and the
+absolute value of the log2foldchange is &lt; lfc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
+<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
+<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+will be returned that has been subsetted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.upregulated">
+<code class="descname">upregulated</code><span class="sig-paren">(</span><em>alpha=0.1</em>, <em>lfc=0</em>, <em>idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#DifferentialExpressionResults.upregulated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.upregulated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upregulated features.</p>
+<p>Helper function to get where the pval is &lt;= alpha and the
+log2foldchange is &gt;= lfc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
+<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
+<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+will be returned that has been subsetted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.EdgeRResults">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">EdgeRResults</code><span class="sig-paren">(</span><em>data</em>, <em>db=None</em>, <em>header_check=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#EdgeRResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.DifferentialExpressionResults" title="lcdblib.plotting.results_table.DifferentialExpressionResults"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.DifferentialExpressionResults</span></code></a></p>
+<p>Class for working with results from edgeR.</p>
+<p>Just like a DifferentialExpressionResults object, but sets the
+pval_column, lfc_column, and mean_column to the names used in edgeR&#8217;s
+output.</p>
+<p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
+attribute.</p>
+<p>Any attributes not explicitly in this class will be looked for in the
+underlying pandas.DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+a filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.EdgeRResults.lfc_column">
+<code class="descname">lfc_column</code><em class="property"> = 'logFC'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.EdgeRResults.mean_column">
+<code class="descname">mean_column</code><em class="property"> = 'logCPM'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.EdgeRResults.pval_column">
+<code class="descname">pval_column</code><em class="property"> = 'FDR'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.LazyDict">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">LazyDict</code><span class="sig-paren">(</span><em>fn_dict</em>, <em>index_file=None</em>, <em>index_from=None</em>, <em>extra=None</em>, <em>cls=&lt;class 'lcdblib.plotting.results_table.DESeqResults'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.LazyDict.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.LazyDict.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.LazyDict.values">
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">MarginalHistScatter</code><span class="sig-paren">(</span><em>ax</em>, <em>hist_size=0.6</em>, <em>pad=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#MarginalHistScatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.add_legends">
+<code class="descname">add_legends</code><span class="sig-paren">(</span><em>xhists=True</em>, <em>yhists=False</em>, <em>scatter=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#MarginalHistScatter.add_legends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.add_legends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add legends to axes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>scatter_kwargs</em>, <em>hist_kwargs=None</em>, <em>xhist_kwargs=None</em>, <em>yhist_kwargs=None</em>, <em>num_ticks=3</em>, <em>labels=None</em>, <em>hist_share=False</em>, <em>marginal_histograms=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#MarginalHistScatter.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new scatter to self.scatter_ax as well as marginal histograms
+for the same data, borrowing addtional room from the axes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Data to be plotted</li>
+<li><strong>scatter_kwargs</strong> (<em>dict</em>) &#8211; Keyword arguments that are passed directly to scatter().</li>
+<li><strong>hist_kwargs</strong> (<em>dict</em>) &#8211; Keyword arguments that are passed directly to hist(), for both the
+top and side histograms.</li>
+<li><strong>yhist_kwargs</strong> (<em>xhist_kwargs</em><em>,</em>) &#8211; Additional, margin-specific kwargs for the x or y histograms
+respectively.  These are used to update <cite>hist_kwargs</cite></li>
+<li><strong>num_ticks</strong> (<em>int</em>) &#8211; How many tick marks to use in each histogram&#8217;s y-axis</li>
+<li><strong>labels</strong> (<em>array-like</em>) &#8211; Optional NumPy array of labels that will be set on the collection
+so that they can be accessed by a callback function.</li>
+<li><strong>hist_share</strong> (<em>bool</em>) &#8211; If True, then all histograms will share the same frequency axes.
+Useful for showing relative heights if you don&#8217;t want to use the
+hist_kwarg <cite>normed=True</cite></li>
+<li><strong>marginal_histograms</strong> (<em>bool</em>) &#8211; Set to False in order to disable marginal histograms and just use
+as a normal scatterplot.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.limits">
+<code class="descname">limits</code><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.limits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.xmax">
+<code class="descname">xmax</code><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.xmax" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.xmin">
+<code class="descname">xmin</code><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.xmin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.ymax">
+<code class="descname">ymax</code><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.ymax" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lcdblib.plotting.results_table.MarginalHistScatter.ymin">
+<code class="descname">ymin</code><a class="headerlink" href="#lcdblib.plotting.results_table.MarginalHistScatter.ymin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="lcdblib.plotting.results_table.ResultsTable">
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">ResultsTable</code><span class="sig-paren">(</span><em>data</em>, <em>db=None</em>, <em>import_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Wrapper around a pandas.DataFrame that adds additional functionality.</p>
+<p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
+attribute.</p>
+<p>Any attributes not explicitly in this class will be looked for in the
+underlying pandas.DataFrame.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+a filename.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.align_with">
+<code class="descname">align_with</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.align_with"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.align_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>Align the dataframe&#8217;s index with another.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.attach_db">
+<code class="descname">attach_db</code><span class="sig-paren">(</span><em>db</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.attach_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.attach_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a gffutils.FeatureDB for access to features.</p>
+<p>Useful if you want to attach a db after this instance has already been
+created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>db</strong> (<em>gffutils.FeatureDB</em>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.features">
+<code class="descname">features</code><span class="sig-paren">(</span><em>ignore_unknown=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of features.</p>
+<p>If a gffutils.FeatureDB is attached, returns a pybedtools.Interval for
+every feature in the dataframe&#8217;s index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ignore_unknown</strong> (<em>bool</em>) &#8211; If True, silently ignores features that are not found in the db.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.radviz">
+<code class="descname">radviz</code><span class="sig-paren">(</span><em>column_names</em>, <em>transforms={}</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.radviz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.radviz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Radviz plot.</p>
+<p>Useful for exploratory visualization, a radviz plot can show
+multivariate data in 2D.  Conceptually, the variables (here, specified
+in <cite>column_names</cite>) are distributed evenly around the unit circle.  Then
+each point (here, each row in the dataframe) is attached to each
+variable by a spring, where the stiffness of the spring is proportional
+to the value of corresponding variable.  The final position of a point
+represents the equilibrium position with all springs pulling on it.</p>
+<p>In practice, each variable is normalized to 0-1 (by subtracting the
+mean and dividing by the range).</p>
+<p>This is a very exploratory plot.  The order of <cite>column_names</cite> will
+affect the results, so it&#8217;s best to try a couple different orderings.
+For other caveats, see [1].</p>
+<p>Additional kwargs are passed to self.scatter, so subsetting, callbacks,
+and other configuration can be performed using options for that method
+(e.g., <cite>genes_to_highlight</cite> is particularly useful).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>column_names</strong> (<em>list</em>) &#8211; Which columns of the dataframe to consider.  The columns provided
+should only include numeric data, and they should not contain any
+NaN, inf, or -inf values.</li>
+<li><strong>transforms</strong> (<em>dict</em>) &#8211; Dictionary mapping column names to transformations that will be
+applied just for the radviz plot.  For example, np.log1p is
+a useful function. If a column name is not in this dictionary, it
+will be used as-is.</li>
+<li><strong>ax</strong> (<em>matplotlib.Axes</em>) &#8211; If not None, then plot the radviz on this axes.  If None, then
+a new figure will be created.</li>
+<li><strong>kwargs</strong> (<em>dict</em>) &#8211; Additional arguments are passed to self.scatter.  Note that not all
+possible kwargs for self.scatter are necessarily useful for
+a radviz plot (for example, margninal histograms would not be
+meaningful).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method adds two new variables to self.data: &#8220;radviz_x&#8221; and
+&#8220;radviz_y&#8221;.  It then calls the self.scatter method, using these new
+variables.</p>
+<p>The data transformation was adapted from the
+pandas.tools.plotting.radviz function.</p>
+<p class="rubric">References</p>
+<ol class="arabic simple">
+<li>Hoffman,P.E. et al. (1997) DNA visual and analytic data mining. In
+the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
+437-441.</li>
+<li><a class="reference external" href="http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm">http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm</a></li>
+<li><a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/visualization.html#radviz">http://pandas.pydata.org/pandas-docs/stable/visualization.html#radviz</a></li>
+</ol>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.reindex_to">
+<code class="descname">reindex_to</code><span class="sig-paren">(</span><em>x</em>, <em>attribute=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.reindex_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.reindex_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy that only has rows corresponding to feature names in x.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; If str, then assume it&#8217;s a filename. BED, GFF, GTF, or VCF where
+the &#8220;Name&#8221; field (that is, the value returned by feature[&#8216;Name&#8217;])
+or any arbitrary attribute</li>
+<li><strong>attribute</strong> (<em>str</em><em> or </em><em>int</em><em> or </em><em>None</em>) &#8211; If <cite>x</cite> is GFF or GTF format, and <cite>attribute</cite> is str, then attribute
+containing the name of the feature to use. If <cite>x</cite> format is BED and
+<cite>attribute</cite> is str, then use getattr on the interval (e.g., &#8216;name&#8217;
+or &#8216;score&#8217;). If <cite>attribute</cite> is int, then use that column. If None,
+then use the &#8220;name&#8221; attribute of the Interval, which falls back to
+one of &#8220;gene_id&#8221;, &#8220;Name&#8221;, &#8220;transcript_id&#8221; for GFF/GTF.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.scatter">
+<code class="descname">scatter</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>xfunc=None</em>, <em>yfunc=None</em>, <em>xscale=None</em>, <em>yscale=None</em>, <em>xlab=None</em>, <em>ylab=None</em>, <em>genes_to_highlight=None</em>, <em>marginal_histograms=False</em>, <em>general_kwargs={'picker': True</em>, <em>'alpha': 0.2</em>, <em>'color': 'k'}</em>, <em>general_hist_kwargs=None</em>, <em>offset_kwargs={}</em>, <em>label_kwargs=None</em>, <em>ax=None</em>, <em>one_to_one=None</em>, <em>callback=None</em>, <em>hist_size=0.3</em>, <em>hist_pad=0.0</em>, <em>nan_offset=0.015</em>, <em>pos_offset=0.99</em>, <em>linelength=0.01</em>, <em>neg_offset=0.005</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.scatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do-it-all method for making annotated scatterplots.</p>
+<p>Includes rugplots for NaN/Inf/-Inf, a default callback that prints the
+entries of the underlying dataframe when a point is clicked, point
+labeling options, marginal histograms for multiple subsets, arbitrary
+styling of points for arbitrary subsets, and more.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Variables to plot.  Must be names in self.data&#8217;s DataFrame.</li>
+<li><strong>yfunc</strong> (<em>xfunc</em><em>,</em>) &#8211; Functions to apply to <cite>xvar</cite> and <cite>yvar</cite> respectively. If xlab or
+ylab is not set separately, the function name will be used along
+with the column name to label the corresponding axis. This lets you
+play around with transformation functions (e.g., np.log, np.log1p)
+without having to add the corresponding column to the underlying
+dataframe.</li>
+<li><strong>ylab</strong> (<em>xlab</em><em>,</em>) &#8211; Labels for x and y axes; default is to use function names for
+<cite>xfunc</cite> and <cite>yfunc</cite> and variable names <cite>xvar</cite> and <cite>yvar</cite>, e.g.,
+&#8220;log2(baseMeanA)&#8221;</li>
+<li><strong>ax</strong> (<em>None</em><em> or </em><em>Axes object</em>) &#8211; If not None then plot on the provided Axes, otherwise create a new
+figure and axes.</li>
+<li><strong>general_kwargs</strong> (<em>dict</em>) &#8211; Kwargs for matplotlib.scatter; specifies how all points look. Note
+that if you override this, you should include at least
+<cite>picker=True</cite> so that the callback function will work.</li>
+<li><strong>genes_to_highlight</strong> (<em>list of 2-tuples</em><em> or </em><em>3-tuples</em>) &#8211; <p>Provides lots of control to colors.  It is a list of (<cite>ind</cite>,
+<cite>kwargs</cite>) tuples, where each <cite>ind</cite> specifies genes to plot with
+<cite>kwargs</cite>. <cite>ind</cite> is anything that can be used with <cite>DataFrame.ix</cite>.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">(</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">log2FoldChange</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;downregulated&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="p">(</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">log2FoldChange</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;upregulated&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Each dictionary updates a copy of <cite>general_kwargs</cite>. If
+<cite>genes_to_highlight</cite> has a &#8220;name&#8221; kwarg, this must be a list that&#8217;t
+the same length as <cite>ind</cite>.  It will be used to label the genes in
+<cite>ind</cite> using <cite>label_kwargs</cite>.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">(</span>
+        <span class="p">[</span><span class="s1">&#39;ENSG001&#39;</span><span class="p">,</span> <span class="s1">&#39;ENSG002&#39;</span><span class="p">],</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geneA&#39;</span><span class="p">,</span> <span class="s1">&#39;geneB&#39;</span><span class="p">])</span>
+    <span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The tuples can also be 3-tuples of (ind, scatter_kwargs,
+hist_kwargs). The first two items act as above, and the third can
+be used to control histogram kwargs if <cite>marginal_hists</cite> is True.</p>
+<p>Note that, unless overridden, the color and alpha of the histograms
+will be inherited from the scatter kwargs, which in turn are
+inherited from general_kwargs. So the following will modifiy
+marginal histograms to have 100 bins:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">(</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">log2FoldChange</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;down&#39;</span><span class="p">),</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><strong>callback</strong> (<em>callable</em>) &#8211; Function to call upon clicking a point. Must accept a single
+argument which is the gene ID. The function can do whatever it
+wants with it, but probably will want to access the underlying
+dataframe. Default is to print the corresponding row from the
+underlying dataframe.</li>
+<li><strong>one_to_one</strong> (<em>None</em><em> or </em><em>dict</em>) &#8211; If not None, a dictionary of matplotlib.plot kwargs that will be
+used to plot a 1:1 line, e.g., dict(color=&#8217;r&#8217;, linestyle=&#8217;:&#8217;).</li>
+<li><strong>label_kwargs</strong> (<em>dict</em>) &#8211; Kwargs for labeled genes, e.g., dict=(style=&#8217;italic&#8217;).  Will only
+be used if an entry in <cite>genes_to_highlight</cite> has a <cite>name</cite> key.</li>
+<li><strong>offset_kwargs</strong> (<em>dict</em>) &#8211; Kwargs to be passed to matplotlib.transforms.offset_copy, used for
+adjusting the positioning of gene labels in relation to the actual
+point.</li>
+<li><strong>ylab_prefix</strong> (<em>xlab_prefix</em><em>,</em>) &#8211; Optional label prefix that will be added to the beginning of <cite>xlab</cite>
+and/or <cite>ylab</cite>.</li>
+<li><strong>marginal_histograms</strong> (<em>bool</em>) &#8211; If True, for each subset in <cite>genes_to_highlight</cite>, add marginal
+histograms along x and y axes subject to the various histogram
+controls below.</li>
+<li><strong>hist_size</strong> (<em>float</em>) &#8211; Size of marginal histograms</li>
+<li><strong>hist_pad</strong> (<em>float</em>) &#8211; Spacing between marginal histograms</li>
+<li><strong>pos_offset</strong><strong>, </strong><strong>neg_offset</strong> (<em>nan_offset</em><em>,</em>) &#8211; Offset, in units of &#8220;fraction of axes&#8221; for the NaN, +inf, and -inf
+&#8220;rug plots&#8221;</li>
+<li><strong>linelength</strong> (<em>float</em>) &#8211; Line length for the rug plots</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lcdblib.plotting.results_table.ResultsTable.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>dataframe</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the current data with a new dataframe.</p>
+<p>This extra step is required to get around the fancy pandas.DataFrame
+indexing (like .ix, .iloc, etc).</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.plotting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.plotting" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.plotting package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.plotting.basic">lcdblib.plotting.basic module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.plotting.colormap_adjust">lcdblib.plotting.colormap_adjust module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.plotting.compare_rnaseq_and_chipseq">lcdblib.plotting.compare_rnaseq_and_chipseq module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.plotting.results_table">lcdblib.plotting.results_table module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.plotting">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.parse.html"
+                        title="previous chapter">lcdblib.parse package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.snakemake.html"
+                        title="next chapter">lcdblib.snakemake package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.plotting.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.snakemake.html" title="lcdblib.snakemake package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

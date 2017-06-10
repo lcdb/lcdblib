@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.snakemake.helpers &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lcdblib.snakemake.helpers</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">snakemake.shell</span> <span class="k">import</span> <span class="n">shell</span>
+<span class="kn">from</span> <span class="nn">snakemake.io</span> <span class="k">import</span> <span class="n">expand</span>
+
+
+<div class="viewcode-block" id="fill_patterns"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.helpers.fill_patterns">[docs]</a><span class="k">def</span> <span class="nf">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">product</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fills in a dictionary of patterns with the dictionary or DataFrame `fill`.</span>
+
+<span class="sd">    &gt;&gt;&gt; patterns = dict(a=&#39;{sample}_R{N}.fastq&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; fill = dict(sample=[&#39;one&#39;, &#39;two&#39;], N=[1, 2])</span>
+<span class="sd">    &gt;&gt;&gt; sorted(fill_patterns(patterns, fill)[&#39;a&#39;])</span>
+<span class="sd">    [&#39;one_R1.fastq&#39;, &#39;one_R2.fastq&#39;, &#39;two_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; patterns = dict(a=&#39;{sample}_R{N}.fastq&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; fill = dict(sample=[&#39;one&#39;, &#39;two&#39;], N=[1, 2])</span>
+<span class="sd">    &gt;&gt;&gt; sorted(fill_patterns(patterns, fill, zip)[&#39;a&#39;])</span>
+<span class="sd">    [&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+
+<span class="sd">    &gt;&gt;&gt; patterns = dict(a=&#39;{sample}_R{N}.fastq&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; fill = pd.DataFrame({&#39;sample&#39;: [&#39;one&#39;, &#39;two&#39;], &#39;N&#39;: [1, 2]})</span>
+<span class="sd">    &gt;&gt;&gt; sorted(fill_patterns(patterns, fill)[&#39;a&#39;])</span>
+<span class="sd">    [&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Mapping</span><span class="p">):</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="nb">zip</span><span class="p">,</span> <span class="o">**</span><span class="n">fill</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">))))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">expand</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span> <span class="o">**</span><span class="n">fill</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">d</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">combination</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rscript"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.helpers.rscript">[docs]</a><span class="k">def</span> <span class="nf">rscript</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">scriptname</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Saves the string as `scriptname` and then runs it</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    string : str</span>
+<span class="sd">        Filled-in template to be written as R script</span>
+
+<span class="sd">    scriptname : str</span>
+<span class="sd">        File to save script to</span>
+
+<span class="sd">    log : str</span>
+<span class="sd">        File to redirect stdout and stderr to. If None, no redirection occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">scriptname</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fout</span><span class="p">:</span>
+        <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+        <span class="n">_log</span> <span class="o">=</span> <span class="s1">&#39;&gt; </span><span class="si">{0}</span><span class="s1"> 2&gt;&amp;1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_log</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">shell</span><span class="p">(</span><span class="s1">&#39;Rscript </span><span class="si">{scriptname}</span><span class="s1"> </span><span class="si">{_log}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>

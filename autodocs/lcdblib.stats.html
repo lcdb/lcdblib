@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lcdblib.stats package &#8212; lcdblib 0.1.2.post.dev36 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.2.post.dev36',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="lcdblib.utils package" href="lcdblib.utils.html" />
+    <link rel="prev" title="lcdblib.snakemake package" href="lcdblib.snakemake.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.utils.html" title="lcdblib.utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.snakemake.html" title="lcdblib.snakemake package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="lcdblib-stats-package">
+<h1>lcdblib.stats package<a class="headerlink" href="#lcdblib-stats-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-lcdblib.stats.fisher">
+<span id="lcdblib-stats-fisher-module"></span><h2>lcdblib.stats.fisher module<a class="headerlink" href="#module-lcdblib.stats.fisher" title="Permalink to this headline">¶</a></h2>
+<p>Module for easily running and reporting Fishers exact tests.</p>
+<dl class="function">
+<dt id="lcdblib.stats.fisher.fisher">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">fisher</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#fisher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.fisher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Fisher&#8217;s exact test.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>table</strong> (<em>list</em><em> or </em><em>tuple</em><em>, </em><em>length=4</em>) &#8211; The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Tuple of (odds ratio, two-sided pvalue)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.stats.fisher.fisher_tables">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">fisher_tables</code><span class="sig-paren">(</span><em>table, row_names=['class 1', 'not'], col_names=['class 2', 'not'], title=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#fisher_tables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.fisher_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print all tables along with the FET results</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.stats.fisher.print_2x2_table">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">print_2x2_table</code><span class="sig-paren">(</span><em>table, row_labels=['class 1', 'not'], col_labels=['class 2', 'not'], fmt='%d'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#print_2x2_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.print_2x2_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a table used for Fisher&#8217;s exact test. Adds row, column, and grand
+totals.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table</strong> (<em>list</em><em> or </em><em>tuple</em><em>, </em><em>length=4</em>) &#8211; The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</li>
+<li><strong>row_labels</strong> (<em>list</em>) &#8211; A length-2 list of row names</li>
+<li><strong>col_labels</strong> (<em>list</em>) &#8211; A length-2 list of column names</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.stats.fisher.print_col_perc_table">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">print_col_perc_table</code><span class="sig-paren">(</span><em>table, row_labels=['class 1', 'not'], col_labels=['class 2', 'not']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#print_col_perc_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.print_col_perc_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string form of the table showing column percentages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table</strong> (<em>list</em><em> or </em><em>tuple</em><em>, </em><em>length=4</em>) &#8211; The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</li>
+<li><strong>row_labels</strong> (<em>list</em>) &#8211; A length-2 list of row names</li>
+<li><strong>col_labels</strong> (<em>list</em>) &#8211; A length-2 list of column names</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.stats.fisher.print_row_perc_table">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">print_row_perc_table</code><span class="sig-paren">(</span><em>table, row_labels=['class 1', 'not'], col_labels=['class 2', 'not']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#print_row_perc_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.print_row_perc_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string form of the table showing row percentages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table</strong> (<em>list</em><em> or </em><em>tuple</em><em>, </em><em>length=4</em>) &#8211; The four cells of a 2x2 table: [r1c1, r1c2, r2c1, r2c2]</li>
+<li><strong>row_labels</strong> (<em>list</em>) &#8211; A length-2 list of row names</li>
+<li><strong>col_labels</strong> (<em>list</em>) &#8211; A length-2 list of column names</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="lcdblib.stats.fisher.table_from_bool">
+<code class="descclassname">lcdblib.stats.fisher.</code><code class="descname">table_from_bool</code><span class="sig-paren">(</span><em>ind1</em>, <em>ind2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/stats/fisher.html#table_from_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.stats.fisher.table_from_bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given two boolean arrays, return the 2x2 contingency table</p>
+<dl class="docutils">
+<dt>ind1, ind2 <span class="classifier-delimiter">:</span> <span class="classifier">array-like</span></dt>
+<dd>Arrays of the same length</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-lcdblib.stats">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.stats" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">lcdblib.stats package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.stats.fisher">lcdblib.stats.fisher module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.stats">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.snakemake.html"
+                        title="previous chapter">lcdblib.snakemake package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.utils.html"
+                        title="next chapter">lcdblib.utils package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.stats.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.utils.html" title="lcdblib.utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lcdblib.snakemake.html" title="lcdblib.snakemake package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev36 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, lcdb.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>
