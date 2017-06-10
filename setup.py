@@ -7,8 +7,6 @@ import versioneer
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
 
 requirements = [i.strip() for i in open('requirements.txt').readlines()]
 
@@ -17,7 +15,7 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     description="A set of helper functions for bioinformatics analysis with snakemake.",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Ryan Dale",
     author_email='dalerr@niddk.nih.gov',
     url='https://github.com/lcdb/lcdblib',
