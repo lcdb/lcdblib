@@ -1,5 +1,5 @@
 language: python - "3.5"
-install: bash travis-setup.sh
+install: bash ci/travis-setup.sh
 before_script:
   - export PATH=~/anaconda/bin:$PATH
 script:
