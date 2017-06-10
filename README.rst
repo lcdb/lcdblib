@@ -1,6 +1,9 @@
 lcdblib
 =======
 
+.. image:: https://travis-ci.org/lcdb/lcdblib.svg?branch=master
+    :target: https://travis-ci.org/lcdb/lcdblib
+
 `lcdblib` is a toolbox of functions and classes for working with genomic data.
 While developing code for other projects, if we decide something could be more
 generally useful then we add it to this package.
