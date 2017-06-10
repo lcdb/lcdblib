@@ -26,7 +26,7 @@ HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOCSOURCE=${HERE}/../docs
 
 # DOCHTML is where sphinx is configured to save the output HTML
-DOCHTML=${HERE}/../docs/build/html
+DOCHTML=${HERE}/../docs/_build/html
 
 # tmpdir to which built docs will be copied
 STAGING=/tmp/${GITHUB_USERNAME}-docs
