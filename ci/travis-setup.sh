@@ -17,4 +17,7 @@ conda install -y --file requirements.txt
 # we also want conda-build to build a conda package
 conda install -y conda-build
 
+# for docs
+pip install guzzle_sphinx_theme
+
 ~/anaconda/bin/python setup.py install
