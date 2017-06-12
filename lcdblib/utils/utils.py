@@ -19,10 +19,17 @@ def temp_env(env):
         os.environ.update(orig)
 
 
-def flatten(iter):
+def flatten(iter, unlist=False):
     """
     Flatten an arbitrarily nested iterable whose innermost items are strings
     into a flat list of strings.
+
+    Parameters
+    ----------
+    iter : iterable
+
+    unlist : bool
+        If True, convert single-item lists into a bare string
     """
     if isinstance(iter, dict):
         iter = iter.values()
@@ -35,7 +42,10 @@ def flatten(iter):
                 yield from flatten(item)
             else:
                 yield item
-    return list(gen())
+    results = list(gen())
+    if unlist and len(results) == 1:
+        return results[0]
+    return results
 
 
 def test_flatten():
@@ -50,6 +60,11 @@ def test_flatten():
             'z': 'd'
         },
     })) == ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+
+    assert flatten('a', True) == 'a'
+    assert flatten(['a'], True) == 'a'
+    assert flatten('a') == ['a']
+    assert flatten(['a']) == ['a']
 
 
 def updatecopy(orig, update_with, keys=None, override=False):

@@ -4,6 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
+SPHINXAUTO    = sphinx-apidoc
 PAPER         =
 BUILDDIR      = _build
 
@@ -47,9 +48,11 @@ help:
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
 clean:
+	rm -rf autodocs
 	rm -rf $(BUILDDIR)/*
 
 html:
+	$(SPHINXAUTO) -f -o autodocs ../lcdblib
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

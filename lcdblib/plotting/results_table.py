@@ -24,9 +24,10 @@ underlying pandas.DataFrame.
 
 Parameters
 ----------
+
 data : string or pandas.DataFrame
     If string, assumes it's a filename and calls
-    pandas.read_table(data, **import_kwargs).
+    `pandas.read_table(data, **import_kwargs)`.
 
 db : string or gffutils.FeatureDB
     Optional database that can be used to generate features
@@ -517,8 +518,10 @@ class ResultsTable(object):
                 (yi, ind & y_valid & x_is_neg_inf, neg_offset, rug_y_kwargs),
             ]
             for values, index, offset, kwargs in items:
+
+                # provide np.array rather than pandas.Series
                 coll = EventCollection(
-                    values[index], lineoffset=offset, **kwargs)
+                    values[index].values, lineoffset=offset, **kwargs)
                 coll.df = self.data
                 coll.ind = index
                 ax.add_collection(coll)
@@ -613,12 +616,11 @@ class ResultsTable(object):
 
         References
         ----------
-        [1]  Hoffman,P.E. et al. (1997) DNA visual and analytic data mining. In
-             the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
-             437-441.
-        [2] http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm
-        [3] http://pandas.pydata.org/pandas-docs/stable/visualization.html\
-                #radviz
+        1. Hoffman,P.E. et al. (1997) DNA visual and analytic data mining. In
+           the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
+           437-441.
+        2. http://www.agocg.ac.uk/reports/visual/casestud/brunsdon/radviz.htm
+        3. http://pandas.pydata.org/pandas-docs/stable/visualization.html#radviz
         """
         # make a copy of data
         x = self.data[column_names].copy()
@@ -709,7 +711,7 @@ class DifferentialExpressionResults(ResultsTable):
         super(DifferentialExpressionResults, self).__init__(
             data=data, db=db, import_kwargs=import_kwargs, **kwargs)
 
-    def changed(self, alpha=0.05, lfc=0, idx=True):
+    def changed(self, alpha=0.1, lfc=0, idx=True):
         """
         Changed features.
 
@@ -735,7 +737,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def unchanged(self, alpha=0.05, lfc=0, idx=True):
+    def unchanged(self, alpha=0.1, lfc=0, idx=True):
         """
         Unchanged features.
 
@@ -757,7 +759,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def upregulated(self, alpha=0.05, lfc=0, idx=True):
+    def upregulated(self, alpha=0.1, lfc=0, idx=True):
         """
         Upregulated features.
 
@@ -782,7 +784,7 @@ class DifferentialExpressionResults(ResultsTable):
             return ind
         return self[ind]
 
-    def downregulated(self, alpha=0.05, lfc=0, idx=True):
+    def downregulated(self, alpha=0.1, lfc=0, idx=True):
         """
         Downregulated features.
 

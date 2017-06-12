@@ -1,10 +1,12 @@
-language: python
-  - "3.5"
-install: bash travis-setup.sh
+language: python - "3.5"
+install: bash ci/travis-setup.sh
 before_script:
-    - export PATH=~/anaconda/bin:$PATH
+  - export PATH=~/anaconda/bin:$PATH
 script:
-    - which python
-    - python -c 'import lcdblib; print(lcdblib.__file__)'
-    - py.test tests/ -v
-    - ./conda-build-and-upload.sh
+  - python -c 'import lcdblib; print(lcdblib.__file__)'
+  - py.test tests/ -v
+  - ci/conda-build-and-upload.sh
+  - ci/build-docs.sh
+env:
+  global:
+    - ENCRYPTION_LABEL: "27b4c1eaf7da"

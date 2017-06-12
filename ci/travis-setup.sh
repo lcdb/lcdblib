@@ -11,11 +11,13 @@ conda config --add channels defaults
 conda config --add channels r
 conda config --add channels bioconda
 
-conda install -y python=3.5
+conda install -y python=3.5 sphinx
 conda install -y --file requirements.txt
 
 # we also want conda-build to build a conda package
 conda install -y conda-build
 
-~/anaconda/bin/python setup.py install
+# for docs
+pip install guzzle_sphinx_theme
 
+~/anaconda/bin/python setup.py install
