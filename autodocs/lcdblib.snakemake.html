@@ -1,6 +1,6 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev38 documentation</title>
+    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev38',
+        VERSION:     '0.1.2.post.dev41',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -41,7 +41,7 @@
    
 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -70,7 +70,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev38 documentation</a>
+    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev41 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -159,7 +159,7 @@
 <span id="lcdblib-snakemake-helpers-module"></span><h2>lcdblib.snakemake.helpers module<a class="headerlink" href="#module-lcdblib.snakemake.helpers" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="lcdblib.snakemake.helpers.fill_patterns">
-<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class 'itertools.product'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class ‘itertools.product’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills in a dictionary of patterns with the dictionary or DataFrame <cite>fill</cite>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -190,9 +190,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>string</strong> (<em>str</em>) &#8211; Filled-in template to be written as R script</li>
-<li><strong>scriptname</strong> (<em>str</em>) &#8211; File to save script to</li>
-<li><strong>log</strong> (<em>str</em>) &#8211; File to redirect stdout and stderr to. If None, no redirection occurs.</li>
+<li><strong>string</strong> (<em>str</em>) – Filled-in template to be written as R script</li>
+<li><strong>scriptname</strong> (<em>str</em>) – File to save script to</li>
+<li><strong>log</strong> (<em>str</em>) – File to redirect stdout and stderr to. If None, no redirection occurs.</li>
 </ul>
 </td>
 </tr>
@@ -218,7 +218,7 @@ to fill in the patterns and generate a list of file targets.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patterns</strong> (<em>list</em>) &#8211; List of files with string formating marks that can be filled in
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>patterns</strong> (<em>list</em>) – List of files with string formating marks that can be filled in
 from the config or the sampleTable.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Filled in list of file names.</td>
@@ -238,7 +238,7 @@ from the config or the sampleTable.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> (<em>str</em>) &#8211; string that you want to match to the prefix, this string would have
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>prefix</strong> (<em>str</em>) – string that you want to match to the prefix, this string would have
 sample information filled in.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">[0] is a string indicating which level
@@ -246,7 +246,7 @@ sample information filled in.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; Too lazy to make a custom exception, <cite>raises</cite> ValueError if the
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – Too lazy to make a custom exception, <cite>raises</cite> ValueError if the
 prefix does not match any of the patterns.</td>
 </tr>
 </tbody>
@@ -266,9 +266,9 @@ prefix does not match any of the patterns.</td>
 <span class="gp">... </span><span class="p">]</span>
 </pre></div>
 </div>
-<p>This prefix doesn&#8217;t resolve to an actual sample defined in the
-sampletable (note mismatch between &#8220;1&#8221; in everything but the last
-&#8220;_2_&#8221;. Should this raise ValueError?</p>
+<p>This prefix doesn’t resolve to an actual sample defined in the
+sampletable (note mismatch between “1” in everything but the last
+“_2_”. Should this raise ValueError?</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
@@ -308,11 +308,11 @@ sampletable (note mismatch between &#8220;1&#8221; in everything but the last
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pattern</strong> (<em>str</em>) &#8211; A regex expression for the level</li>
-<li><strong>prefix</strong> (<em>str</em>) &#8211; The prefix that is being matched to the pattern</li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>--------</strong> &#8211; </li>
-<li><strong>dict</strong> &#8211; Sample attributes corresponding to the sample(s) that the prefix
+<li><strong>pattern</strong> (<em>str</em>) – A regex expression for the level</li>
+<li><strong>prefix</strong> (<em>str</em>) – The prefix that is being matched to the pattern</li>
+<li><strong>Returns</strong> – </li>
+<li><strong>--------</strong> – </li>
+<li><strong>dict</strong> – Sample attributes corresponding to the sample(s) that the prefix
 contains.</li>
 </ul>
 </td>
@@ -341,25 +341,25 @@ contains.</li>
 
 <dl class="method">
 <dt id="lcdblib.snakemake.interface.SampleHandler.make_input">
-<code class="descname">make_input</code><span class="sig-paren">(</span><em>prefix='prefix'</em>, <em>midfix=''</em>, <em>suffix=''</em>, <em>agg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.make_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.make_input" title="Permalink to this definition">¶</a></dt>
+<code class="descname">make_input</code><span class="sig-paren">(</span><em>prefix=’prefix’</em>, <em>midfix=”</em>, <em>suffix=”</em>, <em>agg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.make_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.make_input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates Input Function based on wildcards.</p>
 <p class="rubric">Notes</p>
-<p>example: &#8216;{first_element}{second_element}{third_element}&#8217;</p>
+<p>example: ‘{first_element}{second_element}{third_element}’</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>prefix</strong> (<em>str</em>) &#8211; This can either be the entire prefix, or the name of the string
+<li><strong>prefix</strong> (<em>str</em>) – This can either be the entire prefix, or the name of the string
 formatting group that contains the prefix. This would be the
-&#8216;first_element&#8217; in the example.</li>
-<li><strong>midfix</strong> (<em>str</em>) &#8211; This can either be the entire midfix, or the name of the string
+‘first_element’ in the example.</li>
+<li><strong>midfix</strong> (<em>str</em>) – This can either be the entire midfix, or the name of the string
 formating group that contains the midfix. This would be the
-&#8216;second_element&#8217; in the example.</li>
-<li><strong>suffix</strong> (<em>str</em>) &#8211; This can either be the entire suffix, or the name of the string
+‘second_element’ in the example.</li>
+<li><strong>suffix</strong> (<em>str</em>) – This can either be the entire suffix, or the name of the string
 formating group that contains the suffix. This would be the
-&#8216;third_element&#8217; in the example.</li>
-<li><strong>agg</strong> (<em>bool</em>) &#8211; True if you want file names from the level above the current
+‘third_element’ in the example.</li>
+<li><strong>agg</strong> (<em>bool</em>) – True if you want file names from the level above the current
 prefix.</li>
 </ul>
 </td>
@@ -380,19 +380,19 @@ prefix.</li>
 </pre></div>
 </div>
 <p>Instead of directly specifying the midfix, we pull it from the
-wildcards dict entry for &#8220;asdf&#8221;:</p>
+wildcards dict entry for “asdf”:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">({</span><span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;pasilla&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">:</span> <span class="s1">&#39;.cutadapt&#39;</span><span class="p">})</span>
 <span class="go">[&#39;pasilla.cutadapt.fastq&#39;]</span>
 </pre></div>
 </div>
-<p>We want to aggregate into &#8220;pasilla_agg/treated.fastq&#8221;, but the
-following doesn&#8217;t work because we need the directory slash:</p>
+<p>We want to aggregate into “pasilla_agg/treated.fastq”, but the
+following doesn’t work because we need the directory slash:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
 </pre></div>
 </div>
-<p>Also doesn&#8217;t work:</p>
+<p>Also doesn’t work:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/&#39;</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
 </pre></div>
@@ -450,7 +450,7 @@ following doesn&#8217;t work because we need the directory slash:</p>
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

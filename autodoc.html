@@ -1,6 +1,6 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>API &#8212; lcdblib 0.1.2.post.dev38 documentation</title>
+    <title>API &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
     
     <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2.post.dev38',
+        VERSION:     '0.1.2.post.dev41',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -39,7 +39,7 @@
    
 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -49,7 +49,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="container-wrapper">
@@ -60,7 +60,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    index.html" class="text-logo">lcdblib 0.1.2.post.dev38 documentation</a>
+    index.html" class="text-logo">lcdblib 0.1.2.post.dev41 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -110,61 +110,61 @@
 <p>Testing plotting</p>
 <span class="target" id="module-lcdblib.plotting.compare_rnaseq_and_chipseq"></span><dl class="function">
 <dt id="lcdblib.plotting.compare_rnaseq_and_chipseq.plot">
-<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x='baseMean'</em>, <em>y='log2FoldChange'</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col='padj'</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x=’baseMean’</em>, <em>y=’log2FoldChange’</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col=’padj’</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>M-A plot showing up- and downregulated genes with optional labeling and
 Fishers exact tests.</p>
-<p>If &#8211;plot-filename is not specified, then the plot will be displayed and
+<p>If –plot-filename is not specified, then the plot will be displayed and
 points can be clicked for interactive exploration.</p>
-<p>If &#8211;peaks and &#8211;regions are specified, then results from Fishers exact
-tests will be printed to stdout, or to &#8211;report if specified.</p>
+<p>If –peaks and –regions are specified, then results from Fishers exact
+tests will be printed to stdout, or to –report if specified.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>de_results</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If str, it&#8217;s the filename of a TSV of differential expression results,
+<li><strong>de_results</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) – If str, it’s the filename of a TSV of differential expression results,
 with first column as gene ID. It will be parsed into a dataframe where
 the index is gene ID. When called as a library, an already-created
 pandas.DataFrame can optionally be provided instead.</li>
-<li><strong>regions</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; Gene regions in which to look for intersections with peaks. BED file
+<li><strong>regions</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) – Gene regions in which to look for intersections with peaks. BED file
 where the 4th column contains gene IDs that are also present in first
 column of <cite>de_results</cite>. Typically this would be a BED file of promoters
 or gene bodies. When called as a library, a pybedtools.BedTool object
 can optionally be provided instead.</li>
-<li><strong>peaks</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; BED file to be intersected with <cite>regions</cite>. When called as a library,
+<li><strong>peaks</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) – BED file to be intersected with <cite>regions</cite>. When called as a library,
 a pybedtools.BedTool object can optionally be provided instead.</li>
-<li><strong>selected</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Replaces <cite>regions</cite> <cite>peaks</cite> arguments; useful for when you already know
+<li><strong>selected</strong> (<em>str</em><em> or </em><em>list-like</em>) – Replaces <cite>regions</cite> <cite>peaks</cite> arguments; useful for when you already know
 which genes you want to select (e.g., upregulated from a different
-experiment). If a string, assume it&#8217;s a filename and use the first
+experiment). If a string, assume it’s a filename and use the first
 column which will be used as an index into the <cite>de_results</cite> dataframe.
 When called as a library, if <cite>selected</cite> is not a string it will be used
 as an index into the dataframe.</li>
-<li><strong>x</strong> (<em>str</em>) &#8211; Column to use for x-axis. Default of &#8220;baseMean&#8221; expects DESeq2
+<li><strong>x</strong> (<em>str</em>) – Column to use for x-axis. Default of “baseMean” expects DESeq2
 results</li>
-<li><strong>y</strong> (<em>str</em>) &#8211; Column to use for y-axis. Default of &#8220;log2FoldChange&#8221; expects DESeq2
+<li><strong>y</strong> (<em>str</em>) – Column to use for y-axis. Default of “log2FoldChange” expects DESeq2
 results</li>
-<li><strong>disable_logx</strong> (<em>bool</em>) &#8211; Disable default behavior of transforming x values using log10</li>
-<li><strong>logy</strong> (<em>bool</em>) &#8211; Transform y values using log2</li>
-<li><strong>pval-col</strong> (<em>str</em>) &#8211; Column to use for statistical significance. Default &#8220;padj&#8221; expectes
+<li><strong>disable_logx</strong> (<em>bool</em>) – Disable default behavior of transforming x values using log10</li>
+<li><strong>logy</strong> (<em>bool</em>) – Transform y values using log2</li>
+<li><strong>pval-col</strong> (<em>str</em>) – Column to use for statistical significance. Default “padj” expectes
 DESeq2 results.</li>
-<li><strong>alpha</strong> (<em>float</em>) &#8211; Threshold for calling significance. Applied to <cite>pval_col</cite></li>
-<li><strong>lfc_cutoff</strong> (<em>float</em>) &#8211; Log2fold change cutoff to be applied to y values. Threshold is applied
+<li><strong>alpha</strong> (<em>float</em>) – Threshold for calling significance. Applied to <cite>pval_col</cite></li>
+<li><strong>lfc_cutoff</strong> (<em>float</em>) – Log2fold change cutoff to be applied to y values. Threshold is applied
 post-transformation, if any specified (e.g., <cite>logy</cite> argument).</li>
-<li><strong>plot_filename</strong> (<em>str</em>) &#8211; File to save plot. Format auto-detected by extension. Output directory
+<li><strong>plot_filename</strong> (<em>str</em>) – File to save plot. Format auto-detected by extension. Output directory
 will be created if needed.</li>
-<li><strong>disable_raster_points</strong> (<em>bool</em>) &#8211; Disable the default behavior of rasterizing points in a PDF. Use
+<li><strong>disable_raster_points</strong> (<em>bool</em>) – Disable the default behavior of rasterizing points in a PDF. Use
 sparingly, since drawing 30k+ individual points in a PDF may slow down
 your machine.</li>
-<li><strong>genes_to_label</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Optional file containing genes to label with text. First column must be
-a subset of the first column of <cite>de_results</cite>. Lines starting with &#8216;#&#8217;
+<li><strong>genes_to_label</strong> (<em>str</em><em> or </em><em>list-like</em>) – Optional file containing genes to label with text. First column must be
+a subset of the first column of <cite>de_results</cite>. Lines starting with ‘#’
 and subsequent tab-separated columns will be ignored. When called as
 a library, a list-like object of gene IDs can be provided.</li>
-<li><strong>label_column</strong> (<em>str</em>) &#8211; Optional column from which to take gene labels found in
-<cite>genes_to_label</cite> (e.g., &#8220;symbol&#8221;). If the value in this column is
+<li><strong>label_column</strong> (<em>str</em>) – Optional column from which to take gene labels found in
+<cite>genes_to_label</cite> (e.g., “symbol”). If the value in this column is
 missing, fall back to the index. Use this if your gene IDs are long
 Ensembl IDs but you want the gene symbols to show up on the plot.</li>
-<li><strong>report</strong> (<em>str</em>) &#8211; Where to write out Fisher&#8217;s exact test results. Default is stdout</li>
-<li><strong>gene_lists</strong> (<em>str</em>) &#8211; Prefix to gene lists. If specified, gene lists corresponding to the
+<li><strong>report</strong> (<em>str</em>) – Where to write out Fisher’s exact test results. Default is stdout</li>
+<li><strong>gene_lists</strong> (<em>str</em>) – Prefix to gene lists. If specified, gene lists corresponding to the
 cells of the 2x2 Fishers exact test will be written to
 {prefix}.up.tsv and {prefix}.dn.tsv. These are subsets of <cite>de_results</cite>
 where genes are up and have a peak in region (or are selected), or
@@ -194,7 +194,7 @@ respectively.</li>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li> 
       </ul>
     </div>
 <script type="text/javascript">

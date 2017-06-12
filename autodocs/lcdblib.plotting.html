@@ -1,6 +1,6 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.plotting package &#8212; lcdblib 0.1.2.post.dev38 documentation</title>
+    <title>lcdblib.plotting package &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev38',
+        VERSION:     '0.1.2.post.dev41',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -41,7 +41,7 @@
    
 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="lcdblib.parse.html" title="lcdblib.parse package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -70,7 +70,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev38 documentation</a>
+    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev41 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -138,17 +138,17 @@
 
 <dl class="function">
 <dt id="lcdblib.plotting.basic.corrfunc">
-<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">corrfunc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>loc=(0.1</em>, <em>0.5)</em>, <em>template='r = {:0.4f}'</em>, <em>type='spearman'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#corrfunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.corrfunc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">corrfunc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>loc=(0.1</em>, <em>0.5)</em>, <em>template=’r = {:0.4f}’</em>, <em>type=’spearman’</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#corrfunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.corrfunc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds text to the current axes with either the sparman or pearson r.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>array-like</em>) &#8211; Vector of values.</li>
-<li><strong>y</strong> (<em>array-like</em>) &#8211; Vector of values.</li>
-<li><strong>type</strong> (<em>str</em>) &#8211; Which type of correlation coefficient to use. Either &#8220;spearman&#8221; or
-&#8220;pearson&#8221;. Uses scipy.stats module.</li>
+<li><strong>x</strong> (<em>array-like</em>) – Vector of values.</li>
+<li><strong>y</strong> (<em>array-like</em>) – Vector of values.</li>
+<li><strong>type</strong> (<em>str</em>) – Which type of correlation coefficient to use. Either “spearman” or
+“pearson”. Uses scipy.stats module.</li>
 </ul>
 </td>
 </tr>
@@ -165,8 +165,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>df</strong> (<em>pandas.DataFrame</em>) &#8211; DataFrame containing the columns you want to plot in a PairGrid.</li>
-<li><strong>func</strong> (<em>function</em><em> or </em><em>list of functions</em>) &#8211; The function you want to plot in a PairGrid</li>
+<li><strong>df</strong> (<em>pandas.DataFrame</em>) – DataFrame containing the columns you want to plot in a PairGrid.</li>
+<li><strong>func</strong> (<em>function</em><em> or </em><em>list of functions</em>) – The function you want to plot in a PairGrid</li>
 </ul>
 </td>
 </tr>
@@ -189,15 +189,15 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Input variables. If strings, these should correspond with column names
+<li><strong>y</strong> (<em>x</em><em>,</em>) – Input variables. If strings, these should correspond with column names
 in <code class="docutils literal"><span class="pre">data</span></code>. When pandas objects are used, axes will be labeled with
 the series name.</li>
-<li><strong>data</strong> (<em>DataFrame</em>) &#8211; Tidy (&#8220;long-form&#8221;) dataframe where each column is a variable and each
+<li><strong>data</strong> (<em>DataFrame</em>) – Tidy (“long-form”) dataframe where each column is a variable and each
 row is an observation.</li>
-<li><strong>title</strong> (<em>str</em>) &#8211; Title to add to the plot</li>
-<li><strong>log</strong> (<em>bool</em>) &#8211; If true the log2 of the Geometric mean and ratio will be used instead
+<li><strong>title</strong> (<em>str</em>) – Title to add to the plot</li>
+<li><strong>log</strong> (<em>bool</em>) – If true the log2 of the Geometric mean and ratio will be used instead
 of the mean and difference.</li>
-<li><strong>**kwargs</strong> (<em>dict</em>) &#8211; Values to pass to seaborn.regplot</li>
+<li><strong>**kwargs</strong> (<em>dict</em>) – Values to pass to seaborn.regplot</li>
 </ul>
 </td>
 </tr>
@@ -211,13 +211,13 @@ of the mean and difference.</li>
 </table>
 <p class="rubric">Example</p>
 <dl class="docutils">
-<dt>Given that &#8216;x&#8217; and &#8216;y&#8217; are column names in df:</dt>
+<dt>Given that ‘x’ and ‘y’ are column names in df:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maPlot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fig_reg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span><span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
 </dd>
-<dt>Given that &#8216;x&#8217; and &#8216;y&#8217; are pandas.Series</dt>
+<dt>Given that ‘x’ and ‘y’ are pandas.Series</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maPlot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fig_reg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">})</span>
 </pre></div>
 </div>
@@ -243,8 +243,8 @@ but adjusted so that the old center point higher
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cmap</strong> &#8211; colormap instance (e.g., cm.jet)</li>
-<li><strong>center_ratio</strong> &#8211; </li>
+<li><strong>cmap</strong> – colormap instance (e.g., cm.jet)</li>
+<li><strong>center_ratio</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -263,9 +263,9 @@ a new adjusted colormap accordingly</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cmap</strong> &#8211; colormap instance</li>
-<li><strong>range</strong> &#8211; Tuple of (min, max)</li>
-<li><strong>center</strong> &#8211; New cmap center</li>
+<li><strong>cmap</strong> – colormap instance</li>
+<li><strong>range</strong> – Tuple of (min, max)</li>
+<li><strong>center</strong> – New cmap center</li>
 </ul>
 </td>
 </tr>
@@ -283,8 +283,8 @@ but adjusted via power-law, <cite>newcmap = oldcmap**a</cite>.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cmap</strong> &#8211; colormap instance (e.g., cm.jet)</li>
-<li><strong>a</strong> &#8211; power</li>
+<li><strong>cmap</strong> – colormap instance (e.g., cm.jet)</li>
+<li><strong>a</strong> – power</li>
 </ul>
 </td>
 </tr>
@@ -301,8 +301,8 @@ with colors</p>
 
 <dl class="function">
 <dt id="lcdblib.plotting.colormap_adjust.smart_colormap">
-<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">smart_colormap</code><span class="sig-paren">(</span><em>vmin</em>, <em>vmax</em>, <em>color_high='#b11902'</em>, <em>hue_low=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#smart_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.smart_colormap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a &#8220;smart&#8221; colormap that is centered on zero, and accounts for
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">smart_colormap</code><span class="sig-paren">(</span><em>vmin</em>, <em>vmax</em>, <em>color_high=’#b11902’</em>, <em>hue_low=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#smart_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.smart_colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a “smart” colormap that is centered on zero, and accounts for
 asymmetrical vmin and vmax by matching saturation/value of high and low
 colors.</p>
 <p>It works by first creating a colormap from white to <cite>color_high</cite>.  Setting
@@ -315,10 +315,10 @@ new hue-shifted as the low, <cite>color_high</cite> as the max, and centered on 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>color_high</strong> &#8211; a matplotlib color &#8211; try &#8220;#b11902&#8221; for a nice red</li>
-<li><strong>hue_low</strong> &#8211; float in [0, 1] &#8211; try 0.6 for a nice blue</li>
-<li><strong>vmin</strong> &#8211; lowest value in data you&#8217;ll be plotting</li>
-<li><strong>vmax</strong> &#8211; highest value in data you&#8217;ll be plotting</li>
+<li><strong>color_high</strong> – a matplotlib color – try “#b11902” for a nice red</li>
+<li><strong>hue_low</strong> – float in [0, 1] – try 0.6 for a nice blue</li>
+<li><strong>vmin</strong> – lowest value in data you’ll be plotting</li>
+<li><strong>vmax</strong> – highest value in data you’ll be plotting</li>
 </ul>
 </td>
 </tr>
@@ -331,61 +331,61 @@ new hue-shifted as the low, <cite>color_high</cite> as the max, and centered on 
 <span id="lcdblib-plotting-compare-rnaseq-and-chipseq-module"></span><h2>lcdblib.plotting.compare_rnaseq_and_chipseq module<a class="headerlink" href="#module-lcdblib.plotting.compare_rnaseq_and_chipseq" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="lcdblib.plotting.compare_rnaseq_and_chipseq.plot">
-<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x='baseMean'</em>, <em>y='log2FoldChange'</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col='padj'</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x=’baseMean’</em>, <em>y=’log2FoldChange’</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col=’padj’</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>M-A plot showing up- and downregulated genes with optional labeling and
 Fishers exact tests.</p>
-<p>If &#8211;plot-filename is not specified, then the plot will be displayed and
+<p>If –plot-filename is not specified, then the plot will be displayed and
 points can be clicked for interactive exploration.</p>
-<p>If &#8211;peaks and &#8211;regions are specified, then results from Fishers exact
-tests will be printed to stdout, or to &#8211;report if specified.</p>
+<p>If –peaks and –regions are specified, then results from Fishers exact
+tests will be printed to stdout, or to –report if specified.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>de_results</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If str, it&#8217;s the filename of a TSV of differential expression results,
+<li><strong>de_results</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) – If str, it’s the filename of a TSV of differential expression results,
 with first column as gene ID. It will be parsed into a dataframe where
 the index is gene ID. When called as a library, an already-created
 pandas.DataFrame can optionally be provided instead.</li>
-<li><strong>regions</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; Gene regions in which to look for intersections with peaks. BED file
+<li><strong>regions</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) – Gene regions in which to look for intersections with peaks. BED file
 where the 4th column contains gene IDs that are also present in first
 column of <cite>de_results</cite>. Typically this would be a BED file of promoters
 or gene bodies. When called as a library, a pybedtools.BedTool object
 can optionally be provided instead.</li>
-<li><strong>peaks</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; BED file to be intersected with <cite>regions</cite>. When called as a library,
+<li><strong>peaks</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) – BED file to be intersected with <cite>regions</cite>. When called as a library,
 a pybedtools.BedTool object can optionally be provided instead.</li>
-<li><strong>selected</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Replaces <cite>regions</cite> <cite>peaks</cite> arguments; useful for when you already know
+<li><strong>selected</strong> (<em>str</em><em> or </em><em>list-like</em>) – Replaces <cite>regions</cite> <cite>peaks</cite> arguments; useful for when you already know
 which genes you want to select (e.g., upregulated from a different
-experiment). If a string, assume it&#8217;s a filename and use the first
+experiment). If a string, assume it’s a filename and use the first
 column which will be used as an index into the <cite>de_results</cite> dataframe.
 When called as a library, if <cite>selected</cite> is not a string it will be used
 as an index into the dataframe.</li>
-<li><strong>x</strong> (<em>str</em>) &#8211; Column to use for x-axis. Default of &#8220;baseMean&#8221; expects DESeq2
+<li><strong>x</strong> (<em>str</em>) – Column to use for x-axis. Default of “baseMean” expects DESeq2
 results</li>
-<li><strong>y</strong> (<em>str</em>) &#8211; Column to use for y-axis. Default of &#8220;log2FoldChange&#8221; expects DESeq2
+<li><strong>y</strong> (<em>str</em>) – Column to use for y-axis. Default of “log2FoldChange” expects DESeq2
 results</li>
-<li><strong>disable_logx</strong> (<em>bool</em>) &#8211; Disable default behavior of transforming x values using log10</li>
-<li><strong>logy</strong> (<em>bool</em>) &#8211; Transform y values using log2</li>
-<li><strong>pval-col</strong> (<em>str</em>) &#8211; Column to use for statistical significance. Default &#8220;padj&#8221; expectes
+<li><strong>disable_logx</strong> (<em>bool</em>) – Disable default behavior of transforming x values using log10</li>
+<li><strong>logy</strong> (<em>bool</em>) – Transform y values using log2</li>
+<li><strong>pval-col</strong> (<em>str</em>) – Column to use for statistical significance. Default “padj” expectes
 DESeq2 results.</li>
-<li><strong>alpha</strong> (<em>float</em>) &#8211; Threshold for calling significance. Applied to <cite>pval_col</cite></li>
-<li><strong>lfc_cutoff</strong> (<em>float</em>) &#8211; Log2fold change cutoff to be applied to y values. Threshold is applied
+<li><strong>alpha</strong> (<em>float</em>) – Threshold for calling significance. Applied to <cite>pval_col</cite></li>
+<li><strong>lfc_cutoff</strong> (<em>float</em>) – Log2fold change cutoff to be applied to y values. Threshold is applied
 post-transformation, if any specified (e.g., <cite>logy</cite> argument).</li>
-<li><strong>plot_filename</strong> (<em>str</em>) &#8211; File to save plot. Format auto-detected by extension. Output directory
+<li><strong>plot_filename</strong> (<em>str</em>) – File to save plot. Format auto-detected by extension. Output directory
 will be created if needed.</li>
-<li><strong>disable_raster_points</strong> (<em>bool</em>) &#8211; Disable the default behavior of rasterizing points in a PDF. Use
+<li><strong>disable_raster_points</strong> (<em>bool</em>) – Disable the default behavior of rasterizing points in a PDF. Use
 sparingly, since drawing 30k+ individual points in a PDF may slow down
 your machine.</li>
-<li><strong>genes_to_label</strong> (<em>str</em><em> or </em><em>list-like</em>) &#8211; Optional file containing genes to label with text. First column must be
-a subset of the first column of <cite>de_results</cite>. Lines starting with &#8216;#&#8217;
+<li><strong>genes_to_label</strong> (<em>str</em><em> or </em><em>list-like</em>) – Optional file containing genes to label with text. First column must be
+a subset of the first column of <cite>de_results</cite>. Lines starting with ‘#’
 and subsequent tab-separated columns will be ignored. When called as
 a library, a list-like object of gene IDs can be provided.</li>
-<li><strong>label_column</strong> (<em>str</em>) &#8211; Optional column from which to take gene labels found in
-<cite>genes_to_label</cite> (e.g., &#8220;symbol&#8221;). If the value in this column is
+<li><strong>label_column</strong> (<em>str</em>) – Optional column from which to take gene labels found in
+<cite>genes_to_label</cite> (e.g., “symbol”). If the value in this column is
 missing, fall back to the index. Use this if your gene IDs are long
 Ensembl IDs but you want the gene symbols to show up on the plot.</li>
-<li><strong>report</strong> (<em>str</em>) &#8211; Where to write out Fisher&#8217;s exact test results. Default is stdout</li>
-<li><strong>gene_lists</strong> (<em>str</em>) &#8211; Prefix to gene lists. If specified, gene lists corresponding to the
+<li><strong>report</strong> (<em>str</em>) – Where to write out Fisher’s exact test results. Default is stdout</li>
+<li><strong>gene_lists</strong> (<em>str</em>) – Prefix to gene lists. If specified, gene lists corresponding to the
 cells of the 2x2 Fishers exact test will be written to
 {prefix}.up.tsv and {prefix}.dn.tsv. These are subsets of <cite>de_results</cite>
 where genes are up and have a peak in region (or are selected), or
@@ -407,7 +407,7 @@ respectively.</li>
 <dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.DESeqResults" title="lcdblib.plotting.results_table.DESeqResults"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.DESeqResults</span></code></a></p>
 <p>Class for working with results from DESeq2.</p>
 <p>Just like a DifferentialExpressionResults object, but sets the
-pval_column, lfc_column, and mean_column to the names used in edgeR&#8217;s
+pval_column, lfc_column, and mean_column to the names used in edgeR’s
 output.</p>
 <p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
 attribute.</p>
@@ -418,10 +418,10 @@ underlying pandas.DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) – If string, assumes it’s a filename and calls
 <cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
-<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
-<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) – Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) – These arguments will be passed to pandas.read_table() if <cite>data</cite> is
 a filename.</li>
 </ul>
 </td>
@@ -430,17 +430,17 @@ a filename.</li>
 </table>
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = ‘log2FoldChange’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.mean_column">
-<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = ‘baseMean’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.pval_column">
-<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = ‘padj’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -462,10 +462,10 @@ underlying pandas.DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) – If string, assumes it’s a filename and calls
 <cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
-<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
-<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) – Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) – These arguments will be passed to pandas.read_table() if <cite>data</cite> is
 a filename.</li>
 </ul>
 </td>
@@ -493,7 +493,7 @@ transformed).  Downregulated features have the sign flipped.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmap</strong> (<em>matplotlib colormap</em>) &#8211; Default is matplotlib.cm.RdBu_r</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmap</strong> (<em>matplotlib colormap</em>) – Default is matplotlib.cm.RdBu_r</td>
 </tr>
 </tbody>
 </table>
@@ -521,10 +521,10 @@ underlying pandas.DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) – If string, assumes it’s a filename and calls
 <cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
-<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
-<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) – Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) – These arguments will be passed to pandas.read_table() if <cite>data</cite> is
 a filename.</li>
 </ul>
 </td>
@@ -542,9 +542,9 @@ absolute value log2foldchange is &gt;= lfc.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
-<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
-<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+<li><strong>alpha</strong> (<em>float</em>) – </li>
+<li><strong>lfc</strong> (<em>float</em>) – </li>
+<li><strong>idx</strong> (<em>bool</em>) – If True, a boolean index will be returned.  If False, a new object
 will be returned that has been subsetted.</li>
 </ul>
 </td>
@@ -564,9 +564,9 @@ log2foldchange is &lt;= lfc.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
-<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
-<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+<li><strong>alpha</strong> (<em>float</em>) – </li>
+<li><strong>lfc</strong> (<em>float</em>) – </li>
+<li><strong>idx</strong> (<em>bool</em>) – If True, a boolean index will be returned.  If False, a new object
 will be returned that has been subsetted.</li>
 </ul>
 </td>
@@ -577,7 +577,7 @@ will be returned that has been subsetted.</li>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = ‘log2FoldChange’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -593,10 +593,10 @@ fold change (y-axis).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>alpha</strong> (<em>float</em>) &#8211; Features with values &lt;= <cite>alpha</cite> will be highlighted in the plot.</li>
-<li><strong>dn_kwargs</strong> (<em>up_kwargs</em><em>,</em>) &#8211; Kwargs passed to matplotlib&#8217;s scatter(), used for styling up/down
+<li><strong>alpha</strong> (<em>float</em>) – Features with values &lt;= <cite>alpha</cite> will be highlighted in the plot.</li>
+<li><strong>dn_kwargs</strong> (<em>up_kwargs</em><em>,</em>) – Kwargs passed to matplotlib’s scatter(), used for styling up/down
 regulated features (defined by <cite>alpha</cite> and <cite>col</cite>)</li>
-<li><strong>zero_line</strong> (<em>None</em><em> or </em><em>dict</em>) &#8211; Kwargs passed to matplotlib.axhline(0).</li>
+<li><strong>zero_line</strong> (<em>None</em><em> or </em><em>dict</em>) – Kwargs passed to matplotlib.axhline(0).</li>
 </ul>
 </td>
 </tr>
@@ -606,12 +606,12 @@ regulated features (defined by <cite>alpha</cite> and <cite>col</cite>)</li>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column">
-<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = ‘baseMean’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column">
-<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = ‘padj’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -625,9 +625,9 @@ absolute value of the log2foldchange is &lt; lfc.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
-<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
-<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+<li><strong>alpha</strong> (<em>float</em>) – </li>
+<li><strong>lfc</strong> (<em>float</em>) – </li>
+<li><strong>idx</strong> (<em>bool</em>) – If True, a boolean index will be returned.  If False, a new object
 will be returned that has been subsetted.</li>
 </ul>
 </td>
@@ -647,9 +647,9 @@ log2foldchange is &gt;= lfc.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>alpha</strong> (<em>float</em>) &#8211; </li>
-<li><strong>lfc</strong> (<em>float</em>) &#8211; </li>
-<li><strong>idx</strong> (<em>bool</em>) &#8211; If True, a boolean index will be returned.  If False, a new object
+<li><strong>alpha</strong> (<em>float</em>) – </li>
+<li><strong>lfc</strong> (<em>float</em>) – </li>
+<li><strong>idx</strong> (<em>bool</em>) – If True, a boolean index will be returned.  If False, a new object
 will be returned that has been subsetted.</li>
 </ul>
 </td>
@@ -666,7 +666,7 @@ will be returned that has been subsetted.</li>
 <dd><p>Bases: <a class="reference internal" href="#lcdblib.plotting.results_table.DifferentialExpressionResults" title="lcdblib.plotting.results_table.DifferentialExpressionResults"><code class="xref py py-class docutils literal"><span class="pre">lcdblib.plotting.results_table.DifferentialExpressionResults</span></code></a></p>
 <p>Class for working with results from edgeR.</p>
 <p>Just like a DifferentialExpressionResults object, but sets the
-pval_column, lfc_column, and mean_column to the names used in edgeR&#8217;s
+pval_column, lfc_column, and mean_column to the names used in edgeR’s
 output.</p>
 <p>The underlying pandas.DataFrame is always available with the <cite>data</cite>
 attribute.</p>
@@ -677,10 +677,10 @@ underlying pandas.DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) – If string, assumes it’s a filename and calls
 <cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
-<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
-<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) – Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) – These arguments will be passed to pandas.read_table() if <cite>data</cite> is
 a filename.</li>
 </ul>
 </td>
@@ -689,24 +689,24 @@ a filename.</li>
 </table>
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = 'logFC'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = ‘logFC’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.mean_column">
-<code class="descname">mean_column</code><em class="property"> = 'logCPM'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = ‘logCPM’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.pval_column">
-<code class="descname">pval_column</code><em class="property"> = 'FDR'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = ‘FDR’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="lcdblib.plotting.results_table.LazyDict">
-<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">LazyDict</code><span class="sig-paren">(</span><em>fn_dict</em>, <em>index_file=None</em>, <em>index_from=None</em>, <em>extra=None</em>, <em>cls=&lt;class 'lcdblib.plotting.results_table.DESeqResults'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">LazyDict</code><span class="sig-paren">(</span><em>fn_dict</em>, <em>index_file=None</em>, <em>index_from=None</em>, <em>extra=None</em>, <em>cls=&lt;class ‘lcdblib.plotting.results_table.DESeqResults’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="lcdblib.plotting.results_table.LazyDict.items">
@@ -745,19 +745,19 @@ for the same data, borrowing addtional room from the axes.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Data to be plotted</li>
-<li><strong>scatter_kwargs</strong> (<em>dict</em>) &#8211; Keyword arguments that are passed directly to scatter().</li>
-<li><strong>hist_kwargs</strong> (<em>dict</em>) &#8211; Keyword arguments that are passed directly to hist(), for both the
+<li><strong>y</strong> (<em>x</em><em>,</em>) – Data to be plotted</li>
+<li><strong>scatter_kwargs</strong> (<em>dict</em>) – Keyword arguments that are passed directly to scatter().</li>
+<li><strong>hist_kwargs</strong> (<em>dict</em>) – Keyword arguments that are passed directly to hist(), for both the
 top and side histograms.</li>
-<li><strong>yhist_kwargs</strong> (<em>xhist_kwargs</em><em>,</em>) &#8211; Additional, margin-specific kwargs for the x or y histograms
+<li><strong>yhist_kwargs</strong> (<em>xhist_kwargs</em><em>,</em>) – Additional, margin-specific kwargs for the x or y histograms
 respectively.  These are used to update <cite>hist_kwargs</cite></li>
-<li><strong>num_ticks</strong> (<em>int</em>) &#8211; How many tick marks to use in each histogram&#8217;s y-axis</li>
-<li><strong>labels</strong> (<em>array-like</em>) &#8211; Optional NumPy array of labels that will be set on the collection
+<li><strong>num_ticks</strong> (<em>int</em>) – How many tick marks to use in each histogram’s y-axis</li>
+<li><strong>labels</strong> (<em>array-like</em>) – Optional NumPy array of labels that will be set on the collection
 so that they can be accessed by a callback function.</li>
-<li><strong>hist_share</strong> (<em>bool</em>) &#8211; If True, then all histograms will share the same frequency axes.
-Useful for showing relative heights if you don&#8217;t want to use the
+<li><strong>hist_share</strong> (<em>bool</em>) – If True, then all histograms will share the same frequency axes.
+Useful for showing relative heights if you don’t want to use the
 hist_kwarg <cite>normed=True</cite></li>
-<li><strong>marginal_histograms</strong> (<em>bool</em>) &#8211; Set to False in order to disable marginal histograms and just use
+<li><strong>marginal_histograms</strong> (<em>bool</em>) – Set to False in order to disable marginal histograms and just use
 as a normal scatterplot.</li>
 </ul>
 </td>
@@ -807,10 +807,10 @@ underlying pandas.DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) &#8211; If string, assumes it&#8217;s a filename and calls
+<li><strong>data</strong> (<em>string</em><em> or </em><em>pandas.DataFrame</em>) – If string, assumes it’s a filename and calls
 <cite>pandas.read_table(data, **import_kwargs)</cite>.</li>
-<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) &#8211; Optional database that can be used to generate features</li>
-<li><strong>import_kwargs</strong> (<em>dict</em>) &#8211; These arguments will be passed to pandas.read_table() if <cite>data</cite> is
+<li><strong>db</strong> (<em>string</em><em> or </em><em>gffutils.FeatureDB</em>) – Optional database that can be used to generate features</li>
+<li><strong>import_kwargs</strong> (<em>dict</em>) – These arguments will be passed to pandas.read_table() if <cite>data</cite> is
 a filename.</li>
 </ul>
 </td>
@@ -820,7 +820,7 @@ a filename.</li>
 <dl class="method">
 <dt id="lcdblib.plotting.results_table.ResultsTable.align_with">
 <code class="descname">align_with</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.align_with"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.align_with" title="Permalink to this definition">¶</a></dt>
-<dd><p>Align the dataframe&#8217;s index with another.</p>
+<dd><p>Align the dataframe’s index with another.</p>
 </dd></dl>
 
 <dl class="method">
@@ -833,7 +833,7 @@ created.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>db</strong> (<em>gffutils.FeatureDB</em>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>db</strong> (<em>gffutils.FeatureDB</em>) – </td>
 </tr>
 </tbody>
 </table>
@@ -849,12 +849,12 @@ created.</p>
 <code class="descname">features</code><span class="sig-paren">(</span><em>ignore_unknown=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator of features.</p>
 <p>If a gffutils.FeatureDB is attached, returns a pybedtools.Interval for
-every feature in the dataframe&#8217;s index.</p>
+every feature in the dataframe’s index.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ignore_unknown</strong> (<em>bool</em>) &#8211; If True, silently ignores features that are not found in the db.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ignore_unknown</strong> (<em>bool</em>) – If True, silently ignores features that are not found in the db.</td>
 </tr>
 </tbody>
 </table>
@@ -874,7 +874,7 @@ represents the equilibrium position with all springs pulling on it.</p>
 <p>In practice, each variable is normalized to 0-1 (by subtracting the
 mean and dividing by the range).</p>
 <p>This is a very exploratory plot.  The order of <cite>column_names</cite> will
-affect the results, so it&#8217;s best to try a couple different orderings.
+affect the results, so it’s best to try a couple different orderings.
 For other caveats, see [1].</p>
 <p>Additional kwargs are passed to self.scatter, so subsetting, callbacks,
 and other configuration can be performed using options for that method
@@ -884,16 +884,16 @@ and other configuration can be performed using options for that method
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>column_names</strong> (<em>list</em>) &#8211; Which columns of the dataframe to consider.  The columns provided
+<li><strong>column_names</strong> (<em>list</em>) – Which columns of the dataframe to consider.  The columns provided
 should only include numeric data, and they should not contain any
 NaN, inf, or -inf values.</li>
-<li><strong>transforms</strong> (<em>dict</em>) &#8211; Dictionary mapping column names to transformations that will be
+<li><strong>transforms</strong> (<em>dict</em>) – Dictionary mapping column names to transformations that will be
 applied just for the radviz plot.  For example, np.log1p is
 a useful function. If a column name is not in this dictionary, it
 will be used as-is.</li>
-<li><strong>ax</strong> (<em>matplotlib.Axes</em>) &#8211; If not None, then plot the radviz on this axes.  If None, then
+<li><strong>ax</strong> (<em>matplotlib.Axes</em>) – If not None, then plot the radviz on this axes.  If None, then
 a new figure will be created.</li>
-<li><strong>kwargs</strong> (<em>dict</em>) &#8211; Additional arguments are passed to self.scatter.  Note that not all
+<li><strong>kwargs</strong> (<em>dict</em>) – Additional arguments are passed to self.scatter.  Note that not all
 possible kwargs for self.scatter are necessarily useful for
 a radviz plot (for example, margninal histograms would not be
 meaningful).</li>
@@ -903,8 +903,8 @@ meaningful).</li>
 </tbody>
 </table>
 <p class="rubric">Notes</p>
-<p>This method adds two new variables to self.data: &#8220;radviz_x&#8221; and
-&#8220;radviz_y&#8221;.  It then calls the self.scatter method, using these new
+<p>This method adds two new variables to self.data: “radviz_x” and
+“radviz_y”.  It then calls the self.scatter method, using these new
 variables.</p>
 <p>The data transformation was adapted from the
 pandas.tools.plotting.radviz function.</p>
@@ -927,15 +927,15 @@ the Proceedings of the IEEE Visualization. Phoenix, AZ, pp.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) &#8211; If str, then assume it&#8217;s a filename. BED, GFF, GTF, or VCF where
-the &#8220;Name&#8221; field (that is, the value returned by feature[&#8216;Name&#8217;])
+<li><strong>x</strong> (<em>str</em><em> or </em><em>pybedtools.BedTool</em>) – If str, then assume it’s a filename. BED, GFF, GTF, or VCF where
+the “Name” field (that is, the value returned by feature[‘Name’])
 or any arbitrary attribute</li>
-<li><strong>attribute</strong> (<em>str</em><em> or </em><em>int</em><em> or </em><em>None</em>) &#8211; If <cite>x</cite> is GFF or GTF format, and <cite>attribute</cite> is str, then attribute
+<li><strong>attribute</strong> (<em>str</em><em> or </em><em>int</em><em> or </em><em>None</em>) – If <cite>x</cite> is GFF or GTF format, and <cite>attribute</cite> is str, then attribute
 containing the name of the feature to use. If <cite>x</cite> format is BED and
-<cite>attribute</cite> is str, then use getattr on the interval (e.g., &#8216;name&#8217;
-or &#8216;score&#8217;). If <cite>attribute</cite> is int, then use that column. If None,
-then use the &#8220;name&#8221; attribute of the Interval, which falls back to
-one of &#8220;gene_id&#8221;, &#8220;Name&#8221;, &#8220;transcript_id&#8221; for GFF/GTF.</li>
+<cite>attribute</cite> is str, then use getattr on the interval (e.g., ‘name’
+or ‘score’). If <cite>attribute</cite> is int, then use that column. If None,
+then use the “name” attribute of the Interval, which falls back to
+one of “gene_id”, “Name”, “transcript_id” for GFF/GTF.</li>
 </ul>
 </td>
 </tr>
@@ -945,7 +945,7 @@ one of &#8220;gene_id&#8221;, &#8220;Name&#8221;, &#8220;transcript_id&#8221; fo
 
 <dl class="method">
 <dt id="lcdblib.plotting.results_table.ResultsTable.scatter">
-<code class="descname">scatter</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>xfunc=None</em>, <em>yfunc=None</em>, <em>xscale=None</em>, <em>yscale=None</em>, <em>xlab=None</em>, <em>ylab=None</em>, <em>genes_to_highlight=None</em>, <em>marginal_histograms=False</em>, <em>general_kwargs={'alpha': 0.2</em>, <em>'color': 'k'</em>, <em>'picker': True}</em>, <em>general_hist_kwargs=None</em>, <em>offset_kwargs={}</em>, <em>label_kwargs=None</em>, <em>ax=None</em>, <em>one_to_one=None</em>, <em>callback=None</em>, <em>hist_size=0.3</em>, <em>hist_pad=0.0</em>, <em>nan_offset=0.015</em>, <em>pos_offset=0.99</em>, <em>linelength=0.01</em>, <em>neg_offset=0.005</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.scatter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">scatter</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>xfunc=None</em>, <em>yfunc=None</em>, <em>xscale=None</em>, <em>yscale=None</em>, <em>xlab=None</em>, <em>ylab=None</em>, <em>genes_to_highlight=None</em>, <em>marginal_histograms=False</em>, <em>general_kwargs={‘color’: ‘k’</em>, <em>’alpha’: 0.2</em>, <em>’picker’: True}</em>, <em>general_hist_kwargs=None</em>, <em>offset_kwargs={}</em>, <em>label_kwargs=None</em>, <em>ax=None</em>, <em>one_to_one=None</em>, <em>callback=None</em>, <em>hist_size=0.3</em>, <em>hist_pad=0.0</em>, <em>nan_offset=0.015</em>, <em>pos_offset=0.99</em>, <em>linelength=0.01</em>, <em>neg_offset=0.005</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.scatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do-it-all method for making annotated scatterplots.</p>
 <p>Includes rugplots for NaN/Inf/-Inf, a default callback that prints the
 entries of the underlying dataframe when a point is clicked, point
@@ -956,22 +956,22 @@ styling of points for arbitrary subsets, and more.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>y</strong> (<em>x</em><em>,</em>) &#8211; Variables to plot.  Must be names in self.data&#8217;s DataFrame.</li>
-<li><strong>yfunc</strong> (<em>xfunc</em><em>,</em>) &#8211; Functions to apply to <cite>xvar</cite> and <cite>yvar</cite> respectively. If xlab or
+<li><strong>y</strong> (<em>x</em><em>,</em>) – Variables to plot.  Must be names in self.data’s DataFrame.</li>
+<li><strong>yfunc</strong> (<em>xfunc</em><em>,</em>) – Functions to apply to <cite>xvar</cite> and <cite>yvar</cite> respectively. If xlab or
 ylab is not set separately, the function name will be used along
 with the column name to label the corresponding axis. This lets you
 play around with transformation functions (e.g., np.log, np.log1p)
 without having to add the corresponding column to the underlying
 dataframe.</li>
-<li><strong>ylab</strong> (<em>xlab</em><em>,</em>) &#8211; Labels for x and y axes; default is to use function names for
+<li><strong>ylab</strong> (<em>xlab</em><em>,</em>) – Labels for x and y axes; default is to use function names for
 <cite>xfunc</cite> and <cite>yfunc</cite> and variable names <cite>xvar</cite> and <cite>yvar</cite>, e.g.,
-&#8220;log2(baseMeanA)&#8221;</li>
-<li><strong>ax</strong> (<em>None</em><em> or </em><em>Axes object</em>) &#8211; If not None then plot on the provided Axes, otherwise create a new
+“log2(baseMeanA)”</li>
+<li><strong>ax</strong> (<em>None</em><em> or </em><em>Axes object</em>) – If not None then plot on the provided Axes, otherwise create a new
 figure and axes.</li>
-<li><strong>general_kwargs</strong> (<em>dict</em>) &#8211; Kwargs for matplotlib.scatter; specifies how all points look. Note
+<li><strong>general_kwargs</strong> (<em>dict</em>) – Kwargs for matplotlib.scatter; specifies how all points look. Note
 that if you override this, you should include at least
 <cite>picker=True</cite> so that the callback function will work.</li>
-<li><strong>genes_to_highlight</strong> (<em>list of 2-tuples</em><em> or </em><em>3-tuples</em>) &#8211; <p>Provides lots of control to colors.  It is a list of (<cite>ind</cite>,
+<li><strong>genes_to_highlight</strong> (<em>list of 2-tuples</em><em> or </em><em>3-tuples</em>) – <p>Provides lots of control to colors.  It is a list of (<cite>ind</cite>,
 <cite>kwargs</cite>) tuples, where each <cite>ind</cite> specifies genes to plot with
 <cite>kwargs</cite>. <cite>ind</cite> is anything that can be used with <cite>DataFrame.ix</cite>.</p>
 <p>For example:</p>
@@ -988,7 +988,7 @@ that if you override this, you should include at least
 </pre></div>
 </div>
 <p>Each dictionary updates a copy of <cite>general_kwargs</cite>. If
-<cite>genes_to_highlight</cite> has a &#8220;name&#8221; kwarg, this must be a list that&#8217;t
+<cite>genes_to_highlight</cite> has a “name” kwarg, this must be a list that’t
 the same length as <cite>ind</cite>.  It will be used to label the genes in
 <cite>ind</cite> using <cite>label_kwargs</cite>.</p>
 <p>For example:</p>
@@ -1017,28 +1017,28 @@ marginal histograms to have 100 bins:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>callback</strong> (<em>callable</em>) &#8211; Function to call upon clicking a point. Must accept a single
+<li><strong>callback</strong> (<em>callable</em>) – Function to call upon clicking a point. Must accept a single
 argument which is the gene ID. The function can do whatever it
 wants with it, but probably will want to access the underlying
 dataframe. Default is to print the corresponding row from the
 underlying dataframe.</li>
-<li><strong>one_to_one</strong> (<em>None</em><em> or </em><em>dict</em>) &#8211; If not None, a dictionary of matplotlib.plot kwargs that will be
-used to plot a 1:1 line, e.g., dict(color=&#8217;r&#8217;, linestyle=&#8217;:&#8217;).</li>
-<li><strong>label_kwargs</strong> (<em>dict</em>) &#8211; Kwargs for labeled genes, e.g., dict=(style=&#8217;italic&#8217;).  Will only
+<li><strong>one_to_one</strong> (<em>None</em><em> or </em><em>dict</em>) – If not None, a dictionary of matplotlib.plot kwargs that will be
+used to plot a 1:1 line, e.g., dict(color=’r’, linestyle=’:’).</li>
+<li><strong>label_kwargs</strong> (<em>dict</em>) – Kwargs for labeled genes, e.g., dict=(style=’italic’).  Will only
 be used if an entry in <cite>genes_to_highlight</cite> has a <cite>name</cite> key.</li>
-<li><strong>offset_kwargs</strong> (<em>dict</em>) &#8211; Kwargs to be passed to matplotlib.transforms.offset_copy, used for
+<li><strong>offset_kwargs</strong> (<em>dict</em>) – Kwargs to be passed to matplotlib.transforms.offset_copy, used for
 adjusting the positioning of gene labels in relation to the actual
 point.</li>
-<li><strong>ylab_prefix</strong> (<em>xlab_prefix</em><em>,</em>) &#8211; Optional label prefix that will be added to the beginning of <cite>xlab</cite>
+<li><strong>ylab_prefix</strong> (<em>xlab_prefix</em><em>,</em>) – Optional label prefix that will be added to the beginning of <cite>xlab</cite>
 and/or <cite>ylab</cite>.</li>
-<li><strong>marginal_histograms</strong> (<em>bool</em>) &#8211; If True, for each subset in <cite>genes_to_highlight</cite>, add marginal
+<li><strong>marginal_histograms</strong> (<em>bool</em>) – If True, for each subset in <cite>genes_to_highlight</cite>, add marginal
 histograms along x and y axes subject to the various histogram
 controls below.</li>
-<li><strong>hist_size</strong> (<em>float</em>) &#8211; Size of marginal histograms</li>
-<li><strong>hist_pad</strong> (<em>float</em>) &#8211; Spacing between marginal histograms</li>
-<li><strong>pos_offset</strong><strong>, </strong><strong>neg_offset</strong> (<em>nan_offset</em><em>,</em>) &#8211; Offset, in units of &#8220;fraction of axes&#8221; for the NaN, +inf, and -inf
-&#8220;rug plots&#8221;</li>
-<li><strong>linelength</strong> (<em>float</em>) &#8211; Line length for the rug plots</li>
+<li><strong>hist_size</strong> (<em>float</em>) – Size of marginal histograms</li>
+<li><strong>hist_pad</strong> (<em>float</em>) – Spacing between marginal histograms</li>
+<li><strong>pos_offset</strong><strong>, </strong><strong>neg_offset</strong> (<em>nan_offset</em><em>,</em>) – Offset, in units of “fraction of axes” for the NaN, +inf, and -inf
+“rug plots”</li>
+<li><strong>linelength</strong> (<em>float</em>) – Line length for the rug plots</li>
 </ul>
 </td>
 </tr>
@@ -1095,7 +1095,7 @@ indexing (like .ix, .iloc, etc).</p>
         <li class="right" >
           <a href="lcdblib.parse.html" title="lcdblib.parse package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev38 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

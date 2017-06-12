@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.parse.dupradar &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
+    <title>lcdblib.expression.expression_utils &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -102,32 +102,58 @@
               
                 <li><a href="../../index.html">Module code</a></li>
               
-              <li>lcdblib.parse.dupradar</li>
+              <li>lcdblib.expression.expression_utils</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <h1>Source code for lcdblib.parse.dupradar</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+  <h1>Source code for lcdblib.expression.expression_utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">gaussian_kde</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="parse_dupradar"><a class="viewcode-back" href="../../../autodocs/lcdblib.parse.html#lcdblib.parse.dupradar.parse_dupradar">[docs]</a><span class="k">def</span> <span class="nf">parse_dupradar</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parser for dupradar.</span>
+<div class="viewcode-block" id="zFPKM"><a class="viewcode-back" href="../../../autodocs/lcdblib.expression.html#lcdblib.expression.expression_utils.zFPKM">[docs]</a><span class="k">def</span> <span class="nf">zFPKM</span><span class="p">(</span><span class="n">log_fpkm</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Should we consider a gene &quot;expressed&quot; or not?</span>
+
+<span class="sd">    Implements algorithm from Hart et al 2013 (DOI:10.1186/1471-2164-14-778).</span>
+<span class="sd">    In that paper, using human data they conclude that zFPKM &lt; -3 is</span>
+<span class="sd">    a reasonable cutoff since at that point, the frequency of repressive</span>
+<span class="sd">    chromatin marks outweighs active marks.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    sample: str</span>
-<span class="sd">        Sample name which will be added as row index.</span>
-<span class="sd">    file: str</span>
-<span class="sd">        Path to the fastqc zip file.</span>
+<span class="sd">    log_fpkm : array-like</span>
+<span class="sd">        FPKM (or TPM) on a log scale</span>
 
+<span class="sd">    resolution : int</span>
+<span class="sd">        Use this many evenly-spaced points between min and max log_fpkm</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dictionary of values as follows:</span>
+
+<span class="sd">        xi: basis over which the kde was evaluated</span>
+<span class="sd">        yi: the kde</span>
+<span class="sd">        mu: maximum of the kde</span>
+<span class="sd">        U: mean of log_fpkm values &gt; mu</span>
+<span class="sd">        sigma: std of the fitted half-gaussian</span>
+<span class="sd">        zfpkm: z-transformed FPKM</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FBgn&#39;</span><span class="p">,</span> <span class="s1">&#39;geneLength&#39;</span><span class="p">,</span> <span class="s1">&#39;allCountsMulti&#39;</span><span class="p">,</span> <span class="s1">&#39;filteredCountsMulti&#39;</span><span class="p">,</span> <span class="s1">&#39;dupRateMulti&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;dupsPerIdMulti&#39;</span><span class="p">,</span> <span class="s1">&#39;RPKMulti&#39;</span><span class="p">,</span> <span class="s1">&#39;RPKMMulti&#39;</span><span class="p">,</span> <span class="s1">&#39;allCounts&#39;</span><span class="p">,</span> <span class="s1">&#39;filteredCounts&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;dupRate&#39;</span><span class="p">,</span> <span class="s1">&#39;dupsPerId&#39;</span><span class="p">,</span> <span class="s1">&#39;RPK&#39;</span><span class="p">,</span> <span class="s1">&#39;RPKM&#39;</span><span class="p">,</span> <span class="s1">&#39;mhRate&#39;</span><span class="p">]</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sample&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample</span>
-    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="s1">&#39;FBgn&#39;</span><span class="p">])</span></div>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">log_fpkm</span><span class="p">)</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">log_fpkm</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">log_fpkm</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">resolution</span><span class="p">)</span>
+    <span class="n">yi</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">xi</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yi</span><span class="p">)]</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">log_fpkm</span><span class="p">[</span><span class="n">log_fpkm</span> <span class="o">&gt;</span> <span class="n">mu</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">zlog_fpkm</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_fpkm</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;xi&#39;</span><span class="p">:</span> <span class="n">xi</span><span class="p">,</span>
+        <span class="s1">&#39;yi&#39;</span><span class="p">:</span> <span class="n">yi</span><span class="p">,</span>
+        <span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">mu</span><span class="p">,</span>
+        <span class="s1">&#39;U&#39;</span><span class="p">:</span> <span class="n">U</span><span class="p">,</span>
+        <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">zlog_fpkm</span><span class="p">}</span></div>
+
 </pre></div>
 
           </div>

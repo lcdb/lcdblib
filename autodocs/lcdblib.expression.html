@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.pandas package &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
+    <title>lcdblib.expression package &#8212; lcdblib 0.1.2.post.dev41 documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -35,8 +35,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="lcdblib.parse package" href="lcdblib.parse.html" />
-    <link rel="prev" title="lcdblib.images package" href="lcdblib.images.html" />
+    <link rel="next" title="lcdblib.images package" href="lcdblib.images.html" />
+    <link rel="prev" title="lcdblib package" href="lcdblib.html" />
   
    
 
@@ -52,10 +52,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+          <a href="lcdblib.images.html" title="lcdblib.images package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="lcdblib.images.html" title="lcdblib.images package"
+          <a href="lcdblib.html" title="lcdblib package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
@@ -116,81 +116,55 @@
               
                 <li><a href="lcdblib.html">lcdblib package</a></li>
               
-              <li>lcdblib.pandas package</li>
+              <li>lcdblib.expression package</li>
             </ol>
           </div>
           
           <div class="document clearer body">
             
-  <div class="section" id="lcdblib-pandas-package">
-<h1>lcdblib.pandas package<a class="headerlink" href="#lcdblib-pandas-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="lcdblib-expression-package">
+<h1>lcdblib.expression package<a class="headerlink" href="#lcdblib-expression-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-lcdblib.pandas.utils">
-<span id="lcdblib-pandas-utils-module"></span><h2>lcdblib.pandas.utils module<a class="headerlink" href="#module-lcdblib.pandas.utils" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lcdblib.expression.expression_utils">
+<span id="lcdblib-expression-expression-utils-module"></span><h2>lcdblib.expression.expression_utils module<a class="headerlink" href="#module-lcdblib.expression.expression_utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="lcdblib.pandas.utils.cartesian_product">
-<code class="descclassname">lcdblib.pandas.utils.</code><code class="descname">cartesian_product</code><span class="sig-paren">(</span><em>df1</em>, <em>df2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/pandas/utils.html#cartesian_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.pandas.utils.cartesian_product" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the carteisan product and returns expanded DataFrame.</p>
-<p>Given a pandas.DataFrame:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span>
-<span class="o">|--------|--------|</span>
-<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span>
-<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span>
-</pre></div>
-</div>
-<p>and some set of values <cite>{‘num’: [100, 200]}</cite> build:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span> <span class="n">num</span> <span class="o">|</span>
-<span class="o">|--------|--------|-----|</span>
-<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span>
-</pre></div>
-</div>
+<dt id="lcdblib.expression.expression_utils.zFPKM">
+<code class="descclassname">lcdblib.expression.expression_utils.</code><code class="descname">zFPKM</code><span class="sig-paren">(</span><em>log_fpkm</em>, <em>resolution=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/expression/expression_utils.html#zFPKM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.expression.expression_utils.zFPKM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should we consider a gene “expressed” or not?</p>
+<p>Implements algorithm from Hart et al 2013 (DOI:10.1186/1471-2164-14-778).
+In that paper, using human data they conclude that zFPKM &lt; -3 is
+a reasonable cutoff since at that point, the frequency of repressive
+chromatin marks outweighs active marks.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>df1</strong> (<em>pandas.DataFrame</em>) – A DataFrame that you want to expand.</li>
-<li><strong>df2</strong> (<em>dict of array-like | pandas.DataFrame | pandas.Series</em>) – The set of values that you want to expand df1 by.</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>log_fpkm</strong> (<em>array-like</em>) – FPKM (or TPM) on a log scale</li>
+<li><strong>resolution</strong> (<em>int</em>) – Use this many evenly-spaced points between min and max log_fpkm</li>
 </ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xi: basis over which the kde was evaluated
+yi: the kde
+mu: maximum of the kde
+U: mean of log_fpkm values &gt; mu
+sigma: std of the fitted half-gaussian
+zfpkm: z-transformed FPKM</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Dictionary of values as follows</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="function">
-<dt id="lcdblib.pandas.utils.tidy_dataframe">
-<code class="descclassname">lcdblib.pandas.utils.</code><code class="descname">tidy_dataframe</code><span class="sig-paren">(</span><em>df</em>, <em>column</em>, <em>sep=’|’</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/pandas/utils.html#tidy_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.pandas.utils.tidy_dataframe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a dataframe with a delimiter-separated string, create a new dataframe
-with separate rows for each value in each corresponding string.</p>
-<p>E.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>       <span class="n">gene</span>  <span class="n">score</span>
-<span class="mi">0</span>     <span class="n">g1</span><span class="o">|</span><span class="n">g2</span>      <span class="mi">1</span>
-<span class="mi">1</span>        <span class="n">g3</span>      <span class="mi">5</span>
-<span class="mi">2</span>  <span class="n">g4</span><span class="o">|</span><span class="n">g5</span><span class="o">|</span><span class="n">g6</span>      <span class="mi">9</span>
-</pre></div>
 </div>
-<p>becomes:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tidy_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
-<span class="c1">#   gene  score</span>
-<span class="c1"># 0   g1      1</span>
-<span class="c1"># 0   g2      1</span>
-<span class="c1"># 1   g3      5</span>
-<span class="c1"># 2   g4      9</span>
-<span class="c1"># 2   g5      9</span>
-<span class="c1"># 2   g6      9</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</div>
-<div class="section" id="module-lcdblib.pandas">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.pandas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lcdblib.expression">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lcdblib.expression" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -200,11 +174,11 @@ with separate rows for each value in each corresponding string.</p>
   <div class="footer-relations">
     
       <div class="pull-left">
-        <a class="btn btn-default" href="lcdblib.images.html" title="previous chapter (use the left arrow)">lcdblib.images package</a>
+        <a class="btn btn-default" href="lcdblib.html" title="previous chapter (use the left arrow)">lcdblib package</a>
       </div>
     
       <div class="pull-right">
-        <a class="btn btn-default" href="lcdblib.parse.html" title="next chapter (use the right arrow)">lcdblib.parse package</a>
+        <a class="btn btn-default" href="lcdblib.images.html" title="next chapter (use the right arrow)">lcdblib.images package</a>
       </div>
     </div>
     <div class="clearer"></div>
@@ -222,10 +196,10 @@ with separate rows for each value in each corresponding string.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="lcdblib.parse.html" title="lcdblib.parse package"
+          <a href="lcdblib.images.html" title="lcdblib.images package"
              >next</a> |</li>
         <li class="right" >
-          <a href="lcdblib.images.html" title="lcdblib.images package"
+          <a href="lcdblib.html" title="lcdblib package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev41 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
