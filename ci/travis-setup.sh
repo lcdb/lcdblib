@@ -8,10 +8,10 @@ export PATH=~/anaconda/bin:$PATH
 # Add channels in the specified order.
 conda config --add channels conda-forge
 conda config --add channels defaults
-conda config --add channels r
+#conda config --add channels r
 conda config --add channels bioconda
 
-conda install -y python=3.5 sphinx
+conda install -y sphinx
 conda install -y --file requirements.txt
 
 # we also want conda-build to build a conda package
