@@ -12,6 +12,7 @@ conda config --add channels defaults
 conda config --add channels bioconda
 
 conda install -y sphinx
+conda install -y "conda<4.3"
 conda install -y --file requirements.txt
 
 # we also want conda-build to build a conda package
