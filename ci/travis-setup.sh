@@ -11,7 +11,7 @@ conda config --add channels defaults
 #conda config --add channels r
 conda config --add channels bioconda
 
-conda install -y sphinx "python=3.5" "conda<4.3"
+conda install -y sphinx  "conda<4.3"
 
 conda install -y --file requirements.txt -vv
 
