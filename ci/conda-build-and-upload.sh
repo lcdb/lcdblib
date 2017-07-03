@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 export LCDBLIB_VERSION=$(python -c 'from lcdblib import __conda_version__; print(__conda_version__)')
 export LCDBLIB_BUILD=$(python -c 'from lcdblib import __conda_build__; print(__conda_build__)')
