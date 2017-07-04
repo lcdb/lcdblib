@@ -1,8 +1,9 @@
 import collections
+import re
 from itertools import product
 import pandas as pd
 from snakemake.shell import shell
-from snakemake.io import expand
+from snakemake.io import expand, regex
 
 
 def fill_patterns(patterns, fill, combination=product):
@@ -38,6 +39,33 @@ def fill_patterns(patterns, fill, combination=product):
         return d
     d = {}
     return update(d, patterns, combination)
+
+
+def extract_wildcards(pattern, target):
+    """
+    Return a dictionary of wildcards and values identified from `target`.
+
+    Returns None if the regex match failed.
+
+    Parameters
+    ----------
+    pattern : str
+        Snakemake-style filename pattern, e.g. ``{output}/{sample}.bam``.
+
+    target : str
+        Filename from which to extract wildcards, e.g., ``data/a.bam``.
+
+    Examples
+    --------
+    >>> pattern = '{output}/{sample}.bam'
+    >>> target = 'data/a.bam'
+    >>> expected = {'output': 'data', 'sample': 'a'}
+    >>> assert extract_wildcards(pattern, target) == expected
+    >>> assert extract_wildcards(pattern, 'asdf') is None
+    """
+    m = re.compile(regex(pattern)).match(target)
+    if m:
+        return m.groupdict()
 
 
 def rscript(string, scriptname, log=None):
