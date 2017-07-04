@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev53 documentation</title>
+    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev55 documentation</title>
     
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev53',
+        VERSION:     '0.1.2.post.dev55',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev53 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -70,7 +70,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev53 documentation</a>
+    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev55 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -157,6 +157,33 @@
 </div>
 <div class="section" id="module-lcdblib.snakemake.helpers">
 <span id="lcdblib-snakemake-helpers-module"></span><h2>lcdblib.snakemake.helpers module<a class="headerlink" href="#module-lcdblib.snakemake.helpers" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="lcdblib.snakemake.helpers.extract_wildcards">
+<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">extract_wildcards</code><span class="sig-paren">(</span><em>pattern</em>, <em>target</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#extract_wildcards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.extract_wildcards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary of wildcards and values identified from <cite>target</cite>.</p>
+<p>Returns None if the regex match failed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pattern</strong> (<em>str</em>) – Snakemake-style filename pattern, e.g. <code class="docutils literal"><span class="pre">{output}/{sample}.bam</span></code>.</li>
+<li><strong>target</strong> (<em>str</em>) – Filename from which to extract wildcards, e.g., <code class="docutils literal"><span class="pre">data/a.bam</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{output}</span><span class="s1">/</span><span class="si">{sample}</span><span class="s1">.bam&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;data/a.bam&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expected</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">extract_wildcards</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">extract_wildcards</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="function">
 <dt id="lcdblib.snakemake.helpers.fill_patterns">
 <code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class ‘itertools.product’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
@@ -450,7 +477,7 @@ following doesn’t work because we need the directory slash:</p>
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev53 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

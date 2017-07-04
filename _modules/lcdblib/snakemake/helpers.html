@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.snakemake.helpers &#8212; lcdblib 0.1.2.post.dev53 documentation</title>
+    <title>lcdblib.snakemake.helpers &#8212; lcdblib 0.1.2.post.dev55 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -23,7 +23,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1.2.post.dev53',
+        VERSION:     '0.1.2.post.dev55',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -49,7 +49,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev53 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -61,7 +61,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../../index.html" class="text-logo">lcdblib 0.1.2.post.dev53 documentation</a>
+    ../../../index.html" class="text-logo">lcdblib 0.1.2.post.dev55 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -110,10 +110,11 @@
             
   <h1>Source code for lcdblib.snakemake.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">snakemake.shell</span> <span class="k">import</span> <span class="n">shell</span>
-<span class="kn">from</span> <span class="nn">snakemake.io</span> <span class="k">import</span> <span class="n">expand</span>
+<span class="kn">from</span> <span class="nn">snakemake.io</span> <span class="k">import</span> <span class="n">expand</span><span class="p">,</span> <span class="n">regex</span>
 
 
 <div class="viewcode-block" id="fill_patterns"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.helpers.fill_patterns">[docs]</a><span class="k">def</span> <span class="nf">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">combination</span><span class="o">=</span><span class="n">product</span><span class="p">):</span>
@@ -149,6 +150,33 @@
         <span class="k">return</span> <span class="n">d</span>
     <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">return</span> <span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">combination</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="extract_wildcards"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.helpers.extract_wildcards">[docs]</a><span class="k">def</span> <span class="nf">extract_wildcards</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a dictionary of wildcards and values identified from `target`.</span>
+
+<span class="sd">    Returns None if the regex match failed.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pattern : str</span>
+<span class="sd">        Snakemake-style filename pattern, e.g. ``{output}/{sample}.bam``.</span>
+
+<span class="sd">    target : str</span>
+<span class="sd">        Filename from which to extract wildcards, e.g., ``data/a.bam``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; pattern = &#39;{output}/{sample}.bam&#39;</span>
+<span class="sd">    &gt;&gt;&gt; target = &#39;data/a.bam&#39;</span>
+<span class="sd">    &gt;&gt;&gt; expected = {&#39;output&#39;: &#39;data&#39;, &#39;sample&#39;: &#39;a&#39;}</span>
+<span class="sd">    &gt;&gt;&gt; assert extract_wildcards(pattern, target) == expected</span>
+<span class="sd">    &gt;&gt;&gt; assert extract_wildcards(pattern, &#39;asdf&#39;) is None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">regex</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="rscript"><a class="viewcode-back" href="../../../autodocs/lcdblib.snakemake.html#lcdblib.snakemake.helpers.rscript">[docs]</a><span class="k">def</span> <span class="nf">rscript</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">scriptname</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -189,7 +217,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev53 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
