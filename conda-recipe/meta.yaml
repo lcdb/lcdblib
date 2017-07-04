@@ -2,9 +2,7 @@ package:
   name: lcdblib
   version: {{ LCDBLIB_VERSION }}
 source:
-  git_url: https://github.com/lcdb/lcdblib.git
-  git_rev: master
-
+  path: ..
 build:
   number: {{ LCDBLIB_BUILD }}
 
