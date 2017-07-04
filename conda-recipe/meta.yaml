@@ -2,14 +2,13 @@ package:
   name: lcdblib
   version: {{ LCDBLIB_VERSION }}
 source:
-  git_url: https://github.com/lcdb/lcdblib.git
-  git_rev: master
-
+  path: ..
 build:
   number: {{ LCDBLIB_BUILD }}
 
 requirements:
   build:
+    - python
     - biopython >=1.68
     - gffutils >=0.8.7.1
     - ipython >=5.1.0
@@ -28,6 +27,7 @@ requirements:
     - samtools >=1.4.1
 
   run:
+    - python
     - biopython >=1.68
     - gffutils >=0.8.7.1
     - ipython >=5.1.0
