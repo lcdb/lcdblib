@@ -1,6 +1,7 @@
 import os
 import contextlib
 from collections.abc import Iterable
+from snakemake.shell import shell
 
 
 @contextlib.contextmanager
@@ -144,3 +145,18 @@ def boolean_labels(names, idx, mapping={True: 'AND', False: 'NOT'},
     if s.startswith(strip):
         s = s.replace(strip, '', 1)
     return s
+
+
+def make_relative_symlink(target, linkname):
+    """
+    Helper function to create a relative symlink.
+
+    Changes to the dirname of the linkname and figures out the relative path to
+    the target before creating the symlink.
+    """
+    linkdir = os.path.dirname(linkname)
+    relative_target = os.path.relpath(target, start=linkdir)
+    linkbase = os.path.basename(linkname)
+    if not os.path.exists(linkdir):
+        shell('mkdir -p {linkdir}')
+    shell('cd {linkdir}; ln -sf {relative_target} {linkbase}')
