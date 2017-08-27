@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
   <!-- Licensed under the Apache 2.0 License -->
   <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
@@ -15,15 +14,13 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.plotting package &#8212; lcdblib 0.1.2.post.dev55 documentation</title>
-    
+    <title>lcdblib.plotting package &#8212; lcdblib 0.1.2.post.dev57 documentation</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev55',
+        VERSION:     '0.1.2.post.dev57',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -57,7 +54,7 @@
         <li class="right" >
           <a href="lcdblib.parse.html" title="lcdblib.parse package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -70,7 +67,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev55 documentation</a>
+    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev57 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -138,7 +135,7 @@
 
 <dl class="function">
 <dt id="lcdblib.plotting.basic.corrfunc">
-<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">corrfunc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>loc=(0.1</em>, <em>0.5)</em>, <em>template=’r = {:0.4f}’</em>, <em>type=’spearman’</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#corrfunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.corrfunc" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.basic.</code><code class="descname">corrfunc</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>loc=(0.1</em>, <em>0.5)</em>, <em>template='r = {:0.4f}'</em>, <em>type='spearman'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/basic.html#corrfunc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.basic.corrfunc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds text to the current axes with either the sparman or pearson r.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -301,7 +298,7 @@ with colors</p>
 
 <dl class="function">
 <dt id="lcdblib.plotting.colormap_adjust.smart_colormap">
-<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">smart_colormap</code><span class="sig-paren">(</span><em>vmin</em>, <em>vmax</em>, <em>color_high=’#b11902’</em>, <em>hue_low=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#smart_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.smart_colormap" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.colormap_adjust.</code><code class="descname">smart_colormap</code><span class="sig-paren">(</span><em>vmin</em>, <em>vmax</em>, <em>color_high='#b11902'</em>, <em>hue_low=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/colormap_adjust.html#smart_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.colormap_adjust.smart_colormap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a “smart” colormap that is centered on zero, and accounts for
 asymmetrical vmin and vmax by matching saturation/value of high and low
 colors.</p>
@@ -331,7 +328,7 @@ new hue-shifted as the low, <cite>color_high</cite> as the max, and centered on 
 <span id="lcdblib-plotting-compare-rnaseq-and-chipseq-module"></span><h2>lcdblib.plotting.compare_rnaseq_and_chipseq module<a class="headerlink" href="#module-lcdblib.plotting.compare_rnaseq_and_chipseq" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="lcdblib.plotting.compare_rnaseq_and_chipseq.plot">
-<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x=’baseMean’</em>, <em>y=’log2FoldChange’</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col=’padj’</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.plotting.compare_rnaseq_and_chipseq.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>de_results</em>, <em>regions=None</em>, <em>peaks=None</em>, <em>selected=None</em>, <em>x='baseMean'</em>, <em>y='log2FoldChange'</em>, <em>disable_logx=False</em>, <em>logy=False</em>, <em>pval_col='padj'</em>, <em>alpha=0.1</em>, <em>lfc_cutoff=0</em>, <em>plot_filename=None</em>, <em>disable_raster_points=False</em>, <em>genes_to_label=None</em>, <em>label_column=None</em>, <em>report=None</em>, <em>gene_lists=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/compare_rnaseq_and_chipseq.html#plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.compare_rnaseq_and_chipseq.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>M-A plot showing up- and downregulated genes with optional labeling and
 Fishers exact tests.</p>
 <p>If –plot-filename is not specified, then the plot will be displayed and
@@ -430,17 +427,17 @@ a filename.</li>
 </table>
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = ‘log2FoldChange’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.mean_column">
-<code class="descname">mean_column</code><em class="property"> = ‘baseMean’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DESeq2Results.pval_column">
-<code class="descname">pval_column</code><em class="property"> = ‘padj’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DESeq2Results.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -577,7 +574,7 @@ will be returned that has been subsetted.</li>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = ‘log2FoldChange’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = 'log2FoldChange'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -606,12 +603,12 @@ regulated features (defined by <cite>alpha</cite> and <cite>col</cite>)</li>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column">
-<code class="descname">mean_column</code><em class="property"> = ‘baseMean’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = 'baseMean'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column">
-<code class="descname">pval_column</code><em class="property"> = ‘padj’</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = 'padj'</em><a class="headerlink" href="#lcdblib.plotting.results_table.DifferentialExpressionResults.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -689,24 +686,24 @@ a filename.</li>
 </table>
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.lfc_column">
-<code class="descname">lfc_column</code><em class="property"> = ‘logFC’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.lfc_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">lfc_column</code><em class="property"> = 'logFC'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.lfc_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.mean_column">
-<code class="descname">mean_column</code><em class="property"> = ‘logCPM’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.mean_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">mean_column</code><em class="property"> = 'logCPM'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.mean_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="lcdblib.plotting.results_table.EdgeRResults.pval_column">
-<code class="descname">pval_column</code><em class="property"> = ‘FDR’</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.pval_column" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pval_column</code><em class="property"> = 'FDR'</em><a class="headerlink" href="#lcdblib.plotting.results_table.EdgeRResults.pval_column" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="lcdblib.plotting.results_table.LazyDict">
-<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">LazyDict</code><span class="sig-paren">(</span><em>fn_dict</em>, <em>index_file=None</em>, <em>index_from=None</em>, <em>extra=None</em>, <em>cls=&lt;class ‘lcdblib.plotting.results_table.DESeqResults’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">lcdblib.plotting.results_table.</code><code class="descname">LazyDict</code><span class="sig-paren">(</span><em>fn_dict</em>, <em>index_file=None</em>, <em>index_from=None</em>, <em>extra=None</em>, <em>cls=&lt;class 'lcdblib.plotting.results_table.DESeqResults'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#LazyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.LazyDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="lcdblib.plotting.results_table.LazyDict.items">
@@ -945,7 +942,7 @@ one of “gene_id”, “Name”, “transcript_id” for GFF/GTF.</li>
 
 <dl class="method">
 <dt id="lcdblib.plotting.results_table.ResultsTable.scatter">
-<code class="descname">scatter</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>xfunc=None</em>, <em>yfunc=None</em>, <em>xscale=None</em>, <em>yscale=None</em>, <em>xlab=None</em>, <em>ylab=None</em>, <em>genes_to_highlight=None</em>, <em>marginal_histograms=False</em>, <em>general_kwargs={‘color’: ‘k’</em>, <em>’alpha’: 0.2</em>, <em>’picker’: True}</em>, <em>general_hist_kwargs=None</em>, <em>offset_kwargs={}</em>, <em>label_kwargs=None</em>, <em>ax=None</em>, <em>one_to_one=None</em>, <em>callback=None</em>, <em>hist_size=0.3</em>, <em>hist_pad=0.0</em>, <em>nan_offset=0.015</em>, <em>pos_offset=0.99</em>, <em>linelength=0.01</em>, <em>neg_offset=0.005</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.scatter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">scatter</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>xfunc=None</em>, <em>yfunc=None</em>, <em>xscale=None</em>, <em>yscale=None</em>, <em>xlab=None</em>, <em>ylab=None</em>, <em>genes_to_highlight=None</em>, <em>marginal_histograms=False</em>, <em>general_kwargs={'color': 'k'</em>, <em>'alpha': 0.2</em>, <em>'picker': True}</em>, <em>general_hist_kwargs=None</em>, <em>offset_kwargs={}</em>, <em>label_kwargs=None</em>, <em>ax=None</em>, <em>one_to_one=None</em>, <em>callback=None</em>, <em>hist_size=0.3</em>, <em>hist_pad=0.0</em>, <em>nan_offset=0.015</em>, <em>pos_offset=0.99</em>, <em>linelength=0.01</em>, <em>neg_offset=0.005</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/plotting/results_table.html#ResultsTable.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.plotting.results_table.ResultsTable.scatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do-it-all method for making annotated scatterplots.</p>
 <p>Includes rugplots for NaN/Inf/-Inf, a default callback that prints the
 entries of the underlying dataframe when a point is clicked, point
@@ -1095,7 +1092,7 @@ indexing (like .ix, .iloc, etc).</p>
         <li class="right" >
           <a href="lcdblib.parse.html" title="lcdblib.parse package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

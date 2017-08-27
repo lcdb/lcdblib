@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
   <!-- Licensed under the Apache 2.0 License -->
   <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
@@ -15,15 +14,13 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev55 documentation</title>
-    
+    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev57 documentation</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev55',
+        VERSION:     '0.1.2.post.dev57',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -57,7 +54,7 @@
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -70,7 +67,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev55 documentation</a>
+    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev57 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -186,7 +183,7 @@
 
 <dl class="function">
 <dt id="lcdblib.snakemake.helpers.fill_patterns">
-<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class ‘itertools.product’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class 'itertools.product'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills in a dictionary of patterns with the dictionary or DataFrame <cite>fill</cite>.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -368,7 +365,7 @@ contains.</li>
 
 <dl class="method">
 <dt id="lcdblib.snakemake.interface.SampleHandler.make_input">
-<code class="descname">make_input</code><span class="sig-paren">(</span><em>prefix=’prefix’</em>, <em>midfix=”</em>, <em>suffix=”</em>, <em>agg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.make_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.make_input" title="Permalink to this definition">¶</a></dt>
+<code class="descname">make_input</code><span class="sig-paren">(</span><em>prefix='prefix'</em>, <em>midfix=''</em>, <em>suffix=''</em>, <em>agg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler.make_input"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler.make_input" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates Input Function based on wildcards.</p>
 <p class="rubric">Notes</p>
 <p>example: ‘{first_element}{second_element}{third_element}’</p>
@@ -477,7 +474,7 @@ following doesn’t work because we need the directory slash:</p>
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

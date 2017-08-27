@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
   
   <!-- Licensed under the Apache 2.0 License -->
   <link rel="stylesheet" type="text/css" href="../../../_static/fonts/open-sans/stylesheet.css" />
@@ -15,15 +14,13 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.utils.utils &#8212; lcdblib 0.1.2.post.dev55 documentation</title>
-    
+    <title>lcdblib.utils.utils &#8212; lcdblib 0.1.2.post.dev57 documentation</title>
     <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1.2.post.dev55',
+        VERSION:     '0.1.2.post.dev57',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -49,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -61,7 +58,7 @@
   <div id="left-column">
     <div class="sphinxsidebar">
         <a href="
-    ../../../index.html" class="text-logo">lcdblib 0.1.2.post.dev55 documentation</a>
+    ../../../index.html" class="text-logo">lcdblib 0.1.2.post.dev57 documentation</a>
         
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
@@ -112,6 +109,7 @@
 <span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="k">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">snakemake.shell</span> <span class="k">import</span> <span class="n">shell</span>
 
 
 <div class="viewcode-block" id="temp_env"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.utils.temp_env">[docs]</a><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
@@ -255,6 +253,21 @@
     <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">strip</span><span class="p">):</span>
         <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">strip</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="make_relative_symlink"><a class="viewcode-back" href="../../../autodocs/lcdblib.utils.html#lcdblib.utils.utils.make_relative_symlink">[docs]</a><span class="k">def</span> <span class="nf">make_relative_symlink</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">linkname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to create a relative symlink.</span>
+
+<span class="sd">    Changes to the dirname of the linkname and figures out the relative path to</span>
+<span class="sd">    the target before creating the symlink.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">linkdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">linkname</span><span class="p">)</span>
+    <span class="n">relative_target</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">linkdir</span><span class="p">)</span>
+    <span class="n">linkbase</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">linkname</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">linkdir</span><span class="p">):</span>
+        <span class="n">shell</span><span class="p">(</span><span class="s1">&#39;mkdir -p </span><span class="si">{linkdir}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">shell</span><span class="p">(</span><span class="s1">&#39;cd </span><span class="si">{linkdir}</span><span class="s1">; ln -sf </span><span class="si">{relative_target}</span><span class="s1"> </span><span class="si">{linkbase}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -271,7 +284,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev55 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev57 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
