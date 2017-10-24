@@ -1,5 +1,6 @@
 import os
 import contextlib
+import collections
 from collections.abc import Iterable
 from snakemake.shell import shell
 
@@ -102,6 +103,31 @@ def updatecopy(orig, update_with, keys=None, override=False):
             d[k] = update_with[k]
     return d
 
+
+def update_recursive(orig, update_with):
+    """
+    Recursively update one dict with another.
+
+    From https://stackoverflow.com/a/3233356
+
+    >>> orig = {'a': {'b': 1, 'c': 2, 'd': [7, 8, 9]}}
+    >>> update_with = {'a': {'b': 5}}
+    >>> expected = {'a': {'b': 5, 'c': 2, 'd': [7, 8, 9]}}
+    >>> result = update_recursive(orig, update_with)
+    >>> assert result == expected, result
+
+    >>> update_with = {'a': {'d': 1}}
+    >>> result = update_recursive(orig, update_with)
+    >>> expected = {'a': {'b': 5, 'c': 2, 'd': 1}}
+    >>> result = update_recursive(orig, update_with)
+    >>> assert result == expected, result
+    """
+    for k, v in update_with.items():
+        if isinstance(v, collections.Mapping):
+            orig[k] = update_recursive(orig.get(k, {}), v)
+        else:
+            orig[k] = v
+    return orig
 
 def boolean_labels(names, idx, mapping={True: 'AND', False: 'NOT'},
                    strip='AND_'):
