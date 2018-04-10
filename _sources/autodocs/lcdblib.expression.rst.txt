@@ -1,11 +1,11 @@
-lcdblib\.expression package
-===========================
+lcdblib.expression package
+==========================
 
 Submodules
 ----------
 
-lcdblib\.expression\.expression\_utils module
----------------------------------------------
+lcdblib.expression.expression\_utils module
+-------------------------------------------
 
 .. automodule:: lcdblib.expression.expression_utils
     :members:

@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -14,19 +15,10 @@
   <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.plotting.compare_rnaseq_and_chipseq &#8212; lcdblib 0.1.2.post.dev60 documentation</title>
+    <title>lcdblib.plotting.compare_rnaseq_and_chipseq &#8212; lcdblib 0.1.2.post.dev62 documentation</title>
     <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../../',
-        VERSION:     '0.1.2.post.dev60',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
@@ -35,8 +27,7 @@
   
    
 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -46,7 +37,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -57,25 +48,6 @@
       </div>
   <div id="left-column">
     <div class="sphinxsidebar">
-        <a href="
-    ../../../index.html" class="text-logo">lcdblib 0.1.2.post.dev60 documentation</a>
-        
-<div class="sidebar-block">
-  <div class="sidebar-wrapper">
-    <h2>Table Of Contents</h2>
-  </div>
-  <div class="sidebar-toc">
-    
-    
-      <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">lcdblib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../autodocs/modules.html">lcdblib</a></li>
-</ul>
-
-    
-  </div>
-</div>
-        
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <div id="main-search">
@@ -89,6 +61,7 @@
     </div>
   </div>
 </div>
+      
     </div>
   </div>
         <div id="right-column">
@@ -224,7 +197,8 @@
     <span class="n">rt</span> <span class="o">=</span> <span class="n">results_table</span><span class="o">.</span><span class="n">DESeq2Results</span><span class="p">(</span><span class="n">de_results</span><span class="p">,</span> <span class="n">import_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
     <span class="n">up</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">upregulated</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">lfc</span><span class="o">=</span><span class="n">lfc_cutoff</span><span class="p">)</span>
     <span class="n">dn</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">downregulated</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">lfc</span><span class="o">=-</span><span class="n">lfc_cutoff</span><span class="p">)</span>
-    <span class="n">un</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">up</span> <span class="o">|</span> <span class="n">dn</span><span class="p">)</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="p">(</span><span class="n">up</span> <span class="o">|</span> <span class="n">dn</span><span class="p">)</span>
+    <span class="n">un</span> <span class="o">=</span> <span class="o">~</span><span class="n">ch</span>
     <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;talk&#39;</span><span class="p">)</span>
     <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
     <span class="n">general_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="n">picker</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -341,6 +315,14 @@
                 <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;downregulated&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Downregulated (lfc&lt;-</span><span class="si">{0}</span><span class="s1">; padj&lt;</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lfc_cutoff</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)))</span>
 
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">fisher</span><span class="o">.</span><span class="n">fisher_tables</span><span class="p">(</span>
+                <span class="n">table</span><span class="o">=</span><span class="n">fisher</span><span class="o">.</span><span class="n">table_from_bool</span><span class="p">(</span><span class="n">selected_genes</span><span class="p">,</span> <span class="n">ch</span><span class="p">),</span>
+                <span class="n">row_names</span><span class="o">=</span><span class="n">row_names</span><span class="p">,</span>
+                <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;changed&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">],</span>
+                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Changed (lfc&lt;-</span><span class="si">{0}</span><span class="s1">; padj&lt;</span><span class="si">{1}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lfc_cutoff</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)))</span>
+
         <span class="k">if</span> <span class="n">gene_lists</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">selected_genes</span> <span class="o">&amp;</span> <span class="n">up</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">gene_lists</span> <span class="o">+</span> <span class="s1">&#39;.up.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">rt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">selected_genes</span> <span class="o">&amp;</span> <span class="n">dn</span><span class="p">]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">gene_lists</span> <span class="o">+</span> <span class="s1">&#39;.dn.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -395,7 +377,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>

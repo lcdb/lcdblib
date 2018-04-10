@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -14,19 +15,10 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev60 documentation</title>
+    <title>lcdblib.snakemake package &#8212; lcdblib 0.1.2.post.dev62 documentation</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev60',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -37,8 +29,7 @@
   
    
 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -54,7 +45,7 @@
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -66,28 +57,37 @@
       </div>
   <div id="left-column">
     <div class="sphinxsidebar">
-        <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev60 documentation</a>
-        
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
-    <h2>Table Of Contents</h2>
-  </div>
-  <div class="sidebar-toc">
-    
-    
-      <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../readme.html">lcdblib</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lcdblib</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="lcdblib.html">lcdblib package</a></li>
+    <h2>Contents</h2>
+    <div class="sidebar-localtoc">
+      <ul>
+<li><a class="reference internal" href="#">lcdblib.snakemake package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.aligners">lcdblib.snakemake.aligners module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.helpers">lcdblib.snakemake.helpers module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake.interface">lcdblib.snakemake.interface module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.snakemake">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
-    
+    </div>
   </div>
 </div>
-        
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.plotting.html"
+                        title="previous chapter">lcdblib.plotting package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.stats.html"
+                        title="next chapter">lcdblib.stats package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.snakemake.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <div id="main-search">
@@ -101,6 +101,7 @@
     </div>
   </div>
 </div>
+      
     </div>
   </div>
         <div id="right-column">
@@ -164,15 +165,15 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pattern</strong> (<em>str</em>) – Snakemake-style filename pattern, e.g. <code class="docutils literal"><span class="pre">{output}/{sample}.bam</span></code>.</li>
-<li><strong>target</strong> (<em>str</em>) – Filename from which to extract wildcards, e.g., <code class="docutils literal"><span class="pre">data/a.bam</span></code>.</li>
+<li><strong>pattern</strong> (<em>str</em>) – Snakemake-style filename pattern, e.g. <code class="docutils literal notranslate"><span class="pre">{output}/{sample}.bam</span></code>.</li>
+<li><strong>target</strong> (<em>str</em>) – Filename from which to extract wildcards, e.g., <code class="docutils literal notranslate"><span class="pre">data/a.bam</span></code>.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{output}</span><span class="s1">/</span><span class="si">{sample}</span><span class="s1">.bam&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{output}</span><span class="s1">/</span><span class="si">{sample}</span><span class="s1">.bam&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;data/a.bam&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expected</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">extract_wildcards</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
@@ -185,19 +186,19 @@
 <dt id="lcdblib.snakemake.helpers.fill_patterns">
 <code class="descclassname">lcdblib.snakemake.helpers.</code><code class="descname">fill_patterns</code><span class="sig-paren">(</span><em>patterns</em>, <em>fill</em>, <em>combination=&lt;class 'itertools.product'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/helpers.html#fill_patterns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.helpers.fill_patterns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fills in a dictionary of patterns with the dictionary or DataFrame <cite>fill</cite>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
 <span class="go">[&#39;one_R1.fastq&#39;, &#39;one_R2.fastq&#39;, &#39;two_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sample</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="nb">zip</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
 <span class="go">[&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">patterns</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{sample}</span><span class="s1">_R</span><span class="si">{N}</span><span class="s1">.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fill</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;sample&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">fill_patterns</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="n">fill</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
 <span class="go">[&#39;one_R1.fastq&#39;, &#39;two_R2.fastq&#39;]</span>
@@ -230,7 +231,7 @@
 <dl class="class">
 <dt id="lcdblib.snakemake.interface.SampleHandler">
 <em class="property">class </em><code class="descclassname">lcdblib.snakemake.interface.</code><code class="descname">SampleHandler</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/snakemake/interface.html#SampleHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.snakemake.interface.SampleHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Basic interface to help handle filenames in snakemake</p>
 <dl class="method">
 <dt id="lcdblib.snakemake.interface.SampleHandler.build_targets">
@@ -270,22 +271,22 @@ sample information filled in.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – Too lazy to make a custom exception, <cite>raises</cite> ValueError if the
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – Too lazy to make a custom exception, <cite>raises</cite> ValueError if the
 prefix does not match any of the patterns.</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla/treated1/treated1_treated_1_0001_R1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
 <span class="go">&#39;rawLevel&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">attrs</span> <span class="o">==</span> <span class="p">[</span>
 <span class="gp">... </span><span class="p">{</span><span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated1&#39;</span><span class="p">,</span> <span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">}</span>
 <span class="gp">... </span><span class="p">]</span>
 </pre></div>
@@ -293,7 +294,7 @@ prefix does not match any of the patterns.</td>
 <p>This prefix doesn’t resolve to an actual sample defined in the
 sampletable (note mismatch between “1” in everything but the last
 “_2_”. Should this raise ValueError?</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
 <span class="go">&#39;runLevel&#39;</span>
@@ -301,7 +302,7 @@ sampletable (note mismatch between “1” in everything but the last
 </pre></div>
 </div>
 <p>Run-level prefix:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
 <span class="go">&#39;runLevel&#39;</span>
@@ -311,7 +312,7 @@ sampletable (note mismatch between “1” in everything but the last
 </pre></div>
 </div>
 <p>Agg-level prefix (note the multiple sets of attributes returned):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_agg/treated&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_agg/treated&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_level</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">level</span>
 <span class="go">&#39;aggLevel&#39;</span>
@@ -344,19 +345,19 @@ contains.</li>
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span>
 <span class="gp">... </span><span class="s1">&#39;pasilla_sample\/(?P&lt;sampleID&gt;treated1|treated2|untreated1|untreated2)&#39;</span>
 <span class="gp">... </span><span class="s1">&#39;\/(?P=sampleID)_(?P&lt;treatment&gt;treated|untreated)_(?P&lt;replicate&gt;1|2)_R1&#39;</span>
 <span class="gp">... </span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;pasilla_sample/treated2/treated2_treated_2_R1&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">SH</span><span class="o">.</span><span class="n">find_sample</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span>
 <span class="gp">... </span><span class="p">{</span><span class="s1">&#39;treatment&#39;</span><span class="p">:</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;sampleID&#39;</span><span class="p">:</span> <span class="s1">&#39;treated2&#39;</span><span class="p">,</span> <span class="s1">&#39;replicate&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
 <span class="gp">... </span><span class="p">]</span>
 </pre></div>
@@ -397,7 +398,7 @@ prefix.</li>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SH</span> <span class="o">=</span> <span class="n">SampleHandler</span><span class="p">(</span><span class="n">test_config</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">({</span><span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;pasilla&#39;</span><span class="p">})</span>
 <span class="go">[&#39;pasilla.fastq&#39;]</span>
@@ -405,24 +406,24 @@ prefix.</li>
 </div>
 <p>Instead of directly specifying the midfix, we pull it from the
 wildcards dict entry for “asdf”:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;prefix&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">({</span><span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;pasilla&#39;</span><span class="p">,</span> <span class="s1">&#39;asdf&#39;</span><span class="p">:</span> <span class="s1">&#39;.cutadapt&#39;</span><span class="p">})</span>
 <span class="go">[&#39;pasilla.cutadapt.fastq&#39;]</span>
 </pre></div>
 </div>
 <p>We want to aggregate into “pasilla_agg/treated.fastq”, but the
 following doesn’t work because we need the directory slash:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg&#39;</span><span class="p">,</span> <span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
 </pre></div>
 </div>
 <p>Also doesn’t work:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/&#39;</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/&#39;</span><span class="p">,</span> <span class="n">midfix</span><span class="o">=</span><span class="s1">&#39;treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="p">{})</span>
 </pre></div>
 </div>
 <p>However if we provide most of the path in the prefix it works:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="n">SH</span><span class="o">.</span><span class="n">make_input</span><span class="p">(</span><span class="s1">&#39;pasilla_agg/treated&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.fastq&#39;</span><span class="p">,</span> <span class="n">agg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">func</span><span class="p">({}))</span> <span class="o">==</span> <span class="p">[</span>
 <span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated1/treated1_treated_1_R1.fastq&#39;</span><span class="p">,</span>
 <span class="gp">... </span><span class="s1">&#39;pasilla_sample/treated1/treated1_treated_2_R1.fastq&#39;</span><span class="p">,</span>
@@ -474,7 +475,7 @@ following doesn’t work because we need the directory slash:</p>
         <li class="right" >
           <a href="lcdblib.plotting.html" title="lcdblib.plotting package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

@@ -1,11 +1,11 @@
-lcdblib\.images package
-=======================
+lcdblib.images package
+======================
 
 Submodules
 ----------
 
-lcdblib\.images\.SVG module
----------------------------
+lcdblib.images.SVG module
+-------------------------
 
 .. automodule:: lcdblib.images.SVG
     :members:

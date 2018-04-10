@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   
   <!-- Licensed under the Apache 2.0 License -->
@@ -14,19 +15,10 @@
   <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <title>lcdblib.pandas package &#8212; lcdblib 0.1.2.post.dev60 documentation</title>
+    <title>lcdblib.pandas package &#8212; lcdblib 0.1.2.post.dev62 documentation</title>
     <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '0.1.2.post.dev60',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -37,8 +29,7 @@
   
    
 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -54,7 +45,7 @@
         <li class="right" >
           <a href="lcdblib.images.html" title="lcdblib.images package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" accesskey="U">lcdblib package</a> &#187;</li> 
       </ul>
@@ -66,28 +57,35 @@
       </div>
   <div id="left-column">
     <div class="sphinxsidebar">
-        <a href="
-    ../index.html" class="text-logo">lcdblib 0.1.2.post.dev60 documentation</a>
-        
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
-    <h2>Table Of Contents</h2>
-  </div>
-  <div class="sidebar-toc">
-    
-    
-      <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../readme.html">lcdblib</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">lcdblib</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="lcdblib.html">lcdblib package</a></li>
+    <h2>Contents</h2>
+    <div class="sidebar-localtoc">
+      <ul>
+<li><a class="reference internal" href="#">lcdblib.pandas package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lcdblib.pandas.utils">lcdblib.pandas.utils module</a></li>
+<li><a class="reference internal" href="#module-lcdblib.pandas">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
-    
+    </div>
   </div>
 </div>
-        
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lcdblib.images.html"
+                        title="previous chapter">lcdblib.images package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lcdblib.parse.html"
+                        title="next chapter">lcdblib.parse package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/autodocs/lcdblib.pandas.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div class="sidebar-block">
   <div class="sidebar-wrapper">
     <div id="main-search">
@@ -101,6 +99,7 @@
     </div>
   </div>
 </div>
+      
     </div>
   </div>
         <div id="right-column">
@@ -131,14 +130,14 @@
 <code class="descclassname">lcdblib.pandas.utils.</code><code class="descname">cartesian_product</code><span class="sig-paren">(</span><em>df1</em>, <em>df2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/lcdblib/pandas/utils.html#cartesian_product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lcdblib.pandas.utils.cartesian_product" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the carteisan product and returns expanded DataFrame.</p>
 <p>Given a pandas.DataFrame:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span>
 <span class="o">|--------|--------|</span>
 <span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span>
 <span class="o">|</span> <span class="n">two</span>    <span class="o">|</span> <span class="n">testis</span> <span class="o">|</span>
 </pre></div>
 </div>
 <p>and some set of values <cite>{‘num’: [100, 200]}</cite> build:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span> <span class="n">num</span> <span class="o">|</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">sample</span> <span class="o">|</span> <span class="n">tissue</span> <span class="o">|</span> <span class="n">num</span> <span class="o">|</span>
 <span class="o">|--------|--------|-----|</span>
 <span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">100</span> <span class="o">|</span>
 <span class="o">|</span> <span class="n">one</span>    <span class="o">|</span> <span class="n">ovary</span>  <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span>
@@ -166,14 +165,14 @@
 <dd><p>Given a dataframe with a delimiter-separated string, create a new dataframe
 with separate rows for each value in each corresponding string.</p>
 <p>E.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>       <span class="n">gene</span>  <span class="n">score</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>       <span class="n">gene</span>  <span class="n">score</span>
 <span class="mi">0</span>     <span class="n">g1</span><span class="o">|</span><span class="n">g2</span>      <span class="mi">1</span>
 <span class="mi">1</span>        <span class="n">g3</span>      <span class="mi">5</span>
 <span class="mi">2</span>  <span class="n">g4</span><span class="o">|</span><span class="n">g5</span><span class="o">|</span><span class="n">g6</span>      <span class="mi">9</span>
 </pre></div>
 </div>
 <p>becomes:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tidy_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tidy_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;gene&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
 <span class="c1">#   gene  score</span>
 <span class="c1"># 0   g1      1</span>
 <span class="c1"># 0   g2      1</span>
@@ -224,7 +223,7 @@ with separate rows for each value in each corresponding string.</p>
         <li class="right" >
           <a href="lcdblib.images.html" title="lcdblib.images package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev60 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">lcdblib 0.1.2.post.dev62 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >lcdblib</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="lcdblib.html" >lcdblib package</a> &#187;</li> 
       </ul>

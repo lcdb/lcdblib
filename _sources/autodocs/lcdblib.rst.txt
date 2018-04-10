@@ -18,8 +18,8 @@ Subpackages
 Submodules
 ----------
 
-lcdblib\.logger module
-----------------------
+lcdblib.logger module
+---------------------
 
 .. automodule:: lcdblib.logger
     :members:

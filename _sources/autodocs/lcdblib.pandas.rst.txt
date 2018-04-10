@@ -1,11 +1,11 @@
-lcdblib\.pandas package
-=======================
+lcdblib.pandas package
+======================
 
 Submodules
 ----------
 
-lcdblib\.pandas\.utils module
------------------------------
+lcdblib.pandas.utils module
+---------------------------
 
 .. automodule:: lcdblib.pandas.utils
     :members:

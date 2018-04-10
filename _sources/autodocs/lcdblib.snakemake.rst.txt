@@ -1,27 +1,27 @@
-lcdblib\.snakemake package
-==========================
+lcdblib.snakemake package
+=========================
 
 Submodules
 ----------
 
-lcdblib\.snakemake\.aligners module
------------------------------------
+lcdblib.snakemake.aligners module
+---------------------------------
 
 .. automodule:: lcdblib.snakemake.aligners
     :members:
     :undoc-members:
     :show-inheritance:
 
-lcdblib\.snakemake\.helpers module
-----------------------------------
+lcdblib.snakemake.helpers module
+--------------------------------
 
 .. automodule:: lcdblib.snakemake.helpers
     :members:
     :undoc-members:
     :show-inheritance:
 
-lcdblib\.snakemake\.interface module
-------------------------------------
+lcdblib.snakemake.interface module
+----------------------------------
 
 .. automodule:: lcdblib.snakemake.interface
     :members:

@@ -1,11 +1,11 @@
-lcdblib\.stats package
-======================
+lcdblib.stats package
+=====================
 
 Submodules
 ----------
 
-lcdblib\.stats\.fisher module
------------------------------
+lcdblib.stats.fisher module
+---------------------------
 
 .. automodule:: lcdblib.stats.fisher
     :members:
