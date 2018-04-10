@@ -116,7 +116,8 @@ def plot(de_results, regions=None, peaks=None, selected=None, x='baseMean',
     rt = results_table.DESeq2Results(de_results, import_kwargs=dict(index_col=0))
     up = rt.upregulated(alpha=alpha, lfc=lfc_cutoff)
     dn = rt.downregulated(alpha=alpha, lfc=-lfc_cutoff)
-    un = ~(up | dn)
+    ch = (up | dn)
+    un = ~ch
     sns.set_context('talk')
     sns.set_style('white')
     general_kwargs=dict(marker='.', alpha=0.4, color='0.5', picker=5,
@@ -232,6 +233,14 @@ def plot(de_results, regions=None, peaks=None, selected=None, x='baseMean',
                 row_names=row_names,
                 col_names=['downregulated', 'not'],
                 title='Downregulated (lfc<-{0}; padj<{1})'.format(lfc_cutoff, alpha)))
+
+        output.write('\n\n')
+        output.write(
+            fisher.fisher_tables(
+                table=fisher.table_from_bool(selected_genes, ch),
+                row_names=row_names,
+                col_names=['changed', 'not'],
+                title='Changed (lfc<-{0}; padj<{1})'.format(lfc_cutoff, alpha)))
 
         if gene_lists is not None:
             rt.data[selected_genes & up].to_csv(gene_lists + '.up.tsv', sep='\t')
