@@ -5,11 +5,13 @@ curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/anaconda
 export PATH=~/anaconda/bin:$PATH
 
+conda update -y conda
+
 # Add channels in the specified order.
-conda config --add channels conda-forge
 conda config --add channels defaults
-#conda config --add channels r
 conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 
 conda install -y sphinx
 
