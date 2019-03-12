@@ -7,7 +7,7 @@ build:
   number: {{ LCDBLIB_BUILD }}
 
 requirements:
-  build:
+  host:
     - python
     - biopython >=1.68
     - gffutils >=0.8.7.1
