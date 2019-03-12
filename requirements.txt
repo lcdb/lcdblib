@@ -11,4 +11,4 @@ pytest
 pyyaml
 seaborn
 scipy
-snakemake-minimal
+snakemake
