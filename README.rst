@@ -34,3 +34,9 @@ Automated tests are run on `travis-ci
 <https://travis-ci.org/lcdb/lcdblib/builds>`_, and successful builds on the
 `master` branch are automatically uploaded to the `lcdb conda channel
 <https://anaconda.org/lcdb/lcdblib/files>`_.
+
+Updating
+--------
+
+New versions can be triggered (in the conda package as well as within
+``setup.py``) by tagging a commit with the version.
