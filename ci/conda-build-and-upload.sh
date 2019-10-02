@@ -10,7 +10,7 @@ fi
 
 # Build packages for all supported versions of Python. If we're on the master
 # branch and on Travis-CI, then also upload the built package.
-for PY in 35 36; do
+for PY in 35 36 37; do
     CONDA_PY=$PY conda build conda-recipe
     if [[ $TRAVIS_BRANCH = "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
       anaconda \
